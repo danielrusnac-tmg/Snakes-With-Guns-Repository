@@ -1,0 +1,18 @@
+{
+    "name": "SnakesWithGuns.Prototype.Player",
+    "rootNamespace": "SnakesWithGuns.Prototype.Player",
+    "references": [
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:bb9b69e2ad30a1d49a93aea30d918598",
+        "GUID:bf2f5a6821370e640a4c00a91556be7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
