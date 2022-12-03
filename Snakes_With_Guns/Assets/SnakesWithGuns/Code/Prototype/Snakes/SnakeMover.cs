@@ -6,7 +6,7 @@ namespace SnakesWithGuns.Prototype.Snakes
     {
         [SerializeField] private float _movementSpeed = 5;
         [SerializeField] private float _turnSpeed = 20;
-        [SerializeField] private CharacterController _characterController;
+        [SerializeField] private Rigidbody _rigidbody;
 
         private Vector3 _wantedDirection;
         private Transform _transform;
@@ -21,6 +21,12 @@ namespace SnakesWithGuns.Prototype.Snakes
         {
             get => _turnSpeed;
             set => _turnSpeed = value;
+        }
+        
+        public bool CanMove
+        {
+            get => !_rigidbody.isKinematic;
+            set => _rigidbody.isKinematic = !value;
         }
         
         public Vector3 Direction
@@ -38,12 +44,22 @@ namespace SnakesWithGuns.Prototype.Snakes
             _transform = transform;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            if (_wantedDirection.sqrMagnitude > 0f)
-                _transform.forward = Vector3.Slerp(_transform.forward, _wantedDirection, _turnSpeed * Time.deltaTime);
-            
-            _characterController.Move(Direction * (_movementSpeed * Time.deltaTime));
+            if (!CanMove)
+                return;
+
+            _rigidbody.velocity = transform.forward * MovementSpeed;
+
+            if (_wantedDirection.sqrMagnitude > float.Epsilon)
+            {
+                Quaternion wantedRotation = Quaternion.LookRotation(_wantedDirection, Vector3.up);
+                Quaternion newRotation =
+                    Quaternion.Lerp(_rigidbody.rotation, wantedRotation, _turnSpeed * Time.fixedDeltaTime);
+                _rigidbody.MoveRotation(newRotation);
+            }
+
+            _rigidbody.angularVelocity = Vector3.zero;
         }
     }
 }

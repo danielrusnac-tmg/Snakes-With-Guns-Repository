@@ -4,13 +4,18 @@ namespace SnakesWithGuns.Prototype.Snakes
 {
     public class Segment : MonoBehaviour
     {
-        private Transform _transform;
-
-        public Transform Transform => _transform;
-
-        private void Awake()
+        [SerializeField] private Rigidbody _rigidbody;
+        
+        public Vector3 Position
         {
-            _transform = transform;
+            get => _rigidbody.position;
+            set => _rigidbody.MovePosition(value);
+        }
+
+        public Quaternion Rotation
+        {
+            get => _rigidbody.rotation;
+            set => _rigidbody.MoveRotation(value);
         }
     }
 }
