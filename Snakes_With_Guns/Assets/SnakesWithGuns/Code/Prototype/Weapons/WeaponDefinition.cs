@@ -5,14 +5,44 @@ namespace SnakesWithGuns.Prototype.Weapons
     [CreateAssetMenu(menuName = "Snakes With Guns/Weapon Definition", fileName = "weapon_")]
     public class WeaponDefinition : ScriptableObject
     {
+        [Header("Stats")]
         [SerializeField] private float _fireRate = 0.2f;
         [SerializeField] private float _reloadDuration = 1f;
         [SerializeField] private int _magazineSize = 30;
+
+        [Header("Projectile")]
+        [SerializeField] private float _force = 40;
+        [SerializeField] private float _drag = 3;
+        [SerializeField] private float _rotationOffset = 1f;
+        [Range(0f, 1f)]
+        [SerializeField] private float _randomness = 0.2f;
+        
+        [Header("Effects")]
         [SerializeField] private Projectile _projectile;
+        [SerializeField] private ParticleSystem _muzzleEffectPrefab;
+        [SerializeField] private ParticleSystem _impactEffectPrefab;
 
         public float FireRate => _fireRate;
         public float ReloadDuration => _reloadDuration;
         public int MagazineSize => _magazineSize;
         public Projectile Projectile => _projectile;
+        public ParticleSystem MuzzleEffectPrefab => _muzzleEffectPrefab;
+        public ParticleSystem ImpactEffectPrefab => _impactEffectPrefab;
+
+        public float GetForce()
+        {
+            float offset = _randomness * _force;
+            return _force + Random.Range(-offset, offset);
+        }
+
+        public float GetDrag()
+        {
+            return _drag;
+        }
+
+        public Quaternion GetRotationOffset()
+        {
+            return Quaternion.AngleAxis(Random.Range(-_rotationOffset, _rotationOffset), Vector3.up);
+        }
     }
 }

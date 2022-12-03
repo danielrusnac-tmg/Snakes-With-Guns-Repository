@@ -15,6 +15,7 @@ namespace SnakesWithGuns.Prototype.Weapons
         private void OnEnable()
         {
             _weapon.IsFiring = true;
+            _rotationPivot.localEulerAngles = new Vector3(0, Random.Range(0, 360), 0);
         }
 
         private void OnDisable()
@@ -42,6 +43,15 @@ namespace SnakesWithGuns.Prototype.Weapons
         {
             _rotationPivot.forward = Vector3
                 .SmoothDamp(_rotationPivot.forward, _targetDirection, ref _turnVelocity, _turnDamp).normalized;
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            if (_target == null)
+                return;
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(_weapon.transform.position, _target.position);
         }
     }
 }

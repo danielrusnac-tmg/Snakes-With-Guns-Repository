@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088d027a3ca141d99409e37d85baa84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startSegments: 15
+  _startSegments: 5
   _radius: 0.5
   _mover: {fileID: 1315753168}
   _tail: {fileID: 5486901206705832841}
@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ef74019788b9846b0bb07e1ed48f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 5
+  _movementSpeed: 6
   _turnSpeed: 20
   _characterController: {fileID: 1315753166}
 --- !u!114 &1064538727334303085
@@ -114,6 +114,6 @@ MonoBehaviour:
   _segmentsDistance: 1.1
   _moveSpeed: 15
   _turnSpeed: 20
-  _segmentPrefab: {fileID: 2476195558216098683, guid: a91cff2d16f7d14458f38a2556c6bb46,
+  _segmentPrefab: {fileID: 1813851187639229138, guid: ed077b10e27ff134c9e835046d3a907c,
     type: 3}
   _segments: []

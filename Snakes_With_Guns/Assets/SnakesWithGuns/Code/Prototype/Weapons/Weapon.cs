@@ -8,6 +8,7 @@ namespace SnakesWithGuns.Prototype.Weapons
         [SerializeField] private WeaponDefinition _weaponDefinition;
         [SerializeField] private Transform _muzzlePoint;
 
+        private ParticleSystem _muzzle;
         private bool _isFiring;
         private Coroutine _fireCoroutine;
 
@@ -32,6 +33,11 @@ namespace SnakesWithGuns.Prototype.Weapons
             }
         }
 
+        private void Awake()
+        {
+            _muzzle = Instantiate(_weaponDefinition.MuzzleEffectPrefab, _muzzlePoint);
+        }
+
         private void StartFiring()
         {
             _fireCoroutine = StartCoroutine(FireRoutine());
@@ -44,11 +50,18 @@ namespace SnakesWithGuns.Prototype.Weapons
 
         private void Fire()
         {
-            Instantiate(_weaponDefinition.Projectile, _muzzlePoint.position, _muzzlePoint.rotation);
+            _muzzle.Play();
+            Projectile projectile = Instantiate(
+                _weaponDefinition.Projectile, 
+                _muzzlePoint.position, 
+                _muzzlePoint.rotation * _weaponDefinition.GetRotationOffset());
+            projectile.ApplyForce(_weaponDefinition.GetForce(), _weaponDefinition.GetDrag());
         }
 
         private IEnumerator FireRoutine()
         {
+            yield return null;
+            
             while (true)
             {
                 for (int i = 0; i < _weaponDefinition.MagazineSize; i++)
