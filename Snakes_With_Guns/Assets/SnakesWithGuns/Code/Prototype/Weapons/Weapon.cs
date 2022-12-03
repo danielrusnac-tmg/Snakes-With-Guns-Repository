@@ -56,6 +56,7 @@ namespace SnakesWithGuns.Prototype.Weapons
                 _muzzlePoint.position, 
                 _muzzlePoint.rotation * _weaponDefinition.GetRotationOffset());
             projectile.ApplyForce(_weaponDefinition.GetForce(), _weaponDefinition.GetDrag());
+            projectile.ImpactEffectPrefab = _weaponDefinition.ImpactEffectPrefab;
         }
 
         private IEnumerator FireRoutine()

@@ -125,7 +125,9 @@ GameObject:
   - component: {fileID: 5898271948896328345}
   - component: {fileID: 5898271948896328344}
   - component: {fileID: 7581676130862599616}
-  m_Layer: 0
+  - component: {fileID: -6573675365932876642}
+  - component: {fileID: 3921913435458575681}
+  m_Layer: 8
   m_Name: turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,10 +164,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0178742c059417faae5aa838600065e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _turnDamp: 0.4
+  _turnDamp: 0.1
   _weapon: {fileID: 7581676130862599616}
   _rotationPivot: {fileID: 5898271948896328345}
-  _target: {fileID: 0}
+  _aimer: {fileID: 3921913435458575681}
 --- !u!114 &7581676130862599616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +182,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponDefinition: {fileID: 11400000, guid: 1dfd6fc79a029484a9323853955c670b, type: 2}
   _muzzlePoint: {fileID: 6987084204105482149}
+--- !u!135 &-6573675365932876642
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5898271948896328326}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3921913435458575681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5898271948896328326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d5ca6e345347e5a7b5e0e587f090f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sphereCollider: {fileID: -6573675365932876642}
 --- !u!1 &5898271949452595189
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 198451581803922730}
   - component: {fileID: 5290191564811312939}
   - component: {fileID: 5970117730437543047}
-  m_Layer: 0
+  - component: {fileID: 845787611509832436}
+  m_Layer: 6
   m_Name: Tracer_Blue_Small_Projectile
   m_TagString: FX
   m_Icon: {fileID: 0}
@@ -3689,9 +3690,9 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 4
-    type: 0
+    type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
@@ -3813,7 +3814,7 @@ ParticleSystem:
     m_EnergyLossOnCollision:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -3872,7 +3873,7 @@ ParticleSystem:
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 1
   TriggerModule:
@@ -4857,7 +4858,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed632e2546b74162ad176d75e095fa90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ImpactEffectPrefab: {fileID: 0}
   _rigidbody: {fileID: 5290191564811312939}
+--- !u!135 &845787611509832436
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126776949354822}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.22
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1401749078459792
 GameObject:
   m_ObjectHideFlags: 0
@@ -4869,7 +4884,7 @@ GameObject:
   - component: {fileID: 4077415329187686}
   - component: {fileID: 198150267720971112}
   - component: {fileID: 199673301338346910}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9752,7 +9767,7 @@ GameObject:
   - component: {fileID: 4295140622624916}
   - component: {fileID: 198958021589366678}
   - component: {fileID: 199737696030055578}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14562,7 +14577,7 @@ GameObject:
   - component: {fileID: 4555528068804088}
   - component: {fileID: 198198880381549348}
   - component: {fileID: 199085562516519434}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

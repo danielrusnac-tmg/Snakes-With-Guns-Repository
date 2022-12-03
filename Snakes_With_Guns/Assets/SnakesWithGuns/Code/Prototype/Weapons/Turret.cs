@@ -7,7 +7,7 @@ namespace SnakesWithGuns.Prototype.Weapons
         [SerializeField] private float _turnDamp = 0.4f;
         [SerializeField] private Weapon _weapon;
         [SerializeField] private Transform _rotationPivot;
-        [SerializeField] private Transform _target;
+        [SerializeField] private Aimer _aimer;
 
         private Vector3 _targetDirection;
         private Vector3 _turnVelocity;
@@ -25,16 +25,22 @@ namespace SnakesWithGuns.Prototype.Weapons
 
         private void Update()
         {
-            CalculateTargetDirection();
+            if (_aimer.HasTarget)
+            {
+                CalculateTargetDirection();
+                _weapon.IsFiring = true;
+            }
+            else
+            {
+                _weapon.IsFiring = false;
+            }
+
             RotateTowardsTargetDirection();
         }
 
         private void CalculateTargetDirection()
         {
-            if (_target == null)
-                return;
-
-            _targetDirection = _rotationPivot.position - _target.position;
+            _targetDirection = _aimer.Target - _rotationPivot.position;
             _targetDirection.y = 0f;
             _targetDirection.Normalize();
         }
@@ -47,11 +53,11 @@ namespace SnakesWithGuns.Prototype.Weapons
 
         private void OnDrawGizmosSelected()
         {
-            if (_target == null)
+            if (_aimer == null || !_aimer.HasTarget)
                 return;
 
             Gizmos.color = Color.blue;
-            Gizmos.DrawLine(_weapon.transform.position, _target.position);
+            Gizmos.DrawLine(_weapon.transform.position, _aimer.Target);
         }
     }
 }
