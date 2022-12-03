@@ -6,16 +6,20 @@ namespace SnakesWithGuns.Prototype.Snakes
 {
     public class Tail : MonoBehaviour
     {
+        [Min(0)]
         [SerializeField] private int _pointPerSegment = 3;
-        [SerializeField] private float maxDistance = 0.5f;
-        [SerializeField] private float _moveSpeed = 5f;
-        [SerializeField] private float _turnSpeed = 8f;
+        [Min(0f)]
+        [SerializeField] private float _segmentsDistance = 1.1f;
+        [SerializeField] private float _moveSpeed = 15f;
+        [SerializeField] private float _turnSpeed = 20f;
         [SerializeField] private Segment _segmentPrefab;
         [SerializeField] private List<Segment> _segments = new();
 
         private Transform _transform;
         private Transform _root;
         private List<TailPoint> _points = new();
+
+        private float PointsDistance => _segmentsDistance / _pointPerSegment;
 
         private void Awake()
         {
@@ -49,17 +53,17 @@ namespace SnakesWithGuns.Prototype.Snakes
             Vector3 direction = _transform.position - _points[0].Position;
             float distance = direction.magnitude;
 
-            if (distance > maxDistance)
+            if (distance > PointsDistance)
             {
                 _points.Insert(0, new TailPoint
                 {
-                    Position = _points[0].Position + direction.normalized * maxDistance,
+                    Position = _points[0].Position + direction.normalized * PointsDistance,
                     Rotation = _transform.rotation
                 });
 
                 _points.RemoveAt(_points.Count - 1);
 
-                distance -= maxDistance;
+                distance -= PointsDistance;
             }
 
             MoveSegment(_segments[0], _transform.position, _transform.rotation);
@@ -67,13 +71,16 @@ namespace SnakesWithGuns.Prototype.Snakes
             if (_segments.Count < 2)
                 return;
 
-            float value = distance / maxDistance;
+            float value = distance / PointsDistance;
 
             for (int i = 1; i < _segments.Count; i++)
             {
+                int pointA = i * _pointPerSegment;
+                int pointB = pointA - 1;
+                
                 MoveSegment(_segments[i],
-                    Vector3.Lerp(_points[i].Position, _points[i - 1].Position, value),
-                    Quaternion.Lerp(_points[i].Rotation, _points[i - 1].Rotation, value));
+                    Vector3.Lerp(_points[pointA].Position, _points[pointB].Position, value),
+                    Quaternion.Lerp(_points[pointA].Rotation, _points[pointB].Rotation, value));
             }
         }
 

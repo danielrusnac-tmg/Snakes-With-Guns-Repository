@@ -110,8 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2381c92488a43acac6fa2b4f47c1061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pointPerSegment: 2
-  maxDistance: 1.1
+  _pointPerSegment: 3
+  _segmentsDistance: 1.1
   _moveSpeed: 15
   _turnSpeed: 20
   _segmentPrefab: {fileID: 2476195558216098683, guid: a91cff2d16f7d14458f38a2556c6bb46,
