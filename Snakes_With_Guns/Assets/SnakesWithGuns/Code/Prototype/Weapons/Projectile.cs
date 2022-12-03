@@ -1,17 +1,16 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SnakesWithGuns.Prototype.Weapons
 {
     public class Projectile : MonoBehaviour
     {
         public ParticleSystem ImpactEffectPrefab;
-        
+
         [SerializeField] private Rigidbody _rigidbody;
 
         private void Update()
         {
-            if (_rigidbody.velocity.sqrMagnitude < 0.1f)
+            if (_rigidbody.velocity.sqrMagnitude < 1f)
                 SelfDestroy();
         }
 
