@@ -1,0 +1,14 @@
+{
+    "name": "SnakesWithGuns.Prototype.Weapons",
+    "rootNamespace": "SnakesWithGuns.Prototype.Weapons",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
