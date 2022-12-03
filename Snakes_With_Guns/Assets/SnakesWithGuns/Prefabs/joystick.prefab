@@ -128,13 +128,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6257d215ab10694bb903768d60306c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 1
+  _radius: 0.5
+  _activeAlpha: 1
+  _inactiveAlpha: 0.3
+  _controlPath: <Gamepad>/leftStick
   _defaultJoystickPosition: {fileID: 8035473463426561917}
   _handle: {fileID: 8035473464562157263}
   _constrain: {fileID: 8035473464730474780}
   _canvasGroup: {fileID: 8035473463422435312}
-  _camera: {fileID: 0}
-  _controlPath: <Gamepad>/leftStick
 --- !u!1 &8035473463426561916
 GameObject:
   m_ObjectHideFlags: 0

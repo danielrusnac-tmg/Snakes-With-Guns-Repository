@@ -8,7 +8,7 @@ namespace SnakesWithGuns.Prototype.Input
     public class Joystick : OnScreenControl
     {
         [Header("Settings")]
-        [Range(0f, 1f), SerializeField] private float _radius = 1f;
+        [Range(0f, 1f), SerializeField] private float _radius = 0.5f;
         [Range(0f, 1f), SerializeField] private float _activeAlpha = 1f;
         [Range(0f, 1f), SerializeField] private float _inactiveAlpha = 0.3f;
         [SerializeField, InputControl(layout = "Vector2")] private string _controlPath;
@@ -22,7 +22,7 @@ namespace SnakesWithGuns.Prototype.Input
         private Vector2 _startDragPosition;
         private bool _isActive;
 
-        private float ConstrainRadius => _constrain.rect.width * 0.5f * _radius;
+        private float ConstrainRadius => (_constrain.rect.width - _handle.rect.width) * _radius;
 
         protected override string controlPathInternal
         {
