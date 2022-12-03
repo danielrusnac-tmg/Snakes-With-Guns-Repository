@@ -8,6 +8,7 @@ namespace SnakesWithGuns.Prototype.Weapons
         public ParticleSystem ImpactEffectPrefab;
 
         [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private ParticleSystem _particleSystem;
 
         public event Action<Projectile> Died;
 
@@ -40,6 +41,7 @@ namespace SnakesWithGuns.Prototype.Weapons
 
         private void SelfDestroy()
         {
+            _particleSystem.Clear(true);
             Died?.Invoke(this);
         }
     }

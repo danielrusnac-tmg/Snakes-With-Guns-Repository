@@ -4860,6 +4860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ImpactEffectPrefab: {fileID: 0}
   _rigidbody: {fileID: 5290191564811312939}
+  _particleSystem: {fileID: 198451581803922730}
 --- !u!135 &845787611509832436
 SphereCollider:
   m_ObjectHideFlags: 0
