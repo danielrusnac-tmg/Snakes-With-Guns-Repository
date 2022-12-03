@@ -11,12 +11,19 @@ namespace SnakesWithGuns.Prototype.Weapons
         [SerializeField] private Aimer _aimer;
 
         private Vector3 _targetDirection;
+        private Vector3 _currentDirection;
         private Vector3 _turnVelocity;
+        private Transform _transform;
+
+        private void Awake()
+        {
+            _transform = transform;
+        }
 
         private void OnEnable()
         {
             _weapon.IsFiring = true;
-            _rotationPivot.localEulerAngles = new Vector3(0, Random.Range(0, 360), 0);
+            _currentDirection = _rotationPivot.forward;
         }
 
         private void OnDisable()
@@ -33,6 +40,7 @@ namespace SnakesWithGuns.Prototype.Weapons
             }
             else
             {
+                _targetDirection = _transform.forward;
                 _weapon.IsFiring = false;
             }
 
@@ -54,8 +62,10 @@ namespace SnakesWithGuns.Prototype.Weapons
 
         private void RotateTowardsTargetDirection()
         {
-            _rotationPivot.forward = Vector3
-                .SmoothDamp(_rotationPivot.forward, _targetDirection, ref _turnVelocity, _turnDamp).normalized;
+            _currentDirection = Vector3
+                .SmoothDamp(_currentDirection, _targetDirection, ref _turnVelocity, _turnDamp).normalized;
+
+            _rotationPivot.forward = _currentDirection;
         }
 
         private void OnDrawGizmosSelected()
