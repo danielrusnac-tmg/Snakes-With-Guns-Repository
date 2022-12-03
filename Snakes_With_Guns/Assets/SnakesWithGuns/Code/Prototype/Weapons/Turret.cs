@@ -5,6 +5,7 @@ namespace SnakesWithGuns.Prototype.Weapons
     public class Turret : MonoBehaviour
     {
         [SerializeField] private float _turnDamp = 0.4f;
+        [SerializeField] private float _aimTolerance = 0.2f;
         [SerializeField] private Weapon _weapon;
         [SerializeField] private Transform _rotationPivot;
         [SerializeField] private Aimer _aimer;
@@ -28,7 +29,7 @@ namespace SnakesWithGuns.Prototype.Weapons
             if (_aimer.HasTarget)
             {
                 CalculateTargetDirection();
-                _weapon.IsFiring = true;
+                _weapon.IsFiring = IsAimingAtTarget();
             }
             else
             {
@@ -36,6 +37,12 @@ namespace SnakesWithGuns.Prototype.Weapons
             }
 
             RotateTowardsTargetDirection();
+        }
+
+        private bool IsAimingAtTarget()
+        {
+            float dot = Vector3.Dot(_rotationPivot.forward, _targetDirection);
+            return _aimTolerance > Mathf.InverseLerp(1f, -1f, dot);
         }
 
         private void CalculateTargetDirection()
@@ -56,7 +63,7 @@ namespace SnakesWithGuns.Prototype.Weapons
             if (_aimer == null || !_aimer.HasTarget)
                 return;
 
-            Gizmos.color = Color.blue;
+            Gizmos.color = IsAimingAtTarget() ? Color.red : Color.blue;
             Gizmos.DrawLine(_weapon.transform.position, _aimer.Target);
         }
     }
