@@ -10,12 +10,11 @@ namespace SnakesWithGuns.Prototype.Snakes
         [Min(0f), SerializeField] private float _segmentsDistance = 1.1f;
         [SerializeField] private float _moveSpeed = 15f;
         [SerializeField] private float _turnSpeed = 20f;
-        [SerializeField] private Segment _segmentPrefab;
-        [SerializeField] private List<Segment> _segments = new();
 
         private Transform _transform;
         private Transform _root;
         private List<TailPoint> _points = new();
+        private List<Segment> _segments = new();
 
         private float PointsDistance => _segmentsDistance / _pointPerSegment;
 
@@ -33,14 +32,15 @@ namespace SnakesWithGuns.Prototype.Snakes
             MoveSegments();
         }
 
-        [ContextMenu(nameof(AddSegment))]
-        public void AddSegment()
+        public void AddSegment(Segment instance)
         {
             Vector3 position = _segments.Count == 0 ? _transform.position : _segments.Last().Position;
             Vector3 forward = _segments.Count == 0 ? _transform.forward : _segments.Last().Rotation * Vector3.forward;
             Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
 
-            Segment instance = Instantiate(_segmentPrefab, position, rotation, _root);
+            instance.Position = position;
+            instance.Rotation = rotation;
+            
             _segments.Add(instance);
 
             AddSegmentPoints(new TailPoint(instance.Position, instance.Rotation));

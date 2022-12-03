@@ -7,10 +7,10 @@ namespace SnakesWithGuns.Prototype.Snakes
 {
     public class Snake : MonoBehaviour
     {
-        [SerializeField] private int _startSegments = 3;
         [SerializeField] private float _radius = 0.5f;
         [SerializeField] private SnakeMover _mover;
         [SerializeField] private Tail _tail;
+        [SerializeField] private Segment[] _segmentPrefabs;
 
         private ISnakeInputProvider _inputProvider;
 
@@ -24,9 +24,9 @@ namespace SnakesWithGuns.Prototype.Snakes
 
         private IEnumerator Start()
         {
-            for (int i = 0; i < _startSegments; i++)
+            for (int i = 0; i < _segmentPrefabs.Length; i++)
             {
-                _tail.AddSegment();
+                _tail.AddSegment(Instantiate(_segmentPrefabs[i]));
                 yield return new WaitForSeconds(0.1f);
             }
         }

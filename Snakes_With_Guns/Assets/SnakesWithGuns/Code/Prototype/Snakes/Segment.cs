@@ -5,7 +5,7 @@ namespace SnakesWithGuns.Prototype.Snakes
     public class Segment : MonoBehaviour
     {
         [SerializeField] private Rigidbody _rigidbody;
-        
+
         public Vector3 Position
         {
             get => _rigidbody.position;
