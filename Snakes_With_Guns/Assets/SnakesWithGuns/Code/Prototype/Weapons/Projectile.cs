@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace SnakesWithGuns.Prototype.Weapons
 {
@@ -7,6 +8,8 @@ namespace SnakesWithGuns.Prototype.Weapons
         public ParticleSystem ImpactEffectPrefab;
 
         [SerializeField] private Rigidbody _rigidbody;
+
+        public event Action<Projectile> Died;
 
         private void Update()
         {
@@ -19,9 +22,11 @@ namespace SnakesWithGuns.Prototype.Weapons
             SpawnImpactEffect(collision);
             SelfDestroy();
         }
-
+        
         public void ApplyForce(float force, float drag)
         {
+            _rigidbody.velocity = Vector3.zero;
+            _rigidbody.angularVelocity = Vector3.zero;
             _rigidbody.AddForce(transform.forward * force, ForceMode.Impulse);
             _rigidbody.drag = drag;
         }
@@ -29,12 +34,13 @@ namespace SnakesWithGuns.Prototype.Weapons
         private void SpawnImpactEffect(Collision collision)
         {
             ContactPoint point = collision.contacts[0];
-            Instantiate(ImpactEffectPrefab, point.point, Quaternion.LookRotation(point.normal));
+            ParticleSystem impactEffect = Instantiate(ImpactEffectPrefab, point.point, Quaternion.LookRotation(point.normal));
+            Destroy(impactEffect.gameObject, 3f);
         }
 
         private void SelfDestroy()
         {
-            Destroy(gameObject);
+            Died?.Invoke(this);
         }
     }
 }
