@@ -5,12 +5,11 @@ namespace SnakesWithGuns.Prototype.Weapons
 {
     public class Projectile : MonoBehaviour
     {
-        public ParticleSystem ImpactEffectPrefab;
-
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private ParticleSystem _particleSystem;
 
         public event Action<Projectile> Died;
+        public event Action<ContactPoint> Collided;
 
         private void Update()
         {
@@ -20,10 +19,10 @@ namespace SnakesWithGuns.Prototype.Weapons
 
         private void OnCollisionEnter(Collision collision)
         {
-            SpawnImpactEffect(collision);
+            Collided?.Invoke(collision.GetContact(0));
             SelfDestroy();
         }
-        
+
         public void ApplyForce(float force, float drag)
         {
             _rigidbody.velocity = Vector3.zero;
@@ -32,16 +31,9 @@ namespace SnakesWithGuns.Prototype.Weapons
             _rigidbody.drag = drag;
         }
 
-        private void SpawnImpactEffect(Collision collision)
-        {
-            ContactPoint point = collision.contacts[0];
-            ParticleSystem impactEffect = Instantiate(ImpactEffectPrefab, point.point, Quaternion.LookRotation(point.normal));
-            Destroy(impactEffect.gameObject, 3f);
-        }
-
         private void SelfDestroy()
         {
-            _particleSystem.Clear(true);
+            _particleSystem.Stop(true);
             Died?.Invoke(this);
         }
     }

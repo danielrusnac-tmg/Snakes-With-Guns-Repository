@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using SnakesWithGuns.Prototype.Infrastructure;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace SnakesWithGuns.Prototype.Weapons
 {
     public class Weapon : MonoBehaviour
     {
-        private static Dictionary<Projectile, Pool<Projectile>> s_projectilePools = new();
+        private static Dictionary<Projectile, ObjectPool<Projectile>> s_projectilePools = new();
+        private static Dictionary<ParticleSystem, ObjectPool<ParticleSystem>> s_impactEffectPools = new();
 
         [SerializeField] private WeaponDefinition _weaponDefinition;
         [SerializeField] private Transform _muzzlePoint;
@@ -40,6 +41,39 @@ namespace SnakesWithGuns.Prototype.Weapons
         private void Awake()
         {
             _muzzle = Instantiate(_weaponDefinition.MuzzleEffectPrefab, _muzzlePoint);
+
+            if (!s_projectilePools.ContainsKey(_weaponDefinition.Projectile))
+            {
+                s_projectilePools.Add(_weaponDefinition.Projectile, new ObjectPool<Projectile>(
+                    () =>
+                    {
+                        Projectile projectile = Instantiate(_weaponDefinition.Projectile);
+                        projectile.Died += OnProjectileDied;
+                        projectile.Collided += OnProjectileCollided;
+                        return projectile;
+                    },
+                    projectile => projectile.gameObject.SetActive(true),
+                    projectile => projectile.gameObject.SetActive(false),
+                    projectile =>
+                    {
+                        projectile.Died -= OnProjectileDied;
+                        projectile.Collided -= OnProjectileCollided;
+                        Destroy(projectile);
+                    }, false, 100));
+            }
+
+            if (!s_impactEffectPools.ContainsKey(_weaponDefinition.ImpactEffectPrefab))
+            {
+                s_impactEffectPools.Add(_weaponDefinition.ImpactEffectPrefab, new ObjectPool<ParticleSystem>(
+                    () =>
+                    {
+                        ParticleSystem effect = Instantiate(_weaponDefinition.ImpactEffectPrefab);
+                        PooledParticle pooledParticle = effect.gameObject.AddComponent<PooledParticle>();
+                        pooledParticle.Construct(effect, OnReleaseImpact);
+                        return effect;
+                    },
+                    null, null, effect => Destroy(effect.gameObject), false, 100));
+            }
         }
 
         private void StartFiring()
@@ -55,11 +89,7 @@ namespace SnakesWithGuns.Prototype.Weapons
         private void Fire()
         {
             _muzzle.Play();
-            Projectile projectile = GetProjectileFromPool();
-            projectile.transform.position = _muzzlePoint.position;
-            projectile.transform.rotation = _muzzlePoint.rotation * _weaponDefinition.GetRotationOffset();
-            projectile.gameObject.SetActive(true);
-            projectile.ApplyForce(_weaponDefinition.GetForce(), _weaponDefinition.GetDrag());
+            SpawnProjectile(_muzzlePoint.position, _muzzlePoint.rotation * _weaponDefinition.GetRotationOffset());
         }
 
         private IEnumerator FireRoutine()
@@ -78,24 +108,30 @@ namespace SnakesWithGuns.Prototype.Weapons
             }
         }
 
-        private Projectile GetProjectileFromPool()
+        private void SpawnProjectile(Vector3 position, Quaternion rotation)
         {
-            if (!s_projectilePools.ContainsKey(_weaponDefinition.Projectile))
-                s_projectilePools.Add(_weaponDefinition.Projectile, new Pool<Projectile>(() =>
-                {
-                    Projectile instance = Instantiate(_weaponDefinition.Projectile);
-                    instance.Died += ReturnProjectileToPool;
-                    instance.ImpactEffectPrefab = _weaponDefinition.ImpactEffectPrefab;
-                    return instance;
-                }, 50));
-
-            return s_projectilePools[_weaponDefinition.Projectile].GetInstance();
+            Projectile projectile = s_projectilePools[_weaponDefinition.Projectile].Get();
+            projectile.transform.position = position;
+            projectile.transform.rotation = rotation;
+            projectile.ApplyForce(_weaponDefinition.GetForce(), _weaponDefinition.GetDrag());
         }
 
-        private void ReturnProjectileToPool(Projectile projectile)
+        private void OnProjectileCollided(ContactPoint point)
         {
-            projectile.gameObject.SetActive(false);
-            s_projectilePools[_weaponDefinition.Projectile].ReturnInstance(projectile);
+            ParticleSystem effect = s_impactEffectPools[_weaponDefinition.ImpactEffectPrefab].Get();
+            effect.transform.position = point.point;
+            effect.transform.forward = point.normal;
+            effect.Play();
+        }
+
+        private void OnProjectileDied(Projectile projectile)
+        {
+            s_projectilePools[_weaponDefinition.Projectile].Release(projectile);
+        }
+
+        private void OnReleaseImpact(ParticleSystem effect)
+        {
+            s_impactEffectPools[_weaponDefinition.ImpactEffectPrefab].Release(effect);
         }
     }
 }
