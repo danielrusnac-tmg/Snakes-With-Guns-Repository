@@ -1,6 +1,6 @@
 {
-    "name": "SnakesWithGuns.Prototype.Infrastructure",
-    "rootNamespace": "SnakesWithGuns.Prototype.Infrastructure",
+    "name": "SnakesWithGuns.Prototype.Utilities",
+    "rootNamespace": "SnakesWithGuns.Prototype.Utilities",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

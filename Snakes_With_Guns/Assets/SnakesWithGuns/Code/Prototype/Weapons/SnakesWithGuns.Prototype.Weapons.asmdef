@@ -2,7 +2,7 @@
     "name": "SnakesWithGuns.Prototype.Weapons",
     "rootNamespace": "SnakesWithGuns.Prototype.Weapons",
     "references": [
-        "GUID:5c81e1fd05813e949a0e590cb5819645"
+        "GUID:ae23bd2b394285e42886c50ae7f9c62f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

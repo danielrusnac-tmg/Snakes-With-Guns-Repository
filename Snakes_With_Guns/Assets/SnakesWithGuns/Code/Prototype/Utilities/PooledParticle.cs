@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace SnakesWithGuns.Prototype.Weapons
+namespace SnakesWithGuns.Prototype.Utilities
 {
     public class PooledParticle : MonoBehaviour
     {
