@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf108639e0e141a5a2fde0bb82a4e70d, type: 3}
-  m_Name: weapon_red
+  m_Name: weapon_blue_slow
   m_EditorClassIdentifier: 
-  _fireRate: 0.1
+  _fireRate: 0.3
   _reloadDuration: 1
   _magazineSize: 6
-  _force: 50
-  _drag: 3
-  _rotationOffset: 2
+  _force: 90
+  _drag: 6
+  _rotationOffset: 5
   _randomness: 0.106
   _alignImpactToSurface: 1
   _impactShake: 0
   _impactVibration: 1
-  _projectile: {fileID: 7530134549050696030, guid: d98ca5adc45586540a05f0eaeefc0381,
+  _projectile: {fileID: 5970117730437543047, guid: 37f07da342416c145a66f6a584dd53f1,
     type: 3}
-  _muzzleEffectPrefab: {fileID: 198686446084952802, guid: 78b77972827bddd4487264ddcf08613b,
+  _muzzleEffectPrefab: {fileID: 198293891458943234, guid: 2f12e769630513147943912203827a58,
     type: 3}
-  _impactEffectPrefab: {fileID: 198494534728232738, guid: 7a4540b877c7b1f44a7c01d60777765b,
+  _impactEffectPrefab: {fileID: 198029466038548546, guid: 2d333dcba55e9d246bb1cbe5d0baab27,
     type: 3}
-  _fire: {fileID: 0}
-  _impact: {fileID: 0}
+  _fire: {fileID: 8300000, guid: bc8c3727d81b340f685d13c544c0662c, type: 3}
+  _impact: {fileID: 8300000, guid: 3d8f66cd6be4846f78ffc04232f67022, type: 3}

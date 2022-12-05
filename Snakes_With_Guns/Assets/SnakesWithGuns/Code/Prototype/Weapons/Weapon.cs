@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SnakesWithGuns.Prototype.Messages;
 using SnakesWithGuns.Prototype.Utilities;
 using SnakesWithGuns.Prototype.Utilities.CameraShake;
 using UnityEngine;
@@ -89,6 +90,7 @@ namespace SnakesWithGuns.Prototype.Weapons
             projectile.transform.position = position;
             projectile.transform.rotation = rotation;
             projectile.ApplyForce(_weaponDefinition.GetForce(), _weaponDefinition.GetDrag());
+            Application.Instance.SfxChannel.Publish(new PlaySfxMessage(_weaponDefinition.Fire));
         }
 
         private void OnProjectileCollided(ContactPoint point)
@@ -102,6 +104,7 @@ namespace SnakesWithGuns.Prototype.Weapons
             effect.Play();
             Application.Instance.ScreenShakeChannel.Publish(_weaponDefinition.ImpactShake);
             Application.Instance.VibrationChannel.Publish(_weaponDefinition.ImpactVibration);
+            Application.Instance.SfxChannel.Publish(new PlaySfxMessage(_weaponDefinition.Impact));
         }
 
         private void OnProjectileDied(Projectile projectile)
