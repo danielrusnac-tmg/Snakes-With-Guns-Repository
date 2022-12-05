@@ -5,6 +5,9 @@ namespace SnakesWithGuns.Prototype.Snakes
     public class Segment : MonoBehaviour
     {
         [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private Transform _modulePoint;
+
+        public Transform ModulePoint => _modulePoint;
 
         public Vector3 Position
         {

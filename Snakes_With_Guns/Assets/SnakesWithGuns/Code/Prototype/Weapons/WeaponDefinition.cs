@@ -26,11 +26,10 @@ namespace SnakesWithGuns.Prototype.Weapons
         [SerializeField] private Projectile _projectile;
         [SerializeField] private ParticleSystem _muzzleEffectPrefab;
         [SerializeField] private ParticleSystem _impactEffectPrefab;
-        
-        [Header("Audio")]
-        [SerializeField] private AudioClip _fire;
-        [SerializeField] private AudioClip _impact;
 
+        [Header("Turret")]
+        [SerializeField] private float _turretRadius;
+        [SerializeField] private Turret _turretPrefab;
 
         public float FireRate => _fireRate;
         public float ReloadDuration => _reloadDuration;
@@ -41,8 +40,8 @@ namespace SnakesWithGuns.Prototype.Weapons
         public Projectile Projectile => _projectile;
         public ParticleSystem MuzzleEffectPrefab => _muzzleEffectPrefab;
         public ParticleSystem ImpactEffectPrefab => _impactEffectPrefab;
-        public AudioClip Fire => _fire;
-        public AudioClip Impact => _impact;
+        public float TurretRadius => _turretRadius;
+        public Turret TurretPrefab => _turretPrefab;
 
         public float GetForce()
         {

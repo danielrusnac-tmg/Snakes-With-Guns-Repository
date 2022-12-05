@@ -48,6 +48,12 @@ namespace SnakesWithGuns.Prototype.Weapons
             RotateTowardsTargetDirection();
         }
 
+        public void Initialize(WeaponDefinition weaponDefinition)
+        {
+            _aimer.Radius = weaponDefinition.TurretRadius;
+            _weapon.Initialize(weaponDefinition);
+        }
+
         private bool IsAimingAtTarget()
         {
             float dot = Vector3.Dot(_rotationPivot.forward, _targetDirection);

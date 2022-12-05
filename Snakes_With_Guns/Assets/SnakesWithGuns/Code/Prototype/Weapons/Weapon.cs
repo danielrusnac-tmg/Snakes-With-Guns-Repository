@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using SnakesWithGuns.Prototype.Messages;
 using SnakesWithGuns.Prototype.Utilities;
-using SnakesWithGuns.Prototype.Utilities.CameraShake;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -13,9 +11,9 @@ namespace SnakesWithGuns.Prototype.Weapons
         private static Dictionary<Projectile, ObjectPool<Projectile>> s_projectilePools = new();
         private static Dictionary<ParticleSystem, ObjectPool<ParticleSystem>> s_impactEffectPools = new();
 
-        [SerializeField] private WeaponDefinition _weaponDefinition;
         [SerializeField] private Transform _muzzlePoint;
 
+        private WeaponDefinition _weaponDefinition;
         private ParticleSystem _muzzle;
         private bool _isFiring;
         private Coroutine _fireCoroutine;
@@ -41,8 +39,9 @@ namespace SnakesWithGuns.Prototype.Weapons
             }
         }
 
-        private void Awake()
+        public void Initialize(WeaponDefinition weaponDefinition)
         {
+            _weaponDefinition = weaponDefinition;
             _muzzle = Instantiate(_weaponDefinition.MuzzleEffectPrefab, _muzzlePoint);
 
             if (!s_projectilePools.ContainsKey(_weaponDefinition.Projectile))
@@ -90,7 +89,6 @@ namespace SnakesWithGuns.Prototype.Weapons
             projectile.transform.position = position;
             projectile.transform.rotation = rotation;
             projectile.ApplyForce(_weaponDefinition.GetForce(), _weaponDefinition.GetDrag());
-            Application.Instance.SfxChannel.Publish(new PlaySfxMessage(_weaponDefinition.Fire));
         }
 
         private void OnProjectileCollided(ContactPoint point)
@@ -104,7 +102,6 @@ namespace SnakesWithGuns.Prototype.Weapons
             effect.Play();
             Application.Instance.ScreenShakeChannel.Publish(_weaponDefinition.ImpactShake);
             Application.Instance.VibrationChannel.Publish(_weaponDefinition.ImpactVibration);
-            Application.Instance.SfxChannel.Publish(new PlaySfxMessage(_weaponDefinition.Impact));
         }
 
         private void OnProjectileDied(Projectile projectile)

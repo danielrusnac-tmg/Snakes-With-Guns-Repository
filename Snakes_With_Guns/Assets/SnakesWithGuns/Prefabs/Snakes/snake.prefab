@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1315753168}
   - component: {fileID: 1064538727334303085}
   - component: {fileID: 5486901206705832841}
+  - component: {fileID: 1962191532383249651}
   - component: {fileID: 4100908408852745963}
   - component: {fileID: 7059934517421916861}
   m_Layer: 7
@@ -49,18 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088d027a3ca141d99409e37d85baa84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 0.5
   _mover: {fileID: 1315753168}
-  _tail: {fileID: 5486901206705832841}
-  _segmentPrefabs:
-  - {fileID: 1360499563118829476, guid: a9e7764cc9fe18346a41ec35bada9fff, type: 3}
-  - {fileID: 1360499563118829476, guid: a9e7764cc9fe18346a41ec35bada9fff, type: 3}
-  - {fileID: 2476195558216098683, guid: a91cff2d16f7d14458f38a2556c6bb46, type: 3}
-  - {fileID: 1360499563118829476, guid: 00bb10ecd636569418c7830cdab1d4e0, type: 3}
-  - {fileID: 1360499563118829476, guid: 00bb10ecd636569418c7830cdab1d4e0, type: 3}
-  - {fileID: 2476195558216098683, guid: a91cff2d16f7d14458f38a2556c6bb46, type: 3}
-  - {fileID: 1360499563118829476, guid: ae4696e260bf0954db9821ee5ab16923, type: 3}
-  - {fileID: 1360499563118829476, guid: ae4696e260bf0954db9821ee5ab16923, type: 3}
 --- !u!114 &1315753168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,6 +95,22 @@ MonoBehaviour:
   _segmentsDistance: 1.1
   _moveSpeed: 15
   _turnSpeed: 20
+  _startSegmentCount: 1
+  _segmentPrefab: {fileID: 2476195558216098683, guid: a91cff2d16f7d14458f38a2556c6bb46,
+    type: 3}
+--- !u!114 &1962191532383249651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7409312564375074347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a94e4a23aa944e2c917d3f7ef41ed4a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tail: {fileID: 5486901206705832841}
 --- !u!54 &4100908408852745963
 Rigidbody:
   m_ObjectHideFlags: 0
