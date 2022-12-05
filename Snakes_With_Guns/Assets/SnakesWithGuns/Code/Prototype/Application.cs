@@ -1,4 +1,5 @@
 using SnakesWithGuns.Prototype.Infrastructure.PubSub;
+using SnakesWithGuns.Prototype.Messages;
 using SnakesWithGuns.Prototype.Utilities.CameraShake;
 using SnakesWithGuns.Prototype.Utilities.Vibrations;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace SnakesWithGuns.Prototype
 
         public IChannel<CameraShakeType> ScreenShakeChannel { get; private set; }
         public IChannel<VibrationType> VibrationChannel { get; private set; }
+        public IChannel<PlaySfxMessage> SfxChannel { get; private set; }
 
         private void Awake()
         {
@@ -46,6 +48,7 @@ namespace SnakesWithGuns.Prototype
         {
             ScreenShakeChannel = new Channel<CameraShakeType>();
             VibrationChannel = new Channel<VibrationType>();
+            SfxChannel = new Channel<PlaySfxMessage>();
         }
 
         private void RegisterChannels()
