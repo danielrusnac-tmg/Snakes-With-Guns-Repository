@@ -6,7 +6,7 @@ using UnityEngine.Pool;
 
 namespace SnakesWithGuns.Prototype.Weapons
 {
-    public class Weapon : MonoBehaviour
+    public class Weapon : MonoBehaviour, IWeapon
     {
         private static Dictionary<Projectile, ObjectPool<Projectile>> s_projectilePools = new();
         private static Dictionary<ParticleSystem, ObjectPool<ParticleSystem>> s_impactEffectPools = new();
@@ -44,37 +44,10 @@ namespace SnakesWithGuns.Prototype.Weapons
             _muzzle = Instantiate(_weaponDefinition.MuzzleEffectPrefab, _muzzlePoint);
 
             if (!s_projectilePools.ContainsKey(_weaponDefinition.Projectile))
-            {
-                s_projectilePools.Add(_weaponDefinition.Projectile, new ObjectPool<Projectile>(
-                    () =>
-                    {
-                        Projectile projectile = Instantiate(_weaponDefinition.Projectile);
-                        projectile.Died += OnProjectileDied;
-                        projectile.Collided += OnProjectileCollided;
-                        return projectile;
-                    },
-                    projectile => projectile.gameObject.SetActive(true),
-                    projectile => projectile.gameObject.SetActive(false),
-                    projectile =>
-                    {
-                        projectile.Died -= OnProjectileDied;
-                        projectile.Collided -= OnProjectileCollided;
-                        Destroy(projectile);
-                    }, false, 100));
-            }
+                s_projectilePools.Add(_weaponDefinition.Projectile, CreateProjectilePool());
 
             if (!s_impactEffectPools.ContainsKey(_weaponDefinition.ImpactEffectPrefab))
-            {
-                s_impactEffectPools.Add(_weaponDefinition.ImpactEffectPrefab, new ObjectPool<ParticleSystem>(
-                    () =>
-                    {
-                        ParticleSystem effect = Instantiate(_weaponDefinition.ImpactEffectPrefab);
-                        PooledParticle pooledParticle = effect.gameObject.AddComponent<PooledParticle>();
-                        pooledParticle.Construct(effect, OnReleaseImpact);
-                        return effect;
-                    },
-                    null, null, effect => Destroy(effect.gameObject), false, 100));
-            }
+                s_impactEffectPools.Add(_weaponDefinition.ImpactEffectPrefab, CreateImpactEffectPool());
         }
 
         private void StartFiring()
@@ -133,6 +106,39 @@ namespace SnakesWithGuns.Prototype.Weapons
         private void OnReleaseImpact(ParticleSystem effect)
         {
             s_impactEffectPools[_weaponDefinition.ImpactEffectPrefab].Release(effect);
+        }
+
+        private ObjectPool<ParticleSystem> CreateImpactEffectPool()
+        {
+            return new ObjectPool<ParticleSystem>(
+                () =>
+                {
+                    ParticleSystem effect = Instantiate(_weaponDefinition.ImpactEffectPrefab);
+                    PooledParticle pooledParticle = effect.gameObject.AddComponent<PooledParticle>();
+                    pooledParticle.Construct(effect, OnReleaseImpact);
+                    return effect;
+                },
+                null, null, effect => Destroy(effect.gameObject), false, 100);
+        }
+
+        private ObjectPool<Projectile> CreateProjectilePool()
+        {
+            return new ObjectPool<Projectile>(
+                () =>
+                {
+                    Projectile projectile = Instantiate(_weaponDefinition.Projectile);
+                    projectile.Died += OnProjectileDied;
+                    projectile.Collided += OnProjectileCollided;
+                    return projectile;
+                },
+                projectile => projectile.gameObject.SetActive(true),
+                projectile => projectile.gameObject.SetActive(false),
+                projectile =>
+                {
+                    projectile.Died -= OnProjectileDied;
+                    projectile.Collided -= OnProjectileCollided;
+                    Destroy(projectile);
+                }, false, 100);
         }
     }
 }

@@ -6,7 +6,6 @@ namespace SnakesWithGuns.Prototype.Weapons
     {
         [SerializeField] private float _turnDamp = 0.4f;
         [SerializeField] private float _aimTolerance = 0.2f;
-        [SerializeField] private Weapon _weapon;
         [SerializeField] private Transform _rotationPivot;
         [SerializeField] private Aimer _aimer;
 
@@ -14,10 +13,12 @@ namespace SnakesWithGuns.Prototype.Weapons
         private Vector3 _currentDirection;
         private Vector3 _turnVelocity;
         private Transform _transform;
+        private IWeapon _weapon;
 
         private void Awake()
         {
             _transform = transform;
+            _weapon = GetComponent<IWeapon>();
         }
 
         private void OnEnable()
@@ -74,7 +75,7 @@ namespace SnakesWithGuns.Prototype.Weapons
                 return;
 
             Gizmos.color = IsAimingAtTarget() ? Color.red : Color.blue;
-            Gizmos.DrawLine(_weapon.transform.position, _aimer.Target);
+            Gizmos.DrawLine(_rotationPivot.position, _aimer.Target);
         }
     }
 }
