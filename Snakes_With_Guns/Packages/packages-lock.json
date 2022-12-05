@@ -1,12 +1,5 @@
 {
   "dependencies": {
-    "com.tmg.modular-inventory": {
-      "version": "0.1.0",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.trymygames.com"
-    },
     "com.unity.burst": {
       "version": "1.7.3",
       "depth": 1,

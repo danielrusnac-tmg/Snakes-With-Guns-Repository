@@ -1,7 +1,9 @@
 {
     "name": "SnakesWithGuns.Prototype.Snakes",
     "rootNamespace": "SnakesWithGuns.Prototype.Snakes",
-    "references": [],
+    "references": [
+        "GUID:5c81e1fd05813e949a0e590cb5819645"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
