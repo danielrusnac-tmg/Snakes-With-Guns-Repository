@@ -15,8 +15,8 @@ MonoBehaviour:
   _fireRate: 0.5
   _reloadDuration: 5
   _magazineSize: 3
-  _force: 20
-  _drag: 0.1
+  _force: 16
+  _drag: 0.01
   _rotationOffset: 3
   _randomness: 0.336
   _alignImpactToSurface: 1
