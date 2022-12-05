@@ -16,7 +16,6 @@ namespace SnakesWithGuns.Prototype
         public IChannel<CameraShakeType> ScreenShakeChannel { get; private set; }
         public IChannel<VibrationType> VibrationChannel { get; private set; }
 
-
         private void Awake()
         {
             if (Instance != null)
@@ -28,10 +27,10 @@ namespace SnakesWithGuns.Prototype
             InitializeServices();
             CreateChannels();
             RegisterChannels();
-            
+
             Instance = this;
         }
-        
+
         private void Start()
         {
             UnityEngine.Application.targetFrameRate = 60;
@@ -44,7 +43,7 @@ namespace SnakesWithGuns.Prototype
 
         private void InitializeServices()
         {
-            _vibration = new NiceVibrationWrapper();
+            _vibration = new NiceVibrationCustom();
         }
 
         private void CreateChannels()

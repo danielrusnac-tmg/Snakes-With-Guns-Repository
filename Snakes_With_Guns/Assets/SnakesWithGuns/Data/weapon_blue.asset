@@ -19,6 +19,9 @@ MonoBehaviour:
   _drag: 6
   _rotationOffset: 5
   _randomness: 0.106
+  _alignImpactToSurface: 1
+  _impactShake: 0
+  _impactVibration: 1
   _projectile: {fileID: 5970117730437543047, guid: 37f07da342416c145a66f6a584dd53f1,
     type: 3}
   _muzzleEffectPrefab: {fileID: 198293891458943234, guid: 2f12e769630513147943912203827a58,

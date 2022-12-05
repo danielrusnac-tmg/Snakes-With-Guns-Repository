@@ -21,6 +21,7 @@ MonoBehaviour:
   _randomness: 0.106
   _alignImpactToSurface: 1
   _impactShake: 0
+  _impactVibration: 1
   _projectile: {fileID: 7530134549050696030, guid: d98ca5adc45586540a05f0eaeefc0381,
     type: 3}
   _muzzleEffectPrefab: {fileID: 198686446084952802, guid: 78b77972827bddd4487264ddcf08613b,
