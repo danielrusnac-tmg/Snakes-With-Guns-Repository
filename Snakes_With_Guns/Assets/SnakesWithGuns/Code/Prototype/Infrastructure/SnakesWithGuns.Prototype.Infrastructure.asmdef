@@ -1,9 +1,7 @@
 {
-    "name": "SnakesWithGuns.Prototype.Utilities",
-    "rootNamespace": "SnakesWithGuns.Prototype.Utilities",
-    "references": [
-        "GUID:4307f53044263cf4b835bd812fc161a4"
-    ],
+    "name": "SnakesWithGuns.Prototype.Infrastructure",
+    "rootNamespace": "SnakesWithGuns.Prototype.Infrastructure",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

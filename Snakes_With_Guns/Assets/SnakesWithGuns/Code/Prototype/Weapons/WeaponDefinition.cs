@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SnakesWithGuns.Prototype.Utilities.CameraShake;
+using UnityEngine;
 
 namespace SnakesWithGuns.Prototype.Weapons
 {
@@ -19,6 +20,7 @@ namespace SnakesWithGuns.Prototype.Weapons
         [SerializeField] private bool _alignImpactToSurface = true;
 
         [Header("Effects")]
+        [SerializeField] private CameraShakeType _impactShake;
         [SerializeField] private Projectile _projectile;
         [SerializeField] private ParticleSystem _muzzleEffectPrefab;
         [SerializeField] private ParticleSystem _impactEffectPrefab;
@@ -27,6 +29,7 @@ namespace SnakesWithGuns.Prototype.Weapons
         public float ReloadDuration => _reloadDuration;
         public int MagazineSize => _magazineSize;
         public bool AlignImpactToSurface => _alignImpactToSurface;
+        public CameraShakeType ImpactShake => _impactShake;
         public Projectile Projectile => _projectile;
         public ParticleSystem MuzzleEffectPrefab => _muzzleEffectPrefab;
         public ParticleSystem ImpactEffectPrefab => _impactEffectPrefab;

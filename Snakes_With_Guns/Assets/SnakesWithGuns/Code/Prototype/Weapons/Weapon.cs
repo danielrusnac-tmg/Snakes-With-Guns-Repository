@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using SnakesWithGuns.Prototype.Utilities;
+using SnakesWithGuns.Prototype.Utilities.CameraShake;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -94,11 +95,12 @@ namespace SnakesWithGuns.Prototype.Weapons
         {
             ParticleSystem effect = s_impactEffectPools[_weaponDefinition.ImpactEffectPrefab].Get();
             effect.transform.position = point.point;
-            
+
             if (_weaponDefinition.AlignImpactToSurface)
                 effect.transform.forward = point.normal;
-            
+
             effect.Play();
+            Application.Instance.ScreenShakeChannel.Publish(_weaponDefinition.ImpactShake);
         }
 
         private void OnProjectileDied(Projectile projectile)

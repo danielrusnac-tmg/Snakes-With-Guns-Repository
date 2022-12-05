@@ -24,7 +24,7 @@ namespace SnakesWithGuns.Prototype.Weapons
 
         private void FixedUpdate()
         {
-            if (_alignToVelocity)
+            if (_alignToVelocity && _rigidbody.velocity.sqrMagnitude > float.Epsilon)
                 _rigidbody.MoveRotation(Quaternion.LookRotation(_rigidbody.velocity.normalized));
         }
 
