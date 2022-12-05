@@ -5,6 +5,7 @@ namespace SnakesWithGuns.Prototype.Weapons
 {
     public class Projectile : MonoBehaviour
     {
+        [SerializeField] private bool _waitForParticleAnimation;
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private ParticleSystem _particleSystem;
         
@@ -15,6 +16,12 @@ namespace SnakesWithGuns.Prototype.Weapons
 
         public event Action<Projectile> Died;
         public event Action<ContactPoint> Collided;
+
+        private void Awake()
+        {
+            ParticleSystem.MainModule main = _particleSystem.main;
+            main.stopAction = ParticleSystemStopAction.Callback;
+        }
 
         private void Update()
         {
@@ -36,16 +43,28 @@ namespace SnakesWithGuns.Prototype.Weapons
 
         public void ApplyForce(float force, float drag)
         {
+            _particleSystem.Play();
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.angularVelocity = Vector3.zero;
             _rigidbody.AddForce(transform.forward * force, ForceMode.Impulse);
             _rigidbody.drag = drag;
         }
 
+        private void OnParticleSystemStopped()
+        {
+            Died?.Invoke(this);
+        }
+        
         private void SelfDestroy()
         {
-            _particleSystem.Stop(true);
-            Died?.Invoke(this);
+            if (_waitForParticleAnimation)
+            {
+                _particleSystem.Stop(true);
+            }
+            else
+            {
+                Died?.Invoke(this);
+            }
         }
     }
 }

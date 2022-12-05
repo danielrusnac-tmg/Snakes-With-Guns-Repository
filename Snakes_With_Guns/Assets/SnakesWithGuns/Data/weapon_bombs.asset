@@ -18,7 +18,7 @@ MonoBehaviour:
   _force: 20
   _drag: 0.1
   _rotationOffset: 3
-  _randomness: 0.106
+  _randomness: 0.336
   _alignImpactToSurface: 1
   _impactShake: 2
   _projectile: {fileID: 5806941244839805179, guid: 7d0b90a1012893d4da2e9e31dc94fa02,

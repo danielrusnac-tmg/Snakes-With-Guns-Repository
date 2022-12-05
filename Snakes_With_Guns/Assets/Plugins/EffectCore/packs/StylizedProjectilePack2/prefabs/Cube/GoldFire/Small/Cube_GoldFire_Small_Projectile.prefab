@@ -14542,6 +14542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed632e2546b74162ad176d75e095fa90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _waitForParticleAnimation: 1
   _rigidbody: {fileID: 54514016292773024}
   _particleSystem: {fileID: 198709153041281152}
   _destroyOnSlowDown: 0
