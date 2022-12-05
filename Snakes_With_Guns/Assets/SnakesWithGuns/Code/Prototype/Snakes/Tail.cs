@@ -6,22 +6,27 @@ namespace SnakesWithGuns.Prototype.Snakes
 {
     public class Tail : MonoBehaviour
     {
+        [SerializeField] private int _defaultLength = 1;
         [Min(0), SerializeField] private int _pointPerSegment = 3;
         [Min(0f), SerializeField] private float _segmentsDistance = 1.1f;
         [SerializeField] private float _moveSpeed = 15f;
         [SerializeField] private float _turnSpeed = 20f;
+        [SerializeField] private Segment _segmentPrefab;
 
         private Transform _transform;
-        private Transform _root;
         private List<TailPoint> _points = new();
         private List<Segment> _segments = new();
+
+        public IReadOnlyList<Segment> Segments => _segments;
 
         private float PointsDistance => _segmentsDistance / _pointPerSegment;
 
         private void Awake()
         {
             _transform = transform;
-            _root = transform.parent;
+
+            for (int i = 0; i < _defaultLength; i++)
+                AddSegment();
         }
 
         private void FixedUpdate()
@@ -32,18 +37,31 @@ namespace SnakesWithGuns.Prototype.Snakes
             MoveSegments();
         }
 
-        public void AddSegment(Segment instance)
+        [ContextMenu(nameof(AddSegment))]
+        public void AddSegment()
         {
             Vector3 position = _segments.Count == 0 ? _transform.position : _segments.Last().Position;
             Vector3 forward = _segments.Count == 0 ? _transform.forward : _segments.Last().Rotation * Vector3.forward;
             Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
 
-            instance.Position = position;
-            instance.Rotation = rotation;
-            
+            Segment instance = Instantiate(_segmentPrefab, position, rotation);
+
             _segments.Add(instance);
 
             AddSegmentPoints(new TailPoint(instance.Position, instance.Rotation));
+        }
+
+        [ContextMenu(nameof(RemoveSegment))]
+        public void RemoveSegment()
+        {
+            if (_segments.Count <= 1)
+                return;
+
+            Segment last = _segments.Last();
+            _segments.RemoveAt(_segments.Count - 1);
+            Destroy(last.gameObject);
+
+            RemoveSegmentPoints();
         }
 
         private void MoveSegments()
@@ -90,19 +108,16 @@ namespace SnakesWithGuns.Prototype.Snakes
                 Quaternion.Lerp(segment.Rotation, rotation, _turnSpeed * Time.fixedDeltaTime);
         }
 
-        [ContextMenu(nameof(RemoveSegment))]
-        public void RemoveSegment()
-        {
-            if (_segments.Count <= 1)
-                return;
-
-            _segments.RemoveAt(_segments.Count - 1);
-        }
-
         private void AddSegmentPoints(TailPoint point)
         {
             for (int i = 0; i < _pointPerSegment; i++)
                 _points.Add(point);
+        }
+
+        private void RemoveSegmentPoints()
+        {
+            for (int i = 0; i < _pointPerSegment; i++)
+                _points.RemoveAt(_points.Count - 1);
         }
 
         private struct TailPoint
