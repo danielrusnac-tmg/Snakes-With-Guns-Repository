@@ -43,7 +43,7 @@ namespace SnakesWithGuns.Prototype
 
         private void InitializeServices()
         {
-            _vibration = new NiceVibrationCustom();
+            _vibration = new NiceVibrationWithPresets();
         }
 
         private void CreateChannels()
@@ -55,13 +55,13 @@ namespace SnakesWithGuns.Prototype
         private void RegisterChannels()
         {
             ScreenShakeChannel.Register(_screenShaker.Shake);
-            VibrationChannel.Register(_vibration.Play);
+            // VibrationChannel.Register(_vibration.Play);
         }
 
         private void UnregisterChannels()
         {
             ScreenShakeChannel.Unregister(_screenShaker.Shake);
-            VibrationChannel.Unregister(_vibration.Play);
+            // VibrationChannel.Unregister(_vibration.Play);
         }
     }
 }

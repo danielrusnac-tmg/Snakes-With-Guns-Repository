@@ -18,7 +18,7 @@ namespace SnakesWithGuns.Prototype.Utilities.Vibrations
             HapticPatterns.PresetType preset = GetPreset(vibration);
             HapticPatterns.PlayPreset(preset);
 
-            _cooldown = HapticPatterns.GetPresetDuration(preset) * 1.2f;
+            _cooldown = HapticPatterns.GetPresetDuration(preset) * 2f;
             _lastPlayTime = Time.time;
         }
 
@@ -26,8 +26,8 @@ namespace SnakesWithGuns.Prototype.Utilities.Vibrations
         {
             return vibration switch
             {
-                VibrationType.Weak => HapticPatterns.PresetType.LightImpact,
-                VibrationType.Medium => HapticPatterns.PresetType.MediumImpact,
+                VibrationType.Weak => HapticPatterns.PresetType.Selection,
+                VibrationType.Medium => HapticPatterns.PresetType.LightImpact,
                 VibrationType.Strong => HapticPatterns.PresetType.HeavyImpact,
                 _ => HapticPatterns.PresetType.None
             };
