@@ -101,6 +101,7 @@ namespace SnakesWithGuns.Prototype.Weapons
 
             effect.Play();
             Application.Instance.ScreenShakeChannel.Publish(_weaponDefinition.ImpactShake);
+            Application.Instance.VibrationChannel.Publish(_weaponDefinition.ImpactVibration);
         }
 
         private void OnProjectileDied(Projectile projectile)

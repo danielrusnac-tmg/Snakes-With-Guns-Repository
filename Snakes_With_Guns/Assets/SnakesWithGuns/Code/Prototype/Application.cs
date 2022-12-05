@@ -1,16 +1,21 @@
 using SnakesWithGuns.Prototype.Infrastructure.PubSub;
 using SnakesWithGuns.Prototype.Utilities.CameraShake;
+using SnakesWithGuns.Prototype.Utilities.Vibrations;
 using UnityEngine;
 
 namespace SnakesWithGuns.Prototype
 {
     public class Application : MonoBehaviour
     {
+        public static Application Instance { get; private set; }
+
         [SerializeField] private CinemachineScreenShaker _screenShaker;
 
+        private IVibration _vibration;
+
         public IChannel<CameraShakeType> ScreenShakeChannel { get; private set; }
-        
-        public static Application Instance { get; private set; } 
+        public IChannel<VibrationType> VibrationChannel { get; private set; }
+
 
         private void Awake()
         {
@@ -20,24 +25,44 @@ namespace SnakesWithGuns.Prototype
                 return;
             }
 
+            InitializeServices();
+            CreateChannels();
+            RegisterChannels();
+            
             Instance = this;
-            ScreenShakeChannel = new Channel<CameraShakeType>();
-            ScreenShakeChannel.Register(OnScreenShakeEvent);
         }
-
-        private void OnDestroy()
-        {
-            ScreenShakeChannel.Unregister(OnScreenShakeEvent);
-        }
-
+        
         private void Start()
         {
             UnityEngine.Application.targetFrameRate = 60;
         }
 
-        private void OnScreenShakeEvent(CameraShakeType shakeType)
+        private void OnDestroy()
         {
-            _screenShaker.Shake(shakeType);
+            UnregisterChannels();
+        }
+
+        private void InitializeServices()
+        {
+            _vibration = new NiceVibrationWrapper();
+        }
+
+        private void CreateChannels()
+        {
+            ScreenShakeChannel = new Channel<CameraShakeType>();
+            VibrationChannel = new Channel<VibrationType>();
+        }
+
+        private void RegisterChannels()
+        {
+            ScreenShakeChannel.Register(_screenShaker.Shake);
+            VibrationChannel.Register(_vibration.Play);
+        }
+
+        private void UnregisterChannels()
+        {
+            ScreenShakeChannel.Unregister(_screenShaker.Shake);
+            VibrationChannel.Unregister(_vibration.Play);
         }
     }
 }

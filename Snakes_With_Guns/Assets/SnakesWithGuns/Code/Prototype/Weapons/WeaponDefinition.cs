@@ -1,4 +1,5 @@
 ﻿using SnakesWithGuns.Prototype.Utilities.CameraShake;
+using SnakesWithGuns.Prototype.Utilities.Vibrations;
 using UnityEngine;
 
 namespace SnakesWithGuns.Prototype.Weapons
@@ -21,6 +22,7 @@ namespace SnakesWithGuns.Prototype.Weapons
 
         [Header("Effects")]
         [SerializeField] private CameraShakeType _impactShake;
+        [SerializeField] private VibrationType _impactVibration;
         [SerializeField] private Projectile _projectile;
         [SerializeField] private ParticleSystem _muzzleEffectPrefab;
         [SerializeField] private ParticleSystem _impactEffectPrefab;
@@ -30,6 +32,7 @@ namespace SnakesWithGuns.Prototype.Weapons
         public int MagazineSize => _magazineSize;
         public bool AlignImpactToSurface => _alignImpactToSurface;
         public CameraShakeType ImpactShake => _impactShake;
+        public VibrationType ImpactVibration => _impactVibration;
         public Projectile Projectile => _projectile;
         public ParticleSystem MuzzleEffectPrefab => _muzzleEffectPrefab;
         public ParticleSystem ImpactEffectPrefab => _impactEffectPrefab;
