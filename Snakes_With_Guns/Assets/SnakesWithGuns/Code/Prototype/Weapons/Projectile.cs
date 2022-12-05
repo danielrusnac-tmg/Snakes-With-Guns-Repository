@@ -7,14 +7,25 @@ namespace SnakesWithGuns.Prototype.Weapons
     {
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private ParticleSystem _particleSystem;
+        
+        [Header("Settings")]
+        [SerializeField] private bool _destroyOnSlowDown = true;
+        [SerializeField] private float _minVelocity = 1f;
+        [SerializeField] private bool _alignToVelocity;
 
         public event Action<Projectile> Died;
         public event Action<ContactPoint> Collided;
 
         private void Update()
         {
-            if (_rigidbody.velocity.sqrMagnitude < 1f)
+            if (_destroyOnSlowDown && _rigidbody.velocity.sqrMagnitude < _minVelocity)
                 SelfDestroy();
+        }
+
+        private void FixedUpdate()
+        {
+            if (_alignToVelocity)
+                _rigidbody.MoveRotation(Quaternion.LookRotation(_rigidbody.velocity.normalized));
         }
 
         private void OnCollisionEnter(Collision collision)

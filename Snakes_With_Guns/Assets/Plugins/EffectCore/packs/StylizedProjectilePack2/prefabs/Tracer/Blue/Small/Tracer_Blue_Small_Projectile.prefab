@@ -4858,9 +4858,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed632e2546b74162ad176d75e095fa90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ImpactEffectPrefab: {fileID: 0}
   _rigidbody: {fileID: 5290191564811312939}
   _particleSystem: {fileID: 198451581803922730}
+  _destroyOnSlowDown: 1
+  _minVelocity: 1
+  _alignToVelocity: 0
 --- !u!135 &845787611509832436
 SphereCollider:
   m_ObjectHideFlags: 0

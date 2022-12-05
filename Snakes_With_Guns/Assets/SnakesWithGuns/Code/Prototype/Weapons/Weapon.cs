@@ -94,7 +94,10 @@ namespace SnakesWithGuns.Prototype.Weapons
         {
             ParticleSystem effect = s_impactEffectPools[_weaponDefinition.ImpactEffectPrefab].Get();
             effect.transform.position = point.point;
-            effect.transform.forward = point.normal;
+            
+            if (_weaponDefinition.AlignImpactToSurface)
+                effect.transform.forward = point.normal;
+            
             effect.Play();
         }
 

@@ -53,14 +53,14 @@ MonoBehaviour:
   _mover: {fileID: 1315753168}
   _tail: {fileID: 5486901206705832841}
   _segmentPrefabs:
+  - {fileID: 1360499563118829476, guid: a9e7764cc9fe18346a41ec35bada9fff, type: 3}
+  - {fileID: 1360499563118829476, guid: a9e7764cc9fe18346a41ec35bada9fff, type: 3}
   - {fileID: 2476195558216098683, guid: a91cff2d16f7d14458f38a2556c6bb46, type: 3}
-  - {fileID: 1360499563118829476, guid: a9e7764cc9fe18346a41ec35bada9fff, type: 3}
-  - {fileID: 1360499563118829476, guid: a9e7764cc9fe18346a41ec35bada9fff, type: 3}
-  - {fileID: 1360499563118829476, guid: a9e7764cc9fe18346a41ec35bada9fff, type: 3}
+  - {fileID: 1360499563118829476, guid: 00bb10ecd636569418c7830cdab1d4e0, type: 3}
+  - {fileID: 1360499563118829476, guid: 00bb10ecd636569418c7830cdab1d4e0, type: 3}
   - {fileID: 2476195558216098683, guid: a91cff2d16f7d14458f38a2556c6bb46, type: 3}
   - {fileID: 1360499563118829476, guid: ae4696e260bf0954db9821ee5ab16923, type: 3}
   - {fileID: 1360499563118829476, guid: ae4696e260bf0954db9821ee5ab16923, type: 3}
-  - {fileID: 2476195558216098683, guid: a91cff2d16f7d14458f38a2556c6bb46, type: 3}
 --- !u!114 &1315753168
 MonoBehaviour:
   m_ObjectHideFlags: 0
