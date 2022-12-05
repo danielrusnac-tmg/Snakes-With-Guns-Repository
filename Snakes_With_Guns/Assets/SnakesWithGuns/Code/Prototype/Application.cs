@@ -24,16 +24,11 @@ namespace SnakesWithGuns.Prototype
                 return;
             }
 
+            Instance = this;
+
             InitializeServices();
             CreateChannels();
             RegisterChannels();
-
-            Instance = this;
-        }
-
-        private void Start()
-        {
-            UnityEngine.Application.targetFrameRate = 60;
         }
 
         private void OnDestroy()
@@ -43,6 +38,7 @@ namespace SnakesWithGuns.Prototype
 
         private void InitializeServices()
         {
+            UnityEngine.Application.targetFrameRate = 60;
             _vibration = new NiceVibrationWithPresets();
         }
 

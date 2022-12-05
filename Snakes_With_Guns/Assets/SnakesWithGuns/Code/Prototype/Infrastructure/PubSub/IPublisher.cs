@@ -5,11 +5,7 @@ namespace SnakesWithGuns.Prototype.Infrastructure.PubSub
     public interface IChannel<T>
     {
         void Publish(T message);
-        
         void Register(Action<T> action);
-        void Register(Action action);
-        
         void Unregister(Action<T> action);
-        void Unregister(Action action);
     }
 }

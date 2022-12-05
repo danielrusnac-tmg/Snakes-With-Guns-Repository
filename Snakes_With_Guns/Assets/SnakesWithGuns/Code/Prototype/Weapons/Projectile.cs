@@ -7,6 +7,7 @@ namespace SnakesWithGuns.Prototype.Weapons
     {
         [SerializeField] private bool _waitForParticleAnimation;
         [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private Collider _collider;
         [SerializeField] private ParticleSystem _particleSystem;
         
         [Header("Settings")]
@@ -16,7 +17,7 @@ namespace SnakesWithGuns.Prototype.Weapons
 
         public event Action<Projectile> Died;
         public event Action<ContactPoint> Collided;
-
+        
         private void Awake()
         {
             ParticleSystem.MainModule main = _particleSystem.main;
@@ -43,6 +44,7 @@ namespace SnakesWithGuns.Prototype.Weapons
 
         public void ApplyForce(float force, float drag)
         {
+            _collider.enabled = true;
             _particleSystem.Play();
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.angularVelocity = Vector3.zero;
@@ -57,6 +59,8 @@ namespace SnakesWithGuns.Prototype.Weapons
         
         private void SelfDestroy()
         {
+            _collider.enabled = false;
+            
             if (_waitForParticleAnimation)
             {
                 _particleSystem.Stop(true);

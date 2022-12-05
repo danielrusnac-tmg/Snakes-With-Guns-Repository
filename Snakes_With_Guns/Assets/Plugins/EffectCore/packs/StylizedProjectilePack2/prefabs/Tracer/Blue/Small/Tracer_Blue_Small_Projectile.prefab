@@ -128,7 +128,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -4858,7 +4858,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed632e2546b74162ad176d75e095fa90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _waitForParticleAnimation: 0
   _rigidbody: {fileID: 5290191564811312939}
+  _collider: {fileID: 845787611509832436}
   _particleSystem: {fileID: 198451581803922730}
   _destroyOnSlowDown: 1
   _minVelocity: 1
@@ -4926,7 +4928,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -9809,7 +9811,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -14619,7 +14621,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
