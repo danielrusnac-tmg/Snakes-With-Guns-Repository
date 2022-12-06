@@ -111,6 +111,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tail: {fileID: 5486901206705832841}
+  _defaultWeapons:
+  - {fileID: 11400000, guid: 67c350740a236954ab3b5787d71039ff, type: 2}
+  - {fileID: 11400000, guid: 67c350740a236954ab3b5787d71039ff, type: 2}
+  - {fileID: 11400000, guid: 67c350740a236954ab3b5787d71039ff, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 2309f6d23fa2fa146a7ab644b25804a6, type: 2}
+  - {fileID: 11400000, guid: 2309f6d23fa2fa146a7ab644b25804a6, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 1dfd6fc79a029484a9323853955c670b, type: 2}
+  - {fileID: 11400000, guid: 1dfd6fc79a029484a9323853955c670b, type: 2}
 --- !u!54 &4100908408852745963
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -28,5 +28,6 @@ MonoBehaviour:
     type: 3}
   _impactEffectPrefab: {fileID: 198752863565291818, guid: edacf0fc41abd474da349ea9cd8aae6e,
     type: 3}
-  _fire: {fileID: 0}
-  _impact: {fileID: 0}
+  _turretRadius: 14
+  _turretPrefab: {fileID: 5898271948896328344, guid: 404bb378f8bbdf245ba93d27e426826b,
+    type: 3}
