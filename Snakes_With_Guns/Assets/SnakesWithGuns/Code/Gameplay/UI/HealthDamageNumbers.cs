@@ -28,11 +28,12 @@ namespace SnakesWithGuns.Gameplay.UI
 
         private void OnChanged(Health.ChangeData data)
         {
-            _worldTextChannel.Publish(new SpawnFloatingTextMessage()
+            _worldTextChannel.Publish(new SpawnFloatingTextMessage
             {
-                Message = $"{data.Delta}",
+                Value = data.Delta,
                 Position = _transform.position + Vector3.up,
-                Color = _color
+                Color = _color,
+                InstanceID = GetInstanceID()
             });
         }
     }

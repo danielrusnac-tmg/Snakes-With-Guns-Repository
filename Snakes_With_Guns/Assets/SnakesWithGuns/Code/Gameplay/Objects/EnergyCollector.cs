@@ -33,7 +33,13 @@ namespace SnakesWithGuns.Gameplay.Objects
             {
                 collectable.Collect();
                 _current++;
-                _floatingTextChannel.Publish(new SpawnFloatingTextMessage(collectable.transform.position, "+1", new Color(0f, 0.96f, 0.45f)));
+                _floatingTextChannel.Publish(new SpawnFloatingTextMessage
+                {
+                    Position = collectable.transform.position,
+                    Value = 1,
+                    Color = new Color(0f, 0.96f, 0.45f),
+                    InstanceID = GetInstanceID()
+                });
 
                 OnEnergyChanged();
             }

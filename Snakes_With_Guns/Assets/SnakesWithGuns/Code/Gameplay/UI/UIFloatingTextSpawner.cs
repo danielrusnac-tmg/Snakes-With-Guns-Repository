@@ -1,8 +1,7 @@
-﻿using DG.Tweening;
+﻿using System.Collections.Generic;
 using SnakesWithGuns.Gameplay.Messages;
 using SnakesWithGuns.Infrastructure.PubSub;
 using SnakesWithGuns.Utilities;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -10,18 +9,18 @@ namespace SnakesWithGuns.Gameplay.UI
 {
     public class UIFloatingTextSpawner : MonoBehaviour
     {
-        [SerializeField] private TMP_Text _textPrefab;
-        [SerializeField] private float _variation = 1f;
-        [SerializeField] private float _movement = 3f;
-        [SerializeField] private float _duration = 3f;
-        [SerializeField] private Ease _ease = Ease.OutBack;
+        [SerializeField] private FloatingText _textPrefab;
 
-        private ObjectPool<TMP_Text> _pool;
+        private ObjectPool<FloatingText> _pool;
         private IChannel<SpawnFloatingTextMessage> _channel;
+        private Dictionary<int, FloatingText> _floatingTextById;
+        private Queue<int> _floatingTextToRemove;
 
         private void Awake()
         {
-            _pool = new ComponentPool<TMP_Text>(_textPrefab);
+            _pool = new ComponentPool<FloatingText>(_textPrefab);
+            _floatingTextById = new Dictionary<int, FloatingText>();
+            _floatingTextToRemove = new Queue<int>();
             _channel = Channels.GetChannel<SpawnFloatingTextMessage>();
             _channel.Register(OnMessage);
         }
@@ -31,14 +30,48 @@ namespace SnakesWithGuns.Gameplay.UI
             _channel.Unregister(OnMessage);
         }
 
+        private void Update()
+        {
+            CheckForTimeOuts();
+            RemoveTimeOutText();
+        }
+
+        private void RemoveTimeOutText()
+        {
+            while (_floatingTextToRemove.Count > 0)
+            {
+                int id = _floatingTextToRemove.Dequeue();
+                _floatingTextById[id].Despawn(OnDespawn);
+                _floatingTextById.Remove(id);
+            }
+        }
+
+        private void CheckForTimeOuts()
+        {
+            foreach (var valuePair in _floatingTextById)
+            {
+                if (valuePair.Value.IsTimeout)
+                    _floatingTextToRemove.Enqueue(valuePair.Key);
+            }
+        }
+
         private void OnMessage(SpawnFloatingTextMessage message)
         {
-            TMP_Text text = _pool.Get();
-            Transform t = text.transform;
-            text.color = message.Color;
-            text.SetText(message.Message);
-            t.position = message.Position + Random.insideUnitSphere * _variation;
-            t.DOMove(t.position + t.up * _movement, _duration).SetEase(_ease).OnComplete(() => _pool.Release(text));
+            if (!_floatingTextById.ContainsKey(message.InstanceID))
+            {
+                FloatingText floatingText = _pool.Get();
+                floatingText.Display(message);
+                _floatingTextById.Add(message.InstanceID, floatingText);
+            }
+            else
+            {
+                _floatingTextById[message.InstanceID].Display(message);
+            }
+        }
+
+        private void OnDespawn(FloatingText floatingText)
+        {
+            _pool.Release(floatingText);
         }
     }
 }
