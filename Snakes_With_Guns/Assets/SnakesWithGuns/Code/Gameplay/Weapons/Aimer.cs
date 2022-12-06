@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SnakesWithGuns.Utilities.Damage;
 using UnityEngine;
 
 namespace SnakesWithGuns.Gameplay.Weapons
@@ -10,7 +11,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
         [SerializeField] private SphereCollider _sphereCollider;
 
         private Transform _transform;
-        private List<IDamageable> _targets = new();
+        private List<ITarget> _targets = new();
 
         public float Radius
         {
@@ -34,20 +35,32 @@ namespace SnakesWithGuns.Gameplay.Weapons
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.TryGetComponent(out IDamageable damageable))
+            if (!other.TryGetComponent(out ITarget damageable))
                 return;
 
-            _targets.Add(damageable);
-            HasTarget = true;
+            AddTarget(damageable);
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (!other.TryGetComponent(out IDamageable damageable))
+            if (!other.TryGetComponent(out ITarget damageable))
                 return;
 
-            _targets.Remove(damageable);
+            RemoveTarget(damageable);
+        }
+
+        private void AddTarget(ITarget target)
+        {
+            _targets.Add(target);
+            HasTarget = true;
+            target.Died += RemoveTarget;
+        }
+
+        private void RemoveTarget(ITarget target)
+        {
+            _targets.Remove(target);
             HasTarget = _targets.Count > 0;
+            target.Died -= RemoveTarget;
         }
 
         private Vector3 GetClosestTarget()
@@ -56,9 +69,9 @@ namespace SnakesWithGuns.Gameplay.Weapons
                 return Vector3.zero;
 
             float minDistance = float.MaxValue;
-            IDamageable closestTarget = null;
+            ITarget closestTarget = null;
 
-            foreach (IDamageable target in _targets)
+            foreach (ITarget target in _targets)
             {
                 float distance = Vector3.Distance(target.Position, _transform.position);
 

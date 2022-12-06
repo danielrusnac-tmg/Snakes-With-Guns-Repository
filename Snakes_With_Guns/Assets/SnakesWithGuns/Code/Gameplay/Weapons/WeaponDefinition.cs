@@ -30,6 +30,11 @@ namespace SnakesWithGuns.Gameplay.Weapons
         [Header("Turret")]
         [SerializeField] private float _turretRadius;
         [SerializeField] private Turret _turretPrefab;
+        
+        [Header("Damage")]
+        [SerializeField] private int _damage = 10;
+        [SerializeField] private float _damageRadius = 2;
+        [SerializeField] private DamageDealMode _damageDealMode;
 
         public float FireRate => _fireRate;
         public float ReloadDuration => _reloadDuration;
@@ -42,6 +47,9 @@ namespace SnakesWithGuns.Gameplay.Weapons
         public ParticleSystem ImpactEffectPrefab => _impactEffectPrefab;
         public float TurretRadius => _turretRadius;
         public Turret TurretPrefab => _turretPrefab;
+        public int Damage => _damage;
+        public float DamageRadius => _damageRadius;
+        public DamageDealMode DamageDealMode => _damageDealMode;
 
         public float GetForce()
         {

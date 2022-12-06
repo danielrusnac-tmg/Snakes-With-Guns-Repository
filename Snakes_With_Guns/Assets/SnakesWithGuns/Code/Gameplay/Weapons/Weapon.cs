@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using SnakesWithGuns.Infrastructure.PubSub;
 using SnakesWithGuns.Utilities;
 using SnakesWithGuns.Utilities.CameraShake;
+using SnakesWithGuns.Utilities.Damage;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -12,6 +14,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
     {
         private static Dictionary<Projectile, ObjectPool<Projectile>> s_projectilePools = new();
         private static Dictionary<ParticleSystem, ObjectPool<ParticleSystem>> s_impactEffectPools = new();
+        private static Collider[] s_damageColliders = new Collider[20];
 
         [SerializeField] private Transform _muzzlePoint;
 
@@ -95,8 +98,45 @@ namespace SnakesWithGuns.Gameplay.Weapons
             projectile.ApplyForce(_weaponDefinition.GetForce(), _weaponDefinition.GetDrag());
         }
 
-        private void OnProjectileCollided(ContactPoint point)
+        private void OnProjectileCollided(Collision collision)
         {
+            DealProjectileDamage(collision);
+            SpawnProjectileCollisionEffect(collision);
+        }
+
+        private void DealProjectileDamage(Collision collision)
+        {
+            switch (_weaponDefinition.DamageDealMode)
+            {
+                case DamageDealMode.OnContact:
+                {
+                    if (collision.gameObject.TryGetComponent(out IDamageable damageable))
+                        damageable.DealDamage(_weaponDefinition.Damage);
+                }
+                    break;
+                case DamageDealMode.InRadius:
+                {
+                    int targets = Physics.OverlapSphereNonAlloc(
+                        collision.GetContact(0).point, 
+                        _weaponDefinition.DamageRadius,
+                        s_damageColliders);
+                    
+                    if (targets == 0)
+                        return;
+
+                    for (int i = 0; i < targets; i++)
+                    {
+                        if (s_damageColliders[i].TryGetComponent(out IDamageable damageable))
+                            damageable.DealDamage(_weaponDefinition.Damage);
+                    }
+                }
+                    break;
+            }
+        }
+
+        private void SpawnProjectileCollisionEffect(Collision collision)
+        {
+            ContactPoint point = collision.GetContact(0);
             ParticleSystem effect = s_impactEffectPools[_weaponDefinition.ImpactEffectPrefab].Get();
             effect.transform.position = point.point;
 

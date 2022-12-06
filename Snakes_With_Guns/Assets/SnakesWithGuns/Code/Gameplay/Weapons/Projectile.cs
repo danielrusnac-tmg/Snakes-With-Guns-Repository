@@ -16,7 +16,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
         [SerializeField] private bool _alignToVelocity;
 
         public event Action<Projectile> Died;
-        public event Action<ContactPoint> Collided;
+        public event Action<Collision> Collided;
         
         private void Awake()
         {
@@ -38,7 +38,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
 
         private void OnCollisionEnter(Collision collision)
         {
-            Collided?.Invoke(collision.GetContact(0));
+            Collided?.Invoke(collision);
             SelfDestroy();
         }
 
