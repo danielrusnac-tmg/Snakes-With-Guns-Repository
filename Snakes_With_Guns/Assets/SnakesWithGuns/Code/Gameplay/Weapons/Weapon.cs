@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using SnakesWithGuns.Infrastructure.PubSub;
 using SnakesWithGuns.Utilities;
+using SnakesWithGuns.Utilities.CameraShake;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -17,6 +19,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
         private ParticleSystem _muzzle;
         private bool _isFiring;
         private Coroutine _fireCoroutine;
+        private IChannel<ScreenShakeMessage> _screenShakeChannel;
 
         public bool IsFiring
         {
@@ -41,6 +44,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
 
         public void Initialize(WeaponDefinition weaponDefinition)
         {
+            _screenShakeChannel = Channels.GetChannel<ScreenShakeMessage>();
             _weaponDefinition = weaponDefinition;
             _muzzle = Instantiate(_weaponDefinition.MuzzleEffectPrefab, _muzzlePoint);
 
@@ -100,8 +104,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
                 effect.transform.forward = point.normal;
 
             effect.Play();
-            Application.Instance.ScreenShakeChannel.Publish(_weaponDefinition.ImpactShake);
-            Application.Instance.VibrationChannel.Publish(_weaponDefinition.ImpactVibration);
+            _screenShakeChannel.Publish(new ScreenShakeMessage(_weaponDefinition.ImpactShake));
         }
 
         private void OnProjectileDied(Projectile projectile)

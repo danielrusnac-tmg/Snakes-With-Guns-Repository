@@ -2,6 +2,6 @@
 {
     public interface IScreenShaker
     {
-        void Shake(CameraShakeType type);
+        void Shake(ScreenShakeMessage message);
     }
 }
