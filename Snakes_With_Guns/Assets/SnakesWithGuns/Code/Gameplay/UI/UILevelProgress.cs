@@ -15,6 +15,7 @@ namespace SnakesWithGuns.Gameplay.UI
         {
             _levelProgressChannel = Channels.GetChannel<LevelProgressMessage>();
             _levelProgressChannel.Register(OnLevelProgressMessage);
+            OnLevelProgressMessage(new LevelProgressMessage(0f));
         }
 
         private void OnDestroy()

@@ -1,12 +1,10 @@
-﻿namespace SnakesWithGuns.Gameplay.Messages
+﻿using SnakesWithGuns.Gameplay.Snakes;
+
+namespace SnakesWithGuns.Gameplay.Messages
 {
     public struct LevelUpMessage
     {
         public int Level;
-
-        public LevelUpMessage(int level)
-        {
-            Level = level;
-        }
+        public Tail Tail;
     }
 }
