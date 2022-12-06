@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 452224f09657449489d06ea042784c66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 20
+  _maxHealth: 30
 --- !u!114 &1903413531372503987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _energy: 1
-  _speed: 2.5
+  _speed: 1
   _health: {fileID: 1903413531372503986}
   _rigidbody: {fileID: 1903413531372503985}
 --- !u!54 &1903413531372503985
