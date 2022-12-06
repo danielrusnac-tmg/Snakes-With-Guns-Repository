@@ -21,10 +21,10 @@ namespace SnakesWithGuns.Utilities.CameraShake
             }
         }
 
-        public void Shake(ScreenShakeMessage message)
+        public void Shake(CameraShakeType type)
         {
-            if (_presetByType.ContainsKey(message.ShakeType))
-                _presetByType[message.ShakeType].GenerateImpulse();
+            if (_presetByType.ContainsKey(type))
+                _presetByType[type].GenerateImpulse();
         }
     }
 }

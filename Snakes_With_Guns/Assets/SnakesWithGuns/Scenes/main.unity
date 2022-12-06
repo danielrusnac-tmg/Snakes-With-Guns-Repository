@@ -4114,7 +4114,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2026193259}
   - component: {fileID: 2026193260}
-  - component: {fileID: 2026193262}
   - component: {fileID: 2026193261}
   - component: {fileID: 2026193263}
   - component: {fileID: 2026193264}
@@ -4169,18 +4168,6 @@ MonoBehaviour:
   _spawnRadius: 2
   _energyPrefab: {fileID: 4351178733876669864, guid: 1456f571aa76d1a40bac1788db296bc4,
     type: 3}
---- !u!114 &2026193262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2026193258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5048c0bc67584f1f902392d784ea02d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2026193263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4213,7 +4200,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _textPrefab: {fileID: 6339380715936018941, guid: 2e6954df37f71cf44ba4064d3a21d569,
     type: 3}
-  _letGoDelay: 0.4
 --- !u!1001 &2075858845
 PrefabInstance:
   m_ObjectHideFlags: 0
