@@ -7,7 +7,9 @@ namespace SnakesWithGuns.Gameplay.Snakes
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private Transform _modulePoint;
 
-        public Transform ModulePoint => _modulePoint;
+        private SegmentModuleComponent _moduleInstance;
+        
+        public SegmentModule ActiveModule { get; private set; }
 
         public Vector3 Position
         {
@@ -19,6 +21,24 @@ namespace SnakesWithGuns.Gameplay.Snakes
         {
             get => _rigidbody.rotation;
             set => _rigidbody.MoveRotation(value);
+        }
+
+        public void InstallModule(SegmentModule module)
+        {
+            if (ActiveModule != null)
+                UninstallModule();
+
+            ActiveModule = module;
+            _moduleInstance = Instantiate(module.ModulePrefab, _modulePoint);
+        }
+
+        public void UninstallModule()
+        {
+            if (ActiveModule == null)   
+                return;
+
+            ActiveModule = null;
+            Destroy(_moduleInstance.gameObject);
         }
     }
 }

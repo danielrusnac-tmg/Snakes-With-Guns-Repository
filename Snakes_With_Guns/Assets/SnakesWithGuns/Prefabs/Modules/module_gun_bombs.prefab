@@ -23,8 +23,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4396847722275659737}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0.613}
+  m_LocalRotation: {x: -0.57378685, y: -0, z: -0, w: 0.8190047}
+  m_LocalPosition: {x: 0, y: 0.8205235, z: 0.23239526}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56,9 +56,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5266127749326133170}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0.24999991}
-  m_LocalScale: {x: 0.25, y: 0.19999999, z: 0.6999999}
+  m_LocalRotation: {x: -0.57378685, y: -0, z: -0, w: 0.8190047}
+  m_LocalPosition: {x: 0, y: 0.47935128, z: 0.10841721}
+  m_LocalScale: {x: 0.32625, y: 0.32625, z: 0.6999999}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7976188278281075501}
@@ -127,8 +127,9 @@ GameObject:
   - component: {fileID: 7581676130862599616}
   - component: {fileID: -6573675365932876642}
   - component: {fileID: 3921913435458575681}
+  - component: {fileID: 5632188054079955187}
   m_Layer: 8
-  m_Name: turret_gun
+  m_Name: module_gun_bombs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0178742c059417faae5aa838600065e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WeaponDefinition: {fileID: 11400000, guid: 2309f6d23fa2fa146a7ab644b25804a6, type: 2}
   _turnDamp: 0.1
   _aimTolerance: 0.1
   _rotationPivot: {fileID: 7976188278281075501}
@@ -205,6 +207,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sphereCollider: {fileID: -6573675365932876642}
+--- !u!114 &5632188054079955187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5898271948896328326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51d57e2a0b834f34b63c516e9e95767b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5898271949452595189
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +246,7 @@ Transform:
   m_GameObject: {fileID: 5898271949452595189}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.25, z: 0}
-  m_LocalScale: {x: 0.50002503, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.7, y: 0.5, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7976188278281075501}
@@ -266,7 +280,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 50c49710d8f52514f8762a00a65eb71a, type: 2}
+  - {fileID: 2100000, guid: 5340c332331bfbc49adb8cb5b53a3278, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -1,6 +1,5 @@
 ﻿using System;
 using SnakesWithGuns.Gameplay.Snakes;
-using SnakesWithGuns.Gameplay.Weapons;
 using UnityEngine;
 
 namespace SnakesWithGuns.Gameplay
@@ -8,7 +7,7 @@ namespace SnakesWithGuns.Gameplay
     public class SegmentInstaller : MonoBehaviour
     {
         [SerializeField] private Tail _tail;
-        [SerializeField] private WeaponDefinition[] _defaultWeapons = Array.Empty<WeaponDefinition>();
+        [SerializeField] private SegmentModule[] _defaultWeapons = Array.Empty<SegmentModule>();
 
         private void Start()
         {
@@ -19,7 +18,7 @@ namespace SnakesWithGuns.Gameplay
             {
                 if (_tail.Segments.Count < i + 1)
                     _tail.AddSegment();
-                
+
                 Install(_defaultWeapons[i], i);
             }
         }
@@ -36,25 +35,22 @@ namespace SnakesWithGuns.Gameplay
             _tail.RemoveSegment();
         }
 
-        public void Install(WeaponDefinition weapon, int segmentIndex)
+        public void Install(SegmentModule weapon, int segmentIndex)
         {
             if (!IsValidIndex(segmentIndex) || weapon == null)
                 return;
-            
+
             Install(weapon, _tail.Segments[segmentIndex]);
         }
 
         [ContextMenu(nameof(Install))]
-        public void Install(WeaponDefinition weapon, Segment segment)
+        public void Install(SegmentModule weapon, Segment segment)
         {
-            Turret turret = Instantiate(weapon.TurretPrefab, segment.ModulePoint);
-            turret.Initialize(weapon);
+            segment.InstallModule(weapon);
         }
 
         [ContextMenu(nameof(Uninstall))]
-        public void Uninstall(int segmentIndex)
-        {
-        }
+        public void Uninstall(int segmentIndex) { }
 
         private bool IsValidIndex(int targetSegment)
         {
