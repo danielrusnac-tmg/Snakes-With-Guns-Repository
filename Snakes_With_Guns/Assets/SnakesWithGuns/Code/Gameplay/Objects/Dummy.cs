@@ -2,6 +2,7 @@
 using SnakesWithGuns.Gameplay.Messages;
 using SnakesWithGuns.Gameplay.Weapons;
 using SnakesWithGuns.Infrastructure.PubSub;
+using SnakesWithGuns.Utilities;
 using UnityEngine;
 
 namespace SnakesWithGuns.Gameplay.Objects
@@ -15,6 +16,7 @@ namespace SnakesWithGuns.Gameplay.Objects
         [SerializeField] private float _speed;
         [SerializeField] private Health _health;
         [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private EmissionFlashEffect _flashEffect;
 
         private Transform _transform;
         private IChannel<SpawnEnergyMessage> _spawnEnergyChannel;
@@ -33,6 +35,13 @@ namespace SnakesWithGuns.Gameplay.Objects
             _spawnEnergyChannel = Channels.GetChannel<SpawnEnergyMessage>();
             _transform = transform;
             _health.Died += OnDied;
+            _health.Changed += OnHealthChanged;
+        }
+
+        private void OnDestroy()
+        {
+            _health.Died -= OnDied;
+            _health.Changed -= OnHealthChanged;
         }
 
         private void FixedUpdate()
@@ -41,16 +50,18 @@ namespace SnakesWithGuns.Gameplay.Objects
             _rigidbody.velocity = direction * _speed;
         }
 
-        private void OnDestroy()
-        {
-            _health.Died -= OnDied;
-        }
-
         public void Initialize(Transform target)
         {
             _isDead = false;
             _target = target;
+            _flashEffect.ResetFlash();
             _health.ResetHealth();
+        }
+
+        private void OnHealthChanged(Health.ChangeData data)
+        {
+            if (data.Delta < 0)
+                _flashEffect.Flash();
         }
 
         private void OnDied()
