@@ -7,8 +7,6 @@ namespace SnakesWithGuns
 {
     public class Application : MonoBehaviour
     {
-        public static Application Instance { get; private set; }
-
         [SerializeField] private CinemachineScreenShaker _screenShaker;
 
         private IVibration _vibration;
@@ -16,14 +14,6 @@ namespace SnakesWithGuns
 
         private void Awake()
         {
-            if (Instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            Instance = this;
-
             InitializeServices();
             CreateChannels();
             RegisterChannels();
