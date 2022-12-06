@@ -10,7 +10,6 @@ namespace SnakesWithGuns.Gameplay.Snakes
         [Min(0f), SerializeField] private float _segmentsDistance = 1.1f;
         [SerializeField] private float _moveSpeed = 15f;
         [SerializeField] private float _turnSpeed = 20f;
-        [SerializeField] private int _startSegmentCount = 1;
         [SerializeField] private Segment _segmentPrefab;
 
         private Transform _transform;
@@ -24,9 +23,6 @@ namespace SnakesWithGuns.Gameplay.Snakes
         private void Awake()
         {
             _transform = transform;
-
-            for (int i = 0; i < _startSegmentCount; i++)
-                AddSegment();
         }
 
         private void FixedUpdate()

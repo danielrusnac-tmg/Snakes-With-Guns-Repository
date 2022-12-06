@@ -96,7 +96,6 @@ MonoBehaviour:
   _segmentsDistance: 1.1
   _moveSpeed: 15
   _turnSpeed: 20
-  _startSegmentCount: 1
   _segmentPrefab: {fileID: 2476195558216098683, guid: a91cff2d16f7d14458f38a2556c6bb46,
     type: 3}
 --- !u!114 &1962191532383249651
@@ -113,15 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tail: {fileID: 5486901206705832841}
   _defaultWeapons:
-  - {fileID: 11400000, guid: 04b32988a7e396e428e8cb618a260849, type: 2}
   - {fileID: 11400000, guid: 4e4562aa009d5cf4ea4b8828a5dc628f, type: 2}
-  - {fileID: 11400000, guid: 4e4562aa009d5cf4ea4b8828a5dc628f, type: 2}
-  - {fileID: 11400000, guid: 04b32988a7e396e428e8cb618a260849, type: 2}
-  - {fileID: 11400000, guid: 025fbcf8c54e48444934715c1ac1239f, type: 2}
-  - {fileID: 11400000, guid: 04b32988a7e396e428e8cb618a260849, type: 2}
-  - {fileID: 11400000, guid: 756bc89d7d712734284f06720aee6388, type: 2}
-  - {fileID: 11400000, guid: 756bc89d7d712734284f06720aee6388, type: 2}
-  - {fileID: 11400000, guid: 756bc89d7d712734284f06720aee6388, type: 2}
 --- !u!54 &4100908408852745963
 Rigidbody:
   m_ObjectHideFlags: 0

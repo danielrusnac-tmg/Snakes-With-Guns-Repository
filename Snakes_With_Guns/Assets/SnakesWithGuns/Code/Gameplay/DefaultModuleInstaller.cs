@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SnakesWithGuns.Gameplay
 {
-    public class SegmentInstaller : MonoBehaviour
+    public class DefaultModuleInstaller : MonoBehaviour
     {
         [SerializeField] private Tail _tail;
         [SerializeField] private SegmentModule[] _defaultWeapons = Array.Empty<SegmentModule>();
@@ -23,34 +23,13 @@ namespace SnakesWithGuns.Gameplay
             }
         }
 
-        [ContextMenu(nameof(Add))]
-        public void Add()
-        {
-            _tail.AddSegment();
-        }
-
-        [ContextMenu(nameof(Remove))]
-        public void Remove()
-        {
-            _tail.RemoveSegment();
-        }
-
-        public void Install(SegmentModule weapon, int segmentIndex)
+        private void Install(SegmentModule weapon, int segmentIndex)
         {
             if (!IsValidIndex(segmentIndex) || weapon == null)
                 return;
 
-            Install(weapon, _tail.Segments[segmentIndex]);
+            _tail.Segments[segmentIndex].InstallModule(weapon);
         }
-
-        [ContextMenu(nameof(Install))]
-        public void Install(SegmentModule weapon, Segment segment)
-        {
-            segment.InstallModule(weapon);
-        }
-
-        [ContextMenu(nameof(Uninstall))]
-        public void Uninstall(int segmentIndex) { }
 
         private bool IsValidIndex(int targetSegment)
         {
