@@ -10,6 +10,7 @@ namespace SnakesWithGuns.Gameplay
     {
         private IChannel<SpawnEnergyMessage> _spawnEnergyChannel;
 
+        [SerializeField] private float _spawnRadius = 2f;
         [SerializeField] private Collectable _energyPrefab;
 
         private ObjectPool<Collectable> _energyPool;
@@ -31,11 +32,16 @@ namespace SnakesWithGuns.Gameplay
         {
             Collectable energy = _energyPool.Get();
 
-            Vector3 position = message.Position;
-            position.y = 0f;
+            for (int i = 0; i < message.Amount; i++)
+            {
+                Vector3 position = message.Position;
+                position.y = 0f;
+                Vector2 offset = Random.insideUnitCircle * _spawnRadius;
+                position += new Vector3(offset.x, 0f, offset.y);
 
-            energy.transform.position = position;
-            energy.OnSpawn();
+                energy.transform.position = position;
+                energy.OnSpawn();
+            }
         }
 
         private void OnEnergyCollected(Collectable energy)

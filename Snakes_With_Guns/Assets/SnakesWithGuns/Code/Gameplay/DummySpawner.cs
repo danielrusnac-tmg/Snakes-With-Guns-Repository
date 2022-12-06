@@ -8,7 +8,7 @@ namespace SnakesWithGuns.Gameplay
 {
     public class DummySpawner : MonoBehaviour
     {
-        [SerializeField] private Dummy _energyPrefab;
+        [SerializeField] private Dummy[] _dummyPrefabs;
         [SerializeField] private Snake _player;
         [SerializeField] private float _spawnRate = 2;
         [SerializeField] private float _spawnRadius = 15;
@@ -56,7 +56,7 @@ namespace SnakesWithGuns.Gameplay
 
         private Dummy CreateDummy()
         {
-            Dummy dummy = Instantiate(_energyPrefab);
+            Dummy dummy = Instantiate(_dummyPrefabs[Random.Range(0, _dummyPrefabs.Length)]);
             dummy.Died += OnDummyDied;
             return dummy;
         }
