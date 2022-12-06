@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace SnakesWithGuns.Utilities.Damage
+namespace SnakesWithGuns.Gameplay.Weapons
 {
     public interface ITarget
     {

@@ -1,5 +1,5 @@
 ﻿using System;
-using SnakesWithGuns.Utilities.Damage;
+using SnakesWithGuns.Gameplay.Weapons;
 using UnityEngine;
 
 namespace SnakesWithGuns.Gameplay.Objects

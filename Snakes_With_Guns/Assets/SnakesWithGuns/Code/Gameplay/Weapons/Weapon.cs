@@ -1,10 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using SnakesWithGuns.Infrastructure.PubSub;
 using SnakesWithGuns.Utilities;
 using SnakesWithGuns.Utilities.CameraShake;
-using SnakesWithGuns.Utilities.Damage;
 using UnityEngine;
 using UnityEngine.Pool;
 

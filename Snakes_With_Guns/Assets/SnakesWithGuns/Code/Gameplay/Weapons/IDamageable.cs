@@ -1,4 +1,4 @@
-﻿namespace SnakesWithGuns.Utilities.Damage
+﻿namespace SnakesWithGuns.Gameplay.Weapons
 {
     public interface IDamageable
     {

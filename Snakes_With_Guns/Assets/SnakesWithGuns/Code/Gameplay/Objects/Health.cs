@@ -1,7 +1,8 @@
 ﻿using System;
+using SnakesWithGuns.Gameplay.Weapons;
 using UnityEngine;
 
-namespace SnakesWithGuns.Utilities.Damage
+namespace SnakesWithGuns.Gameplay.Objects
 {
     public class Health : MonoBehaviour, IDamageable
     {

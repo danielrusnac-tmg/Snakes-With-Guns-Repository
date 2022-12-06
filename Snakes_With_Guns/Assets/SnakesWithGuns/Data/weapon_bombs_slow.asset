@@ -31,3 +31,6 @@ MonoBehaviour:
   _turretRadius: 14
   _turretPrefab: {fileID: 5898271948896328344, guid: 404bb378f8bbdf245ba93d27e426826b,
     type: 3}
+  _damage: 12
+  _damageRadius: 2
+  _damageDealMode: 1
