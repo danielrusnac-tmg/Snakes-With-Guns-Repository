@@ -6,7 +6,7 @@ namespace SnakesWithGuns.Gameplay.Objects
 {
     public class Health : MonoBehaviour, IDamageable
     {
-        public event Action Changed;
+        public event Action<ChangeData> Changed;
         public event Action Died;
 
         [SerializeField] private int _maxHealth = 100;
@@ -32,12 +32,25 @@ namespace SnakesWithGuns.Gameplay.Objects
             if (Current == newHealth)
                 return;
 
+            Changed?.Invoke(new ChangeData(Current, newHealth));
             Current = newHealth;
-
-            Changed?.Invoke();
 
             if (Current == 0)
                 Died?.Invoke();
+        }
+        
+        public struct ChangeData
+        {
+            public int OldHealth;
+            public int NewHealth;
+            public int Delta;
+
+            public ChangeData(int oldHealth, int newHealth)
+            {
+                OldHealth = oldHealth;
+                NewHealth = newHealth;
+                Delta = newHealth - oldHealth;
+            }
         }
     }
 }

@@ -4117,6 +4117,7 @@ GameObject:
   - component: {fileID: 2026193262}
   - component: {fileID: 2026193261}
   - component: {fileID: 2026193263}
+  - component: {fileID: 2026193264}
   m_Layer: 0
   m_Name: application
   m_TagString: Untagged
@@ -4198,6 +4199,24 @@ MonoBehaviour:
   _player: {fileID: 1254435886}
   _spawnRate: 1
   _spawnRadius: 20
+--- !u!114 &2026193264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026193258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55298a288f9348688e6e57ca3a9b86f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textPrefab: {fileID: 8084062943312001033, guid: 2e6954df37f71cf44ba4064d3a21d569,
+    type: 3}
+  _variation: 1
+  _movement: 2
+  _duration: 1.5
+  _ease: 27
 --- !u!1001 &2075858845
 PrefabInstance:
   m_ObjectHideFlags: 0

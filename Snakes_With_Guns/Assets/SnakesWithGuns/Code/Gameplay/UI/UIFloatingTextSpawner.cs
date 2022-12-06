@@ -1,4 +1,5 @@
-﻿using SnakesWithGuns.Gameplay.Messages;
+﻿using DG.Tweening;
+using SnakesWithGuns.Gameplay.Messages;
 using SnakesWithGuns.Infrastructure.PubSub;
 using SnakesWithGuns.Utilities;
 using TMPro;
@@ -10,7 +11,10 @@ namespace SnakesWithGuns.Gameplay.UI
     public class UIFloatingTextSpawner : MonoBehaviour
     {
         [SerializeField] private TMP_Text _textPrefab;
-        [SerializeField] private Vector3 _positionOffset;
+        [SerializeField] private float _variation = 1f;
+        [SerializeField] private float _movement = 3f;
+        [SerializeField] private float _duration = 3f;
+        [SerializeField] private Ease _ease = Ease.OutBack;
 
         private ObjectPool<TMP_Text> _pool;
         private IChannel<SpawnFloatingTextMessage> _channel;
@@ -30,7 +34,11 @@ namespace SnakesWithGuns.Gameplay.UI
         private void OnMessage(SpawnFloatingTextMessage message)
         {
             TMP_Text text = _pool.Get();
-            text.transform.position = message.Position + _positionOffset;
+            Transform t = text.transform;
+            text.color = message.Color;
+            text.SetText(message.Message);
+            t.position = message.Position + Random.insideUnitSphere * _variation;
+            t.DOMove(t.position + t.up * _movement, _duration).SetEase(_ease).OnComplete(() => _pool.Release(text));
         }
     }
 }

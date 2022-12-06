@@ -15,6 +15,7 @@ namespace SnakesWithGuns.Gameplay.Objects
         private int _current;
         private IChannel<LevelUpMessage> _levelUpChannel;
         private IChannel<LevelProgressMessage> _levelProgressChannel;
+        private IChannel<SpawnFloatingTextMessage> _floatingTextChannel;
 
         private int Goal => (_level - 1) * _goalStep + _goal;
         private float Progress => Mathf.Clamp01((float)_current / Goal);
@@ -23,6 +24,7 @@ namespace SnakesWithGuns.Gameplay.Objects
         {
             _levelUpChannel = Channels.GetChannel<LevelUpMessage>();
             _levelProgressChannel = Channels.GetChannel<LevelProgressMessage>();
+            _floatingTextChannel = Channels.GetChannel<SpawnFloatingTextMessage>();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -31,6 +33,7 @@ namespace SnakesWithGuns.Gameplay.Objects
             {
                 collectable.Collect();
                 _current++;
+                _floatingTextChannel.Publish(new SpawnFloatingTextMessage(collectable.transform.position, "+1", new Color(0f, 0.96f, 0.45f)));
 
                 OnEnergyChanged();
             }
