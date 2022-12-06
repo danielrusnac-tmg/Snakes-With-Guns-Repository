@@ -47,7 +47,6 @@ namespace SnakesWithGuns.Gameplay.UI
 
         public void Hide()
         {
-            Debug.Log("Hide");
             _canvas.enabled = false;
             _pauseMessage.Publish(new PauseMessage(false));
         }

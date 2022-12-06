@@ -21,7 +21,6 @@ namespace SnakesWithGuns.Gameplay.UI
 
         public void Get()
         {
-            Debug.Log("Get UI Module");
             GetPressed?.Invoke(_module);
         }
     }
