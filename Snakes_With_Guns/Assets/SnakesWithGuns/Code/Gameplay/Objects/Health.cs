@@ -17,6 +17,11 @@ namespace SnakesWithGuns.Gameplay.Objects
 
         private void Awake()
         {
+           ResetHealth();
+        }
+
+        public void ResetHealth()
+        {
             Current = Max;
         }
 

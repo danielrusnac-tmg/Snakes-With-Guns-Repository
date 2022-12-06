@@ -26,14 +26,14 @@ namespace SnakesWithGuns.Gameplay
         {
             _spawnEnergyChannel.Unregister(OnSpawnEnergyMessage);
         }
-        
+
         private void OnSpawnEnergyMessage(SpawnEnergyMessage message)
         {
             Collectable energy = _energyPool.Get();
 
             Vector3 position = message.Position;
             position.y = 0f;
-            
+
             energy.transform.position = position;
             energy.OnSpawn();
         }
