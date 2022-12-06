@@ -1,5 +1,7 @@
 ﻿using System;
+using SnakesWithGuns.Gameplay.Messages;
 using SnakesWithGuns.Gameplay.Weapons;
+using SnakesWithGuns.Infrastructure.PubSub;
 using UnityEngine;
 
 namespace SnakesWithGuns.Gameplay.Objects
@@ -8,10 +10,12 @@ namespace SnakesWithGuns.Gameplay.Objects
     public class Dummy : MonoBehaviour, ITarget
     {
         public event Action<ITarget> Died;
-        
+
+        [SerializeField] private int _energy = 1;
         [SerializeField] private Health _health;
 
         private Transform _transform;
+        private IChannel<SpawnEnergyMessage> _spawnEnergyChannel;
 
         public Vector3 Position => _transform.position;
 
@@ -22,6 +26,7 @@ namespace SnakesWithGuns.Gameplay.Objects
 
         private void Awake()
         {
+            _spawnEnergyChannel = Channels.GetChannel<SpawnEnergyMessage>();
             _transform = transform;
             _health.Died += OnDied;
         }
@@ -33,6 +38,12 @@ namespace SnakesWithGuns.Gameplay.Objects
 
         private void OnDied()
         {
+            _spawnEnergyChannel.Publish(new SpawnEnergyMessage()
+            {
+                Amount = _energy,
+                Position = Position
+            });
+            
             Died?.Invoke(this);
             Destroy(gameObject);
         }

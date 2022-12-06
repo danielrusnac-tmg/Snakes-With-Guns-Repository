@@ -362,6 +362,7 @@ GameObject:
   m_Component:
   - component: {fileID: 190464463}
   - component: {fileID: 190464464}
+  - component: {fileID: 190464465}
   m_Layer: 0
   m_Name: gameplay
   m_TagString: Untagged
@@ -382,7 +383,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &190464464
 MonoBehaviour:
@@ -398,6 +399,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 1254435886}
   _uiTailEditorPrefab: {fileID: 1987536912893303662, guid: 011cdec646a8c34458324c69358e4d70,
+    type: 3}
+--- !u!114 &190464465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190464462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24199a3f2abf40778ee94818731f749a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _energyPrefab: {fileID: 4351178733876669864, guid: 1456f571aa76d1a40bac1788db296bc4,
     type: 3}
 --- !u!1 &205999661
 GameObject:
@@ -447,6 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 205999667}
 --- !u!65 &205999664
 BoxCollider:
@@ -572,6 +588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 226159498}
 --- !u!65 &226159495
 BoxCollider:
@@ -664,7 +681,7 @@ PrefabInstance:
     - target: {fileID: 7409312564375074348, guid: b19776e579fbc0249bc3a49ed2b2f039,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7409312564375074348, guid: b19776e579fbc0249bc3a49ed2b2f039,
         type: 3}
@@ -997,7 +1014,7 @@ Transform:
   - {fileID: 1539557513}
   - {fileID: 65279061}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &467444083
 GameObject:
@@ -1032,6 +1049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 467444089}
 --- !u!65 &467444085
 BoxCollider:
@@ -1172,6 +1190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 484077406}
 --- !u!65 &484077403
 BoxCollider:
@@ -1411,7 +1430,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &687535647
 PrefabInstance:
@@ -1536,6 +1555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 710569166}
 --- !u!65 &710569163
 BoxCollider:
@@ -1911,6 +1931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 836255155}
 --- !u!65 &836255152
 BoxCollider:
@@ -2111,6 +2132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 877403848}
 --- !u!65 &877403845
 BoxCollider:
@@ -2221,6 +2243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 881430684}
 --- !u!65 &881430680
 BoxCollider:
@@ -2361,6 +2384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 930308738}
 --- !u!65 &930308735
 BoxCollider:
@@ -2471,6 +2495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 936580399}
 --- !u!65 &936580395
 BoxCollider:
@@ -2656,6 +2681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 1023574723}
 --- !u!65 &1023574720
 BoxCollider:
@@ -2868,6 +2894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 1261545985}
 --- !u!65 &1261545981
 BoxCollider:
@@ -3083,6 +3110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 1296561643}
 --- !u!65 &1296561640
 BoxCollider:
@@ -3170,7 +3198,7 @@ PrefabInstance:
     - target: {fileID: 5811883423202185161, guid: 061fe609be2164e4e899a37ed1822d72,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5811883423202185161, guid: 061fe609be2164e4e899a37ed1822d72,
         type: 3}
@@ -3327,6 +3355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 1475230077}
 --- !u!65 &1475230074
 BoxCollider:
@@ -3517,6 +3546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 1566883208}
 --- !u!65 &1566883204
 BoxCollider:
@@ -3732,6 +3762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 1679404102}
 --- !u!65 &1679404099
 BoxCollider:
@@ -3857,6 +3888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 1698078560}
 --- !u!65 &1698078557
 BoxCollider:
@@ -3982,6 +4014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 1857090826}
 --- !u!65 &1857090823
 BoxCollider:
@@ -4107,6 +4140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 1891052542}
 --- !u!65 &1891052539
 BoxCollider:
@@ -4232,6 +4266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 1932312187}
 --- !u!65 &1932312184
 BoxCollider:
@@ -4357,6 +4392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 2021204407}
 --- !u!65 &2021204404
 BoxCollider:
@@ -4513,6 +4549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 2061694891}
 --- !u!65 &2061694887
 BoxCollider:
@@ -4716,6 +4753,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b958c11b84e4517a79e66266e07457b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energy: 1
   _health: {fileID: 2064845289}
 --- !u!114 &2064845289
 MonoBehaviour:
@@ -4840,7 +4878,7 @@ PrefabInstance:
     - target: {fileID: 3346071377030148068, guid: 6e509612c70b16e459e19a382e02efac,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3346071377030148068, guid: 6e509612c70b16e459e19a382e02efac,
         type: 3}
@@ -4924,7 +4962,7 @@ PrefabInstance:
     - target: {fileID: 8035473463422435314, guid: 2cf77fc8f70065b4eb4824fed319d0b7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8035473463422435314, guid: 2cf77fc8f70065b4eb4824fed319d0b7,
         type: 3}
