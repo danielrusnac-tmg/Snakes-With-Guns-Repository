@@ -90,11 +90,15 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EMISSION: 0
     - _EnvironmentReflections: 0
+    - _GRADIENT: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossinessSource: 0
     - _GlossyReflections: 0
+    - _GradientOffset: 0.5
+    - _GradientRange: 1
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Offset: 0
@@ -118,6 +122,8 @@ Material:
     - _BaseColor: {r: 0.5990566, g: 0.75999874, b: 1, a: 1}
     - _BottomColor: {r: 0.09385012, g: 0.2595454, b: 0.5377358, a: 1}
     - _Color: {r: 0.5990566, g: 0.7599987, b: 1, a: 1}
+    - _ColorBottom: {r: 0.23139909, g: 0.4417524, b: 0.754717, a: 0}
+    - _ColorTop: {r: 0.06759523, g: 0.15797918, b: 0.2924528, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

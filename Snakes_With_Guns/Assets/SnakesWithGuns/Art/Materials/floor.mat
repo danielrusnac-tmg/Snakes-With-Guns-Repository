@@ -108,10 +108,13 @@ Material:
     - _EnvironmentReflections: 0
     - _FlipbookBlending: 0
     - _FlipbookMode: 0
+    - _GRADIENT: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossinessSource: 0
     - _GlossyReflections: 0
+    - _GradientOffset: 0
+    - _GradientRange: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -137,11 +140,13 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.26633143, g: 0.3132046, b: 0.4245283, a: 1}
+    - _BaseColor: {r: 0.4008989, g: 0.49855375, b: 0.7264151, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _BottomColor: {r: 0.4195624, g: 0.23553754, b: 0.6320754, a: 1}
     - _CameraFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 0.15574932, g: 0.18770427, b: 0.2641509, a: 1}
+    - _ColorBottom: {r: 0, g: 0, b: 0, a: 0}
+    - _ColorTop: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0, g: 0, b: 0, a: 0}

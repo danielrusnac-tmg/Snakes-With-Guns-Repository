@@ -10,7 +10,8 @@ Material:
   m_Name: turret_blue
   m_Shader: {fileID: -6465566751694194690, guid: 1de84598c2c41f842befc820b9b49069,
     type: 3}
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _GRADIENT_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
@@ -90,11 +91,15 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EMISSION: 0
     - _EnvironmentReflections: 0
+    - _GRADIENT: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossinessSource: 0
     - _GlossyReflections: 0
+    - _GradientOffset: 0.5
+    - _GradientRange: 1
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Offset: 0
@@ -118,6 +123,8 @@ Material:
     - _BaseColor: {r: 0.3037113, g: 0.5257713, b: 0.8584906, a: 1}
     - _BottomColor: {r: 0.09385012, g: 0.2595454, b: 0.5377358, a: 1}
     - _Color: {r: 0.30371127, g: 0.52577126, b: 0.8584906, a: 1}
+    - _ColorBottom: {r: 0.10622107, g: 0.35517234, b: 0.7264151, a: 0}
+    - _ColorTop: {r: 0.3019608, g: 0.5254902, b: 0.8588236, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
