@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea58091288694f58967ed36be4c2685c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _goal: 5
+  _goal: 2
   _goalStep: 5
   _level: 1
   _tail: {fileID: 5486901206705832841}
