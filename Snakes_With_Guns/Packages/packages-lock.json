@@ -1,5 +1,13 @@
 {
   "dependencies": {
+    "com.tmg.joysticks": {
+      "version": "file:com.tmg.joysticks",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.unity.inputsystem": "1.4.4"
+      }
+    },
     "com.unity.burst": {
       "version": "1.7.3",
       "depth": 1,

@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.Layouts;
 using UnityEngine.InputSystem.OnScreen;
 
-namespace SnakesWithGuns.Gameplay.Input
+namespace TMG.Joysticks
 {
     /// <summary>
     /// On screen joystick that uses New Input System control paths to send it's direction. 

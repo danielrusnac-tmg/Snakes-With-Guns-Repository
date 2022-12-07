@@ -1,0 +1,9 @@
+{
+  "name": "com.tmg.joysticks",
+  "version": "1.0.0",
+  "displayName": "Joysticks",
+  "description": "On screen joystick that uses the New Input System.",
+  "dependencies": {
+    "com.unity.inputsystem": "1.4.4"
+  }
+}
