@@ -1,8 +1,10 @@
+using DG.Tweening;
 using SnakesWithGuns.Gameplay;
 using SnakesWithGuns.Gameplay.Messages;
 using SnakesWithGuns.Infrastructure.PubSub;
 using SnakesWithGuns.Utilities.CameraShake;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SnakesWithGuns
 {
@@ -24,6 +26,12 @@ namespace SnakesWithGuns
         private void OnDestroy()
         {
             UnregisterChannels();
+        }
+
+        public void Restart()
+        {
+            DOTween.KillAll();
+            SceneManager.LoadScene(0);
         }
 
         private void InitializeServices()
