@@ -4165,7 +4165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24199a3f2abf40778ee94818731f749a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnRadius: 2
+  _spawnRadius: 1
   _energyPrefab: {fileID: 4351178733876669864, guid: 1456f571aa76d1a40bac1788db296bc4,
     type: 3}
 --- !u!114 &2026193263

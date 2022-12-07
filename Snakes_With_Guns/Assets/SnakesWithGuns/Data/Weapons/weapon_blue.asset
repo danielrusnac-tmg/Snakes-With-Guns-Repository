@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: weapon_blue
   m_EditorClassIdentifier: 
   _fireRate: 0.03
-  _reloadDuration: 0.6
-  _magazineSize: 6
+  _reloadDuration: 0.4
+  _magazineSize: 8
+  _projectilePerShot: 1
   _force: 90
   _drag: 6
   _rotationOffset: 5
@@ -28,9 +29,7 @@ MonoBehaviour:
     type: 3}
   _impactEffectPrefab: {fileID: 198029466038548546, guid: 2d333dcba55e9d246bb1cbe5d0baab27,
     type: 3}
-  _turretRadius: 10
-  _turretPrefab: {fileID: 709284348921815154, guid: 0dd17e8a0449cfe498d1dd6f705a3f8e,
-    type: 3}
+  _turretRadius: 12
   _damage: 4
   _damageRadius: 0
   _damageDealMode: 0

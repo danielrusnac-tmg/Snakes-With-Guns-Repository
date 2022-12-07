@@ -13,6 +13,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
         [SerializeField] private int _magazineSize = 30;
 
         [Header("Projectile")]
+        [SerializeField] private int _projectilePerShot = 1;
         [SerializeField] private float _force = 40;
         [SerializeField] private float _drag = 3;
         [SerializeField] private float _rotationOffset = 1f;
@@ -35,6 +36,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
         [SerializeField] private float _damageRadius = 2;
         [SerializeField] private DamageDealMode _damageDealMode;
 
+        public int ProjectilePerShot => _projectilePerShot;
         public float FireRate => _fireRate;
         public float ReloadDuration => _reloadDuration;
         public int MagazineSize => _magazineSize;

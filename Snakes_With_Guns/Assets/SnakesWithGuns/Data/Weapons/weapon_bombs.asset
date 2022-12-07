@@ -15,6 +15,7 @@ MonoBehaviour:
   _fireRate: 0.5
   _reloadDuration: 5
   _magazineSize: 3
+  _projectilePerShot: 1
   _force: 16
   _drag: 0.01
   _rotationOffset: 3
@@ -28,9 +29,7 @@ MonoBehaviour:
     type: 3}
   _impactEffectPrefab: {fileID: 198752863565291818, guid: edacf0fc41abd474da349ea9cd8aae6e,
     type: 3}
-  _turretRadius: 14
-  _turretPrefab: {fileID: 5898271948896328344, guid: 404bb378f8bbdf245ba93d27e426826b,
-    type: 3}
+  _turretRadius: 10
   _damage: 20
   _damageRadius: 3
   _damageDealMode: 1

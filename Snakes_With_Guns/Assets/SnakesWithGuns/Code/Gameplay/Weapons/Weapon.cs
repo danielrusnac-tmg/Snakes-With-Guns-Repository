@@ -40,27 +40,32 @@ namespace SnakesWithGuns.Gameplay.Weapons
         private void Fire()
         {
             _muzzle.Play();
-            SpawnProjectile(_muzzlePoint.position, _muzzlePoint.rotation * _weaponDefinition.GetRotationOffset());
+            
+            for (int j = 0; j < _weaponDefinition.ProjectilePerShot; j++)
+                SpawnProjectile(_muzzlePoint.position, _muzzlePoint.rotation * _weaponDefinition.GetRotationOffset());
         }
 
         private IEnumerator FireRoutine()
         {
-            yield return null;
+            WaitWhile waitIsFiring =  new WaitWhile(() => !IsFiring);
+            WaitForSeconds waitRate = new WaitForSeconds(_weaponDefinition.FireRate);
+            WaitForSeconds waitReload = new WaitForSeconds(_weaponDefinition.ReloadDuration);
 
             while (true)
             {
-                yield return new WaitWhile(() => !IsFiring);
+                yield return waitIsFiring;
                 
                 for (int i = 0; i < _weaponDefinition.MagazineSize; i++)
                 {
                     Fire();
-                    yield return new WaitForSeconds(_weaponDefinition.FireRate);
+                    
+                    yield return waitRate;
                     
                     if (!IsFiring)
-                        yield return new WaitWhile(() => !IsFiring);
+                        yield return waitIsFiring;
                 }
 
-                yield return new WaitForSeconds(_weaponDefinition.ReloadDuration);
+                yield return waitReload;
             }
         }
 

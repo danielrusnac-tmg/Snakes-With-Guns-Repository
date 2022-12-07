@@ -30,18 +30,21 @@ namespace SnakesWithGuns.Gameplay
 
         private void OnSpawnEnergyMessage(SpawnEnergyMessage message)
         {
-            Collectable energy = _energyPool.Get();
-
             for (int i = 0; i < message.Amount; i++)
             {
-                Vector3 position = message.Position;
-                position.y = 0f;
-                Vector2 offset = Random.insideUnitCircle * _spawnRadius;
-                position += new Vector3(offset.x, 0f, offset.y);
-
-                energy.transform.position = position;
+                Collectable energy = _energyPool.Get();
+                energy.transform.position =  GetPositionWithOffset(message);
                 energy.OnSpawn();
             }
+        }
+
+        private Vector3 GetPositionWithOffset(SpawnEnergyMessage message)
+        {
+            Vector3 position = message.Position;
+            position.y = 0f;
+            Vector2 offset = Random.insideUnitCircle * _spawnRadius;
+            position += new Vector3(offset.x, 0f, offset.y);
+            return position;
         }
 
         private void OnEnergyCollected(Collectable energy)

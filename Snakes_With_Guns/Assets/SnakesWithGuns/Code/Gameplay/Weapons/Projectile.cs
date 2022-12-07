@@ -17,6 +17,9 @@ namespace SnakesWithGuns.Gameplay.Weapons
 
         public event Action<Projectile> Died;
         public event Action<Collision> Collided;
+
+        private bool _hasCollided;
+        private bool _isDead;
         
         private void Awake()
         {
@@ -38,12 +41,19 @@ namespace SnakesWithGuns.Gameplay.Weapons
 
         private void OnCollisionEnter(Collision collision)
         {
+            if (_hasCollided)
+                return;
+
+            _hasCollided = true;
             Collided?.Invoke(collision);
             SelfDestroy();
         }
 
         public void ApplyForce(float force, float drag)
         {
+            _hasCollided = false;
+            _isDead = false;
+            
             _collider.enabled = true;
             _particleSystem.Play();
             _rigidbody.velocity = Vector3.zero;
@@ -54,9 +64,10 @@ namespace SnakesWithGuns.Gameplay.Weapons
 
         private void OnParticleSystemStopped()
         {
-            Died?.Invoke(this);
+            if (_waitForParticleAnimation)
+                OnDied();
         }
-        
+
         private void SelfDestroy()
         {
             _collider.enabled = false;
@@ -67,8 +78,17 @@ namespace SnakesWithGuns.Gameplay.Weapons
             }
             else
             {
-                Died?.Invoke(this);
+               OnDied();
             }
+        }
+
+        private void OnDied()
+        {
+            if (_isDead)
+                return;
+
+            _isDead = true;
+            Died?.Invoke(this);
         }
     }
 }
