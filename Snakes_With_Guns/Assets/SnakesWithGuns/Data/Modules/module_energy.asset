@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f80c47c1c68147148d3d7eaa742a4668, type: 3}
   m_Name: module_energy
   m_EditorClassIdentifier: 
+  _moduleName: Energy (Decoration)
   _modulePrefab: {fileID: -5967202566279844268, guid: 9dbd0a275854fb147ba6f896a886d649,
     type: 3}

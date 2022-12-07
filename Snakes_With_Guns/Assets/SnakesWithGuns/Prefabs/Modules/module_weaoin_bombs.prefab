@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 3921913435458575681}
   - component: {fileID: 5632188054079955187}
   m_Layer: 8
-  m_Name: module_gun_bombs
+  m_Name: module_weaoin_bombs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

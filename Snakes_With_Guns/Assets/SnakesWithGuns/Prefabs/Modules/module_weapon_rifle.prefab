@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7694698344477832621}
   - component: {fileID: 7872580082594177395}
   m_Layer: 8
-  m_Name: module_gun_blue
+  m_Name: module_weapon_rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

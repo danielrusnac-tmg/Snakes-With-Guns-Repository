@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f80c47c1c68147148d3d7eaa742a4668, type: 3}
-  m_Name: module_gun_bombs
+  m_Name: module_weapon_bombs
   m_EditorClassIdentifier: 
+  _moduleName: Bombs
   _modulePrefab: {fileID: 5632188054079955187, guid: 404bb378f8bbdf245ba93d27e426826b,
     type: 3}

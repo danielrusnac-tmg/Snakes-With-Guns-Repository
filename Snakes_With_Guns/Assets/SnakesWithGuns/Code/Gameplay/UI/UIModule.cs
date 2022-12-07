@@ -16,7 +16,7 @@ namespace SnakesWithGuns.Gameplay.UI
         public void Display(SegmentModule module)
         {
             _module = module;
-            _segmentName.SetText(module.name);
+            _segmentName.SetText(module.ModuleName);
         }
 
         public void Get()

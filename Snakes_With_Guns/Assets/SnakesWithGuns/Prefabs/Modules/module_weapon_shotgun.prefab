@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 1992570178625962344}
   - component: {fileID: 2030844957735900598}
   m_Layer: 8
-  m_Name: module_gun_red
+  m_Name: module_weapon_shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
