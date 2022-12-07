@@ -38,9 +38,8 @@ namespace SnakesWithGuns.Gameplay.UI
         {
             _tail = tail;
             _canvas.enabled = true;
-            
-            foreach (UIModule module in _modules)
-                module.Display(_segmentModules[Random.Range(0, _segmentModules.Length)]);
+
+            Reroll();
             
             _pauseMessage.Publish(new PauseMessage(true));
         }
@@ -51,14 +50,15 @@ namespace SnakesWithGuns.Gameplay.UI
             _pauseMessage.Publish(new PauseMessage(false));
         }
 
-        public void AddSegment()
+        public void Reroll()
         {
-            _tail.AddSegment();
+            foreach (UIModule module in _modules)
+                module.Display(_segmentModules[Random.Range(0, _segmentModules.Length)]);
         }
 
-        public void RemoveSegment()
+        public void Skip()
         {
-            _tail.RemoveSegment();
+            Hide();
         }
 
         private void OnLevelUpMessage(LevelUpMessage message)
