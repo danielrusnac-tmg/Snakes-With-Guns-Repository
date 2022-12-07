@@ -5,7 +5,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
     public class Turret : MonoBehaviour
     {
         public WeaponDefinition WeaponDefinition;
-        
+
         [SerializeField] private float _turnDamp = 0.4f;
         [SerializeField] private float _aimTolerance = 0.2f;
         [SerializeField] private Transform _rotationPivot;

@@ -27,16 +27,13 @@ namespace SnakesWithGuns.Gameplay.Weapons
             main.stopAction = ParticleSystemStopAction.Callback;
         }
 
-        private void Update()
-        {
-            if (_destroyOnSlowDown && _rigidbody.velocity.sqrMagnitude < _minVelocity)
-                SelfDestroy();
-        }
-
         private void FixedUpdate()
         {
             if (_alignToVelocity && _rigidbody.velocity.sqrMagnitude > float.Epsilon)
                 _rigidbody.MoveRotation(Quaternion.LookRotation(_rigidbody.velocity.normalized));
+            
+            if (_destroyOnSlowDown && _rigidbody.velocity.sqrMagnitude < _minVelocity)
+                SelfDestroy();
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -56,9 +53,8 @@ namespace SnakesWithGuns.Gameplay.Weapons
             
             _collider.enabled = true;
             _particleSystem.Play();
-            _rigidbody.velocity = Vector3.zero;
+            _rigidbody.velocity = transform.forward * force;
             _rigidbody.angularVelocity = Vector3.zero;
-            _rigidbody.AddForce(transform.forward * force, ForceMode.Impulse);
             _rigidbody.drag = drag;
         }
 
