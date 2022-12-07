@@ -5,13 +5,21 @@ using UnityEngine.InputSystem.OnScreen;
 
 namespace SnakesWithGuns.Gameplay.Input
 {
-    public class Joystick : OnScreenControl, IPointerDownHandler, IDragHandler, IPointerUpHandler
+    /// <summary>
+    /// On screen joystick that uses New Input System control paths to send it's direction. 
+    /// </summary>
+    public class InputSystemJoystick : OnScreenControl, IPointerDownHandler, IDragHandler, IPointerUpHandler
     {
+        private const string DEFAULT_CONTROL_PATH = "<Gamepad>/leftStick";
+
         [Header("Settings")]
         [SerializeField] private bool _interactable = true;
-        [Range(0f, 1f), SerializeField] private float _radius = 0.5f;
-        [SerializeField, InputControl(layout = "Vector2")] private string _controlPath;
-
+        [Tooltip("The normalized radius for handle movement inside the constrain.")]
+        [Range(0f, 1f)]
+        [SerializeField] private float _radius = 0.5f;
+        [InputControl(layout = "Vector2")]
+        [SerializeField] private string _controlPath = DEFAULT_CONTROL_PATH;
+        
         [Header("Components")]
         [SerializeField] private RectTransform _handle;
         [SerializeField] private RectTransform _constrain;
@@ -29,18 +37,18 @@ namespace SnakesWithGuns.Gameplay.Input
 
                 _interactable = value;
                 _canvasGroup.interactable = value;
-                
+
                 if (!value)
                     Hide();
             }
         }
-        
+
         private bool IsShown
         {
             get => _canvasGroup.alpha > float.Epsilon;
             set => _canvasGroup.alpha = value ? 1f : 0f;
         }
-        
+
         private float ConstrainRadius => (_constrain.rect.width - _handle.rect.width) * _radius;
 
         protected override string controlPathInternal
@@ -48,18 +56,18 @@ namespace SnakesWithGuns.Gameplay.Input
             get => _controlPath;
             set => _controlPath = value;
         }
-        
+
         private void Start()
         {
             ResetAnchors();
             Hide();
         }
-        
+
         public void OnPointerDown(PointerEventData eventData)
         {
             if (!Interactable)
                 return;
-            
+
             Show(eventData.position);
         }
 
@@ -67,7 +75,7 @@ namespace SnakesWithGuns.Gameplay.Input
         {
             if (!Interactable || !IsShown)
                 return;
-            
+
             Vector2 direction = Vector2.ClampMagnitude(
                 eventData.position - _startDragPosition,
                 ConstrainRadius);
@@ -80,7 +88,7 @@ namespace SnakesWithGuns.Gameplay.Input
         {
             if (!Interactable)
                 return;
-            
+
             Hide();
             SendValueToControl(Vector2.zero);
         }
