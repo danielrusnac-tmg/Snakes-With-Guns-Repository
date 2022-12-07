@@ -18,30 +18,9 @@ namespace SnakesWithGuns.Gameplay.Weapons
 
         private WeaponDefinition _weaponDefinition;
         private ParticleSystem _muzzle;
-        private bool _isFiring;
-        private Coroutine _fireCoroutine;
         private IChannel<ScreenShakeMessage> _screenShakeChannel;
 
-        public bool IsFiring
-        {
-            get => _isFiring;
-            set
-            {
-                if (_isFiring == value)
-                    return;
-
-                _isFiring = value;
-
-                if (value)
-                {
-                    StartFiring();
-                }
-                else
-                {
-                    StopFiring();
-                }
-            }
-        }
+        public bool IsFiring { get; set; }
 
         public void Initialize(WeaponDefinition weaponDefinition)
         {
@@ -54,16 +33,8 @@ namespace SnakesWithGuns.Gameplay.Weapons
 
             if (!s_impactEffectPools.ContainsKey(_weaponDefinition.ImpactEffectPrefab))
                 s_impactEffectPools.Add(_weaponDefinition.ImpactEffectPrefab, CreateImpactEffectPool());
-        }
-
-        private void StartFiring()
-        {
-            _fireCoroutine = StartCoroutine(FireRoutine());
-        }
-
-        private void StopFiring()
-        {
-            StopCoroutine(_fireCoroutine);
+            
+            StartCoroutine(FireRoutine());
         }
 
         private void Fire()
@@ -78,10 +49,15 @@ namespace SnakesWithGuns.Gameplay.Weapons
 
             while (true)
             {
+                yield return new WaitWhile(() => !IsFiring);
+                
                 for (int i = 0; i < _weaponDefinition.MagazineSize; i++)
                 {
                     Fire();
                     yield return new WaitForSeconds(_weaponDefinition.FireRate);
+                    
+                    if (!IsFiring)
+                        yield return new WaitWhile(() => !IsFiring);
                 }
 
                 yield return new WaitForSeconds(_weaponDefinition.ReloadDuration);
