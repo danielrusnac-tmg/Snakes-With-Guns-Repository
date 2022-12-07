@@ -5,23 +5,42 @@ using UnityEngine.InputSystem.OnScreen;
 
 namespace SnakesWithGuns.Gameplay.Input
 {
-    public class Joystick : OnScreenControl
+    public class Joystick : OnScreenControl, IPointerDownHandler, IDragHandler, IPointerUpHandler
     {
         [Header("Settings")]
+        [SerializeField] private bool _interactable = true;
         [Range(0f, 1f), SerializeField] private float _radius = 0.5f;
-        [Range(0f, 1f), SerializeField] private float _activeAlpha = 1f;
-        [Range(0f, 1f), SerializeField] private float _inactiveAlpha = 0.3f;
         [SerializeField, InputControl(layout = "Vector2")] private string _controlPath;
 
         [Header("Components")]
-        [SerializeField] private RectTransform _defaultJoystickPosition;
         [SerializeField] private RectTransform _handle;
         [SerializeField] private RectTransform _constrain;
         [SerializeField] private CanvasGroup _canvasGroup;
 
         private Vector2 _startDragPosition;
-        private bool _isActive;
 
+        public bool Interactable
+        {
+            get => _interactable;
+            set
+            {
+                if (_interactable == value)
+                    return;
+
+                _interactable = value;
+                _canvasGroup.interactable = value;
+                
+                if (!value)
+                    Hide();
+            }
+        }
+        
+        private bool IsShown
+        {
+            get => _canvasGroup.alpha > float.Epsilon;
+            set => _canvasGroup.alpha = value ? 1f : 0f;
+        }
+        
         private float ConstrainRadius => (_constrain.rect.width - _handle.rect.width) * _radius;
 
         protected override string controlPathInternal
@@ -29,58 +48,40 @@ namespace SnakesWithGuns.Gameplay.Input
             get => _controlPath;
             set => _controlPath = value;
         }
-
-        private void Awake()
-        {
-            _canvasGroup.alpha = _inactiveAlpha;
-        }
-
+        
         private void Start()
         {
             ResetAnchors();
-            MoveToDefaultPosition();
+            Hide();
+        }
+        
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if (!Interactable)
+                return;
+            
+            Show(eventData.position);
         }
 
-        private void Update()
+        public void OnDrag(PointerEventData eventData)
         {
-            if (EventSystem.current.currentInputModule.input.GetMouseButtonDown(0))
-            {
-                MoveToActivePosition(EventSystem.current.currentInputModule.input.mousePosition);
-            }
-
-            if (EventSystem.current.currentInputModule.input.GetMouseButton(0))
-            {
-                if (_startDragPosition != EventSystem.current.currentInputModule.input.mousePosition && !_isActive)
-                    _isActive = true;
-
-                if (_isActive)
-                    OnDrag(EventSystem.current.currentInputModule.input.mousePosition);
-            }
-
-            if (EventSystem.current.currentInputModule.input.GetMouseButtonUp(0))
-            {
-                _isActive = false;
-                OnPointerUp();
-            }
-        }
-
-        private void OnDrag(Vector2 position)
-        {
-            _constrain.gameObject.SetActive(true);
-
+            if (!Interactable || !IsShown)
+                return;
+            
             Vector2 direction = Vector2.ClampMagnitude(
-                position - _startDragPosition,
+                eventData.position - _startDragPosition,
                 ConstrainRadius);
 
             _handle.localPosition = direction;
             SendValueToControl(direction / ConstrainRadius);
         }
 
-        private void OnPointerUp()
+        public void OnPointerUp(PointerEventData eventData)
         {
-            _constrain.gameObject.SetActive(false);
-
-            MoveToDefaultPosition();
+            if (!Interactable)
+                return;
+            
+            Hide();
             SendValueToControl(Vector2.zero);
         }
 
@@ -90,18 +91,17 @@ namespace SnakesWithGuns.Gameplay.Input
             _constrain.anchorMax = new Vector2(0.5f, 0.5f);
         }
 
-        private void MoveToActivePosition(Vector2 position)
+        private void Show(Vector2 position)
         {
             _constrain.position = position;
             _startDragPosition = position;
-            _canvasGroup.alpha = _activeAlpha;
+            _handle.localPosition = Vector3.zero;
+            IsShown = true;
         }
 
-        private void MoveToDefaultPosition()
+        private void Hide()
         {
-            _canvasGroup.alpha = _inactiveAlpha;
-            _constrain.position = _defaultJoystickPosition.position;
-            _handle.localPosition = Vector2.zero;
+            IsShown = false;
         }
     }
 }
