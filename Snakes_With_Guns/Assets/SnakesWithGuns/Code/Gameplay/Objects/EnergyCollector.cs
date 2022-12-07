@@ -1,4 +1,5 @@
-﻿using SnakesWithGuns.Gameplay.Messages;
+﻿using System;
+using SnakesWithGuns.Gameplay.Messages;
 using SnakesWithGuns.Gameplay.Snakes;
 using SnakesWithGuns.Infrastructure.PubSub;
 using UnityEngine;
@@ -27,6 +28,11 @@ namespace SnakesWithGuns.Gameplay.Objects
             _floatingTextChannel = Channels.GetChannel<SpawnFloatingTextMessage>();
         }
 
+        private void Start()
+        {
+            OnLevelUp();
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out Collectable collectable))
@@ -52,14 +58,19 @@ namespace SnakesWithGuns.Gameplay.Objects
                 _current -= Goal;
                 _level++;
                 
-                _levelUpChannel.Publish(new LevelUpMessage
-                {
-                    Level = _level,
-                    Tail = _tail
-                });
+                OnLevelUp();
             }
 
             _levelProgressChannel.Publish(new LevelProgressMessage(Progress));
+        }
+
+        private void OnLevelUp()
+        {
+            _levelUpChannel.Publish(new LevelUpMessage
+            {
+                Level = _level,
+                Tail = _tail
+            });
         }
     }
 }
