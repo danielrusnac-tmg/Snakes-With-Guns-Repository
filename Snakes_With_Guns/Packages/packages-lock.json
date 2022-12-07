@@ -1,12 +1,13 @@
 {
   "dependencies": {
     "com.tmg.joysticks": {
-      "version": "file:com.tmg.joysticks",
+      "version": "1.0.0",
       "depth": 0,
-      "source": "embedded",
+      "source": "registry",
       "dependencies": {
         "com.unity.inputsystem": "1.4.4"
-      }
+      },
+      "url": "https://packages.trymygames.com"
     },
     "com.unity.burst": {
       "version": "1.7.3",

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.tmg.joysticks": "1.0.0",
     "com.unity.cinemachine": "2.8.9",
     "com.unity.ide.rider": "3.0.16",
     "com.unity.inputsystem": "1.4.4",
@@ -38,5 +39,14 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "packages.trymygames.com",
+      "url": "https://packages.trymygames.com/",
+      "scopes": [
+        "com.tmg."
+      ]
+    }
+  ]
 }
