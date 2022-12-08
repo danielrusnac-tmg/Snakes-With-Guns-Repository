@@ -70,9 +70,11 @@ namespace SnakesWithGuns.Gameplay.Weapons
 
         private void RotateTowardsTargetDirection()
         {
-            _currentDirection = Vector3
-                .SmoothDamp(_currentDirection, _targetDirection, ref _turnVelocity, _turnDamp).normalized;
+            _currentDirection = Vector3.SmoothDamp(_currentDirection, _targetDirection, ref _turnVelocity, _turnDamp).normalized;
 
+            if (_currentDirection.sqrMagnitude < 0.01f)
+                return;
+            
             _rotationPivot.forward = _currentDirection;
         }
 

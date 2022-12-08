@@ -13,7 +13,7 @@ namespace SnakesWithGuns.Gameplay.Snakes
 
         public Actor ParentActor { get; set; }
         public SegmentModule ActiveModule { get; private set; }
-
+        
         public Vector3 Position
         {
             get => _rigidbody.position;
@@ -36,6 +36,11 @@ namespace SnakesWithGuns.Gameplay.Snakes
             _moduleInstance = Instantiate(module.ModulePrefab, _modulePoint);
             _moduleInstance.ParentActor = ParentActor;
             _moduleInstance.OnInstall();
+        }
+
+        public void SetVelocity(Vector3 velocity)
+        {
+            _rigidbody.velocity = velocity;
         }
 
         public void UninstallModule()
