@@ -1,4 +1,5 @@
-﻿using Cinemachine;
+﻿using System.Collections.Generic;
+using Cinemachine;
 using SnakesWithGuns.Gameplay.Messages;
 using SnakesWithGuns.Gameplay.Snakes;
 using SnakesWithGuns.Infrastructure.PubSub;
@@ -9,6 +10,7 @@ namespace SnakesWithGuns.Gameplay.Spawners
     public class SnakeSpawner : MonoBehaviour
     {
         [SerializeField] private Session _session;
+        [SerializeField] private StaticData _staticData;
 
         [Header("Player")]
         [SerializeField] private int _goal = 20;
@@ -24,6 +26,7 @@ namespace SnakesWithGuns.Gameplay.Spawners
         private IChannel<LevelUpMessage> _levelUpChannel;
         private IChannel<LevelProgressMessage> _levelProgressChannel;
         private IChannel<SpawnFloatingTextMessage> _floatingTextChannel;
+        private List<Snake> _bots = new();
 
         private int Goal => (_session.Player.Stats.Level.Value - 1) * _goalStep + _goal;
         private float Progress => Mathf.Clamp01((float)_session.Player.Stats.Energy.Value / Goal);
@@ -39,6 +42,8 @@ namespace SnakesWithGuns.Gameplay.Spawners
         {
             SpawnPlayer();
             SpawnBots();
+            
+            _session.Player.Stats.Level.Value++;
         }
 
         private void OnDestroy()
@@ -50,7 +55,7 @@ namespace SnakesWithGuns.Gameplay.Spawners
         private void SpawnBots()
         {
             foreach (Transform point in _botPointsParent)
-                SpawnSnake(_botPrefab, point.position);
+                _bots.Add(SpawnSnake(_botPrefab, point.position));
         }
 
         private void SpawnPlayer()
@@ -64,8 +69,6 @@ namespace SnakesWithGuns.Gameplay.Spawners
             _virtualCamera.m_LookAt = player.transform;
 
             _session.AssignPlayer(player);
-
-            player.Stats.Level.Value++;
         }
 
         private void OnPlayerEnergyChanged(int energy)
@@ -94,6 +97,14 @@ namespace SnakesWithGuns.Gameplay.Spawners
                 Level = level,
                 Tail = _session.Player.Tail
             });
+
+            AddRandomModuleToBots();
+        }
+
+        private void AddRandomModuleToBots()
+        {
+            foreach (Snake bot in _bots)
+                bot.Tail.AddModule(_staticData.GetRandomModule());
         }
 
         private Snake SpawnSnake(Snake prefab, Vector3 position)

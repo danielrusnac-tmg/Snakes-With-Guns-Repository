@@ -2,6 +2,7 @@ using SnakesWithGuns.Gameplay.Messages;
 using SnakesWithGuns.Gameplay.Snakes;
 using SnakesWithGuns.Infrastructure.PubSub;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 namespace SnakesWithGuns.Gameplay.UI
 {
@@ -9,7 +10,8 @@ namespace SnakesWithGuns.Gameplay.UI
     {
         [SerializeField] private Canvas _canvas;
         [SerializeField] private UIModule[] _modules;
-        [SerializeField] private SegmentModule[] _segmentModules;
+        [RequiredMember]
+        [SerializeField] private StaticData _staticData;
 
         private Tail _tail;
         private IChannel<LevelUpMessage> _levelUpChannel;
@@ -52,7 +54,7 @@ namespace SnakesWithGuns.Gameplay.UI
         public void Reroll()
         {
             foreach (UIModule module in _modules)
-                module.Display(_segmentModules[Random.Range(0, _segmentModules.Length)]);
+                module.Display(_staticData.GetRandomModule());
         }
 
         public void Skip()
