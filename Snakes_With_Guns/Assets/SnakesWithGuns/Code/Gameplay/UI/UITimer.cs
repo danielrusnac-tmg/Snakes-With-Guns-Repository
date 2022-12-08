@@ -6,14 +6,12 @@ namespace SnakesWithGuns.Gameplay.UI
 {
     public class UITimer : MonoBehaviour
     {
+        [SerializeField] private Session _session;
         [SerializeField] private TMP_Text _timeText;
-
-        private float _time;
 
         private void Update()
         {
-            _time += Time.deltaTime;
-            TimeSpan timeSpan = TimeSpan.FromSeconds(_time);
+            TimeSpan timeSpan = TimeSpan.FromSeconds(_session.GameplayTime);
             _timeText.SetText($"{timeSpan.Minutes:00}:{timeSpan.Seconds:00}");
         }
     }

@@ -4,7 +4,7 @@ using SnakesWithGuns.Infrastructure.PubSub;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace SnakesWithGuns.Gameplay
+namespace SnakesWithGuns.Gameplay.Spawners
 {
     public class EnergySpawner : MonoBehaviour
     {

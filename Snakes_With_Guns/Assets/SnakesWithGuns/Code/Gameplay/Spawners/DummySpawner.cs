@@ -1,20 +1,21 @@
 ﻿using SnakesWithGuns.Gameplay.Objects;
-using SnakesWithGuns.Gameplay.Snakes;
 using SnakesWithGuns.Gameplay.Weapons;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace SnakesWithGuns.Gameplay
+namespace SnakesWithGuns.Gameplay.Spawners
 {
     public class DummySpawner : MonoBehaviour
     {
         [SerializeField] private Dummy[] _dummyPrefabs;
-        [SerializeField] private Snake _player;
+        [SerializeField] private Session _session;
         [SerializeField] private float _spawnRate = 2;
         [SerializeField] private float _spawnRadius = 15;
 
         private ObjectPool<Dummy> _dummyyPool;
         private float _spawnTime;
+
+        private Transform PlayerTransform => _session.Player == null ? transform : _session.Player.transform;
 
         private void Awake()
         {
@@ -37,7 +38,7 @@ namespace SnakesWithGuns.Gameplay
         {
             Dummy dummy = _dummyyPool.Get();
             dummy.transform.position = GetRandomPosition();
-            dummy.Initialize(_player.transform);
+            dummy.Initialize(PlayerTransform);
             dummy.gameObject.SetActive(true);
         }
 
@@ -45,8 +46,8 @@ namespace SnakesWithGuns.Gameplay
         {
             Vector3 offset = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up) * Vector3.forward;
             offset *= _spawnRadius;
-            
-            return _player.transform.position + offset;
+
+            return PlayerTransform.position + offset;
         }
 
         private void OnDummyDied(ITarget dummy)
@@ -61,10 +62,7 @@ namespace SnakesWithGuns.Gameplay
             return dummy;
         }
 
-        private void OnGetDummy(Dummy dummy)
-        {
-           
-        }
+        private void OnGetDummy(Dummy dummy) { }
 
         private void OnReleaseDummy(Dummy dummy)
         {
