@@ -19,7 +19,7 @@ namespace SnakesWithGuns.Gameplay.Spawners
 
         [Header("Bots")]
         [SerializeField] private Snake _botPrefab;
-        [SerializeField] private Transform[] _botPoints;
+        [SerializeField] private Transform _botPointsParent;
 
         private IChannel<LevelUpMessage> _levelUpChannel;
         private IChannel<LevelProgressMessage> _levelProgressChannel;
@@ -49,7 +49,7 @@ namespace SnakesWithGuns.Gameplay.Spawners
 
         private void SpawnBots()
         {
-            foreach (Transform point in _botPoints)
+            foreach (Transform point in _botPointsParent)
                 SpawnSnake(_botPrefab, point.position);
         }
 
