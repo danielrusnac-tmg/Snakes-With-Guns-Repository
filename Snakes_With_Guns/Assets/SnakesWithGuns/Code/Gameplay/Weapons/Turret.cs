@@ -52,6 +52,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
         {
             _aimer.ParentActor = ParentActor;
             _aimer.Radius = weaponDefinition.TurretRadius;
+            _weapon.SourceID = ParentActor.SourceID;
             _weapon.Initialize(weaponDefinition);
         }
 

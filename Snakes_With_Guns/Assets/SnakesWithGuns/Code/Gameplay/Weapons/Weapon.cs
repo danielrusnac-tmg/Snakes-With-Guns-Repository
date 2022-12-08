@@ -73,7 +73,6 @@ namespace SnakesWithGuns.Gameplay.Weapons
         private void SpawnProjectile(Vector3 position, Quaternion rotation)
         {
             Projectile projectile = s_projectilePools[_weaponDefinition.Projectile].Get();
-            projectile.gameObject.layer = SourceID;
             projectile.transform.position = position;
             projectile.transform.rotation = rotation;
             projectile.ApplyForce(_weaponDefinition.GetForce(), _weaponDefinition.GetDrag());

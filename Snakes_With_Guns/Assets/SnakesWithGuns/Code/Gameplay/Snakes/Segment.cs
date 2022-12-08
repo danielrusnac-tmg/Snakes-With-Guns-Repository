@@ -1,10 +1,14 @@
+using System;
 using SnakesWithGuns.Gameplay.Objects;
+using SnakesWithGuns.Gameplay.Weapons;
 using UnityEngine;
 
 namespace SnakesWithGuns.Gameplay.Snakes
 {
-    public class Segment : MonoBehaviour
+    public class Segment : MonoBehaviour, ITarget
     {
+        public event Action<ITarget> Died;
+        
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private Transform _modulePoint;
         [SerializeField] private Health _health;
@@ -13,7 +17,9 @@ namespace SnakesWithGuns.Gameplay.Snakes
 
         public Actor ParentActor { get; set; }
         public SegmentModule ActiveModule { get; private set; }
-        
+
+        public int SourceID => ParentActor.SourceID;
+
         public Vector3 Position
         {
             get => _rigidbody.position;
