@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace SnakesWithGuns.Gameplay.UI
 {
-    public class HealthDamageNumbers : MonoBehaviour
+    public class DamageNumberSpawner : MonoBehaviour
     {
         [SerializeField] private Color _color = Color.red;
         [SerializeField] private Health _health;

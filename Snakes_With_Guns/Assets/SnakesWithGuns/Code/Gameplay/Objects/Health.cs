@@ -9,6 +9,7 @@ namespace SnakesWithGuns.Gameplay.Objects
         public event Action<ChangeData> Changed;
         public event Action Died;
 
+        [SerializeField] private bool _isImmortal;
         [SerializeField] private int _maxHealth = 100;
 
         public int Current { get; private set; }
@@ -17,7 +18,7 @@ namespace SnakesWithGuns.Gameplay.Objects
 
         private void Awake()
         {
-           ResetHealth();
+            ResetHealth();
         }
 
         public void ResetHealth()
@@ -35,10 +36,10 @@ namespace SnakesWithGuns.Gameplay.Objects
             Changed?.Invoke(new ChangeData(Current, newHealth));
             Current = newHealth;
 
-            if (Current == 0)
+            if (Current == 0 && !_isImmortal)
                 Died?.Invoke();
         }
-        
+
         public struct ChangeData
         {
             public int OldHealth;

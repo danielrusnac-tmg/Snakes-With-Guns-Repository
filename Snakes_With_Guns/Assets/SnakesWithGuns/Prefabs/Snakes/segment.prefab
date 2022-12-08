@@ -42,7 +42,9 @@ GameObject:
   - component: {fileID: 2476195558216098682}
   - component: {fileID: 2476195558216098683}
   - component: {fileID: 8735052509464045884}
-  m_Layer: 0
+  - component: {fileID: 9209503892612829635}
+  - component: {fileID: 1130994333052417426}
+  m_Layer: 9
   m_Name: segment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,6 +98,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &9209503892612829635
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2476195558216098685}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1130994333052417426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2476195558216098685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 452224f09657449489d06ea042784c66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
 --- !u!1 &2476195558492249922
 GameObject:
   m_ObjectHideFlags: 0
