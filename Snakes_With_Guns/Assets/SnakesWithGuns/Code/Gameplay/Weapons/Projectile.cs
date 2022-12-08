@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 namespace SnakesWithGuns.Gameplay.Weapons
@@ -10,7 +9,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
         public Vector3 Normal;
         public IDamageable Damageable;
     }
-    
+
     public class Projectile : MonoBehaviour
     {
         [SerializeField] private bool _waitForParticleAnimation;
@@ -20,6 +19,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
 
         [Header("Settings")]
         [SerializeField] private bool _destroyOnSlowDown = true;
+
         [SerializeField] private float _minVelocity = 1f;
         [SerializeField] private bool _alignToVelocity;
 
@@ -30,9 +30,9 @@ namespace SnakesWithGuns.Gameplay.Weapons
         private bool _isDead;
         private Ray _ray;
         private RaycastHit[] _hits = new RaycastHit[1];
-        
+
         public int SourceID { get; set; }
-        
+
         private void Awake()
         {
             ParticleSystem.MainModule main = _particleSystem.main;
@@ -43,7 +43,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
         {
             float velocity = _rigidbody.velocity.magnitude;
             Vector3 direction = _rigidbody.velocity.normalized;
-            
+
             DetectHit(direction, velocity);
             AlignToVelocity(velocity, direction);
             DestroyOnSlowdown(velocity);
@@ -61,7 +61,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
 
                 if (!_hits[0].collider.TryGetComponent(out IDamageable damageable) || damageable.SourceID == SourceID)
                     return;
-                
+
                 _hasCollided = true;
                 Collided?.Invoke(new HitData
                 {
@@ -89,7 +89,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
         {
             _hasCollided = false;
             _isDead = false;
-            
+
             _particleSystem.Play();
             _rigidbody.velocity = transform.forward * force;
             _rigidbody.angularVelocity = Vector3.zero;
@@ -110,7 +110,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
             }
             else
             {
-               OnDied();
+                OnDied();
             }
         }
 
