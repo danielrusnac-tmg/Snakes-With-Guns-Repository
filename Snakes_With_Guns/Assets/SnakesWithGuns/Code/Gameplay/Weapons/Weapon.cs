@@ -12,7 +12,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
     {
         private static Dictionary<Projectile, ObjectPool<Projectile>> s_projectilePools = new();
         private static Dictionary<ParticleSystem, ObjectPool<ParticleSystem>> s_impactEffectPools = new();
-        private static Collider[] s_damageColliders = new Collider[20];
+        private static Collider[] s_damageColliders = new Collider[10];
 
         [SerializeField] private Transform _muzzlePoint;
 
@@ -36,6 +36,12 @@ namespace SnakesWithGuns.Gameplay.Weapons
                 s_impactEffectPools.Add(_weaponDefinition.ImpactEffectPrefab, CreateImpactEffectPool());
 
             StartCoroutine(FireRoutine());
+        }
+
+        private void OnDestroy()
+        {
+            s_projectilePools.Clear();
+            s_impactEffectPools.Clear();
         }
 
         private void Fire()
