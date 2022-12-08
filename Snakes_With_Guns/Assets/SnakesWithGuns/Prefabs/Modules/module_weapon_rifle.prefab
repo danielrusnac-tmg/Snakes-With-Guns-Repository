@@ -53,6 +53,7 @@ MonoBehaviour:
   _aimTolerance: 0.1
   _rotationPivot: {fileID: 3608928009876657089}
   _aimer: {fileID: 7694698344477832621}
+  _health: {fileID: 0}
 --- !u!114 &3860682572462531884
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4763,7 +4763,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _session: {fileID: 2026193266}
-  _actorLayerIndex: 20
   _goal: 20
   _goalStep: 5
   _playerPrefab: {fileID: 2492170797315894015, guid: 56918a12b2f2cd345a887907da150300,

@@ -21,6 +21,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
         public Vector3 Target => GetClosestTarget();
 
         public bool HasTarget { get; private set; }
+        public Actor ParentActor { get; set; }
 
         private void Reset()
         {
@@ -34,7 +35,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.TryGetComponent(out ITarget damageable))
+            if (!other.TryGetComponent(out ITarget damageable) || damageable.SourceID == ParentActor.SourceID)
                 return;
 
             AddTarget(damageable);
@@ -42,7 +43,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
 
         private void OnTriggerExit(Collider other)
         {
-            if (!other.TryGetComponent(out ITarget damageable))
+            if (!other.TryGetComponent(out ITarget damageable) || damageable.SourceID == ParentActor.SourceID)
                 return;
 
             RemoveTarget(damageable);

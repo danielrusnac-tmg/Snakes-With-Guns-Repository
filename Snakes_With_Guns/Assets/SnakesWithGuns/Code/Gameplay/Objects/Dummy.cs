@@ -24,6 +24,7 @@ namespace SnakesWithGuns.Gameplay.Objects
         private bool _isDead;
 
         public Vector3 Position => _transform.position;
+        public int SourceID => GetInstanceID();
 
         private void Reset()
         {

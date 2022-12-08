@@ -4,6 +4,6 @@ namespace SnakesWithGuns.Gameplay
 {
     public class Actor : MonoBehaviour
     {
-        public int ActorID => GetInstanceID();
+        public int SourceID => GetInstanceID();
     }
 }

@@ -2,7 +2,7 @@
 {
     public interface IWeapon
     {
-        int DamageLayer { get; set; }
+        int SourceID { get; set; }
         bool IsFiring { get; set; }
         void Initialize(WeaponDefinition weaponDefinition);
     }

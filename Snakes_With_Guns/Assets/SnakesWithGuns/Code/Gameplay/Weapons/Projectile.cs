@@ -8,7 +8,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
     {
         public Vector3 Point;
         public Vector3 Normal;
-        public Collider Collider;
+        public IDamageable Damageable;
     }
     
     public class Projectile : MonoBehaviour
@@ -30,6 +30,8 @@ namespace SnakesWithGuns.Gameplay.Weapons
         private bool _isDead;
         private Ray _ray;
         private RaycastHit[] _hits = new RaycastHit[1];
+        
+        public int SourceID { get; set; }
         
         private void Awake()
         {
@@ -57,12 +59,15 @@ namespace SnakesWithGuns.Gameplay.Weapons
                 if (_hasCollided)
                     return;
 
+                if (!_hits[0].collider.TryGetComponent(out IDamageable damageable) || damageable.SourceID == SourceID)
+                    return;
+                
                 _hasCollided = true;
                 Collided?.Invoke(new HitData
                 {
                     Point = _hits[0].point,
                     Normal = _hits[0].normal,
-                    Collider = _hits[0].collider
+                    Damageable = damageable,
                 });
                 SelfDestroy();
             }

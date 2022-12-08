@@ -20,7 +20,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
         private ParticleSystem _muzzle;
         private IChannel<ScreenShakeMessage> _screenShakeChannel;
 
-        public int DamageLayer { get; set; }
+        public int SourceID { get; set; }
         public bool IsFiring { get; set; }
 
         public void Initialize(WeaponDefinition weaponDefinition)
@@ -34,34 +34,34 @@ namespace SnakesWithGuns.Gameplay.Weapons
 
             if (!s_impactEffectPools.ContainsKey(_weaponDefinition.ImpactEffectPrefab))
                 s_impactEffectPools.Add(_weaponDefinition.ImpactEffectPrefab, CreateImpactEffectPool());
-            
+
             StartCoroutine(FireRoutine());
         }
 
         private void Fire()
         {
             _muzzle.Play();
-            
+
             for (int j = 0; j < _weaponDefinition.ProjectilePerShot; j++)
                 SpawnProjectile(_muzzlePoint.position, _muzzlePoint.rotation * _weaponDefinition.GetRotationOffset());
         }
 
         private IEnumerator FireRoutine()
         {
-            WaitWhile waitIsFiring =  new WaitWhile(() => !IsFiring);
+            WaitWhile waitIsFiring = new WaitWhile(() => !IsFiring);
             WaitForSeconds waitRate = new WaitForSeconds(_weaponDefinition.FireRate);
             WaitForSeconds waitReload = new WaitForSeconds(_weaponDefinition.ReloadDuration);
 
             while (true)
             {
                 yield return waitIsFiring;
-                
+
                 for (int i = 0; i < _weaponDefinition.MagazineSize; i++)
                 {
                     Fire();
-                    
+
                     yield return waitRate;
-                    
+
                     if (!IsFiring)
                         yield return waitIsFiring;
                 }
@@ -73,7 +73,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
         private void SpawnProjectile(Vector3 position, Quaternion rotation)
         {
             Projectile projectile = s_projectilePools[_weaponDefinition.Projectile].Get();
-            projectile.gameObject.layer = DamageLayer;
+            projectile.gameObject.layer = SourceID;
             projectile.transform.position = position;
             projectile.transform.rotation = rotation;
             projectile.ApplyForce(_weaponDefinition.GetForce(), _weaponDefinition.GetDrag());
@@ -91,25 +91,21 @@ namespace SnakesWithGuns.Gameplay.Weapons
             {
                 case DamageDealMode.OnContact:
                 {
-                    if (hitData.Collider.TryGetComponent(out IDamageable damageable))
-                        damageable.DealDamage(_weaponDefinition.Damage);
+                    hitData.Damageable.DealDamage(_weaponDefinition.Damage);
                 }
                     break;
                 case DamageDealMode.InRadius:
                 {
                     int targets = Physics.OverlapSphereNonAlloc(
-                        hitData.Point, 
+                        hitData.Point,
                         _weaponDefinition.DamageRadius,
                         s_damageColliders);
-                    
+
                     if (targets == 0)
                         return;
 
                     for (int i = 0; i < targets; i++)
-                    {
-                        if (s_damageColliders[i].TryGetComponent(out IDamageable damageable))
-                            damageable.DealDamage(_weaponDefinition.Damage);
-                    }
+                        hitData.Damageable.DealDamage(_weaponDefinition.Damage);
                 }
                     break;
             }

@@ -10,7 +10,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
         private IWeapon[] _weapons;
         private bool _isFiring;
 
-        public int DamageLayer { get; set; }
+        public int SourceID { get; set; }
 
         public bool IsFiring
         {
@@ -31,7 +31,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
 
             foreach (IWeapon weapon in _weapons)
             {
-                weapon.DamageLayer = DamageLayer;
+                weapon.SourceID = SourceID;
                 weapon.Initialize(weaponDefinition);
             }
         }

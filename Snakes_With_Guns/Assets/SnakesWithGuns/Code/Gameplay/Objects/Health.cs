@@ -16,6 +16,8 @@ namespace SnakesWithGuns.Gameplay.Objects
         public int Max => _maxHealth;
         public float Percent => Mathf.Clamp01((float)Current / Max);
 
+        public int SourceID { get; set; } = -1;
+
         private void Awake()
         {
             ResetHealth();
