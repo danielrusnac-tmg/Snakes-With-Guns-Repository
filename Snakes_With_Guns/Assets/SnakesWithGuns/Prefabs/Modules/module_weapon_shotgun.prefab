@@ -289,10 +289,9 @@ GameObject:
   - component: {fileID: 8939848046972454577}
   - component: {fileID: 653015820800827575}
   - component: {fileID: 1992570178625962344}
-  - component: {fileID: 2030844957735900598}
   - component: {fileID: 2458236467173476866}
   m_Layer: 8
-  m_Name: module_weapon_shotgun_lvl1
+  m_Name: module_weapon_shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -357,18 +356,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sphereCollider: {fileID: 653015820800827575}
---- !u!114 &2030844957735900598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8939848046972454575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51d57e2a0b834f34b63c516e9e95767b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2458236467173476866
 MonoBehaviour:
   m_ObjectHideFlags: 0

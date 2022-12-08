@@ -11,4 +11,4 @@ namespace SnakesWithGuns.Gameplay.Snakes
         public string ModuleName => _moduleName;
         public SegmentModuleComponent ModulePrefab => _modulePrefab;
     }
-}
+}       

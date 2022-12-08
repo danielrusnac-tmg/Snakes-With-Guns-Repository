@@ -9695,7 +9695,6 @@ GameObject:
   - component: {fileID: 198356421454905678}
   - component: {fileID: 199603346467327328}
   - component: {fileID: 54625915932452936}
-  - component: {fileID: 708120809207579794}
   - component: {fileID: 7530134549050696030}
   m_Layer: 6
   m_Name: Flashy_Red_Small_Projectile
@@ -14528,19 +14527,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &708120809207579794
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1681046568612450}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.22
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7530134549050696030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14555,8 +14541,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waitForParticleAnimation: 0
   _rigidbody: {fileID: 54625915932452936}
-  _collider: {fileID: 708120809207579794}
   _particleSystem: {fileID: 198356421454905678}
+  _hitMask:
+    serializedVersion: 2
+    m_Bits: 512
   _destroyOnSlowDown: 1
   _minVelocity: 1
   _alignToVelocity: 0

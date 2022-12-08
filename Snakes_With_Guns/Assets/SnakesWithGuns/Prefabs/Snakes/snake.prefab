@@ -79,6 +79,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088d027a3ca141d99409e37d85baa84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HealthLayer: 0
+  ProjectileLayer: 0
   _stats: {}
   _mover: {fileID: 1315753168}
   _tail: {fileID: 5486901206705832841}
@@ -109,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2381c92488a43acac6fa2b4f47c1061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _snake: {fileID: 1315753167}
   _pointPerSegment: 3
   _segmentsDistance: 1.1
   _moveSpeed: 15

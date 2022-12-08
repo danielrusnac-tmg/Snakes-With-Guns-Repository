@@ -1,25 +1,35 @@
 ﻿using System;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 namespace SnakesWithGuns.Gameplay.Weapons
 {
+    public struct HitData
+    {
+        public Vector3 Point;
+        public Vector3 Normal;
+        public Collider Collider;
+    }
+    
     public class Projectile : MonoBehaviour
     {
         [SerializeField] private bool _waitForParticleAnimation;
         [SerializeField] private Rigidbody _rigidbody;
-        [SerializeField] private Collider _collider;
         [SerializeField] private ParticleSystem _particleSystem;
-        
+        [SerializeField] private LayerMask _hitMask;
+
         [Header("Settings")]
         [SerializeField] private bool _destroyOnSlowDown = true;
         [SerializeField] private float _minVelocity = 1f;
         [SerializeField] private bool _alignToVelocity;
 
         public event Action<Projectile> Died;
-        public event Action<Collision> Collided;
+        public event Action<HitData> Collided;
 
         private bool _hasCollided;
         private bool _isDead;
+        private Ray _ray;
+        private RaycastHit[] _hits = new RaycastHit[1];
         
         private void Awake()
         {
@@ -29,21 +39,45 @@ namespace SnakesWithGuns.Gameplay.Weapons
 
         private void FixedUpdate()
         {
-            if (_alignToVelocity && _rigidbody.velocity.sqrMagnitude > float.Epsilon)
-                _rigidbody.MoveRotation(Quaternion.LookRotation(_rigidbody.velocity.normalized));
+            float velocity = _rigidbody.velocity.magnitude;
+            Vector3 direction = _rigidbody.velocity.normalized;
             
-            if (_destroyOnSlowDown && _rigidbody.velocity.sqrMagnitude < _minVelocity)
+            DetectHit(direction, velocity);
+            AlignToVelocity(velocity, direction);
+            DestroyOnSlowdown(velocity);
+        }
+
+        private void DetectHit(Vector3 direction, float velocity)
+        {
+            _ray.origin = _rigidbody.position;
+            _ray.direction = direction;
+
+            if (Physics.RaycastNonAlloc(_ray, _hits, velocity * Time.fixedDeltaTime, _hitMask) > 0)
+            {
+                if (_hasCollided)
+                    return;
+
+                _hasCollided = true;
+                Collided?.Invoke(new HitData
+                {
+                    Point = _hits[0].point,
+                    Normal = _hits[0].normal,
+                    Collider = _hits[0].collider
+                });
+                SelfDestroy();
+            }
+        }
+
+        private void DestroyOnSlowdown(float velocitySqrMagnitude)
+        {
+            if (_destroyOnSlowDown && velocitySqrMagnitude < _minVelocity)
                 SelfDestroy();
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void AlignToVelocity(float velocitySqrMagnitude, Vector3 direction)
         {
-            if (_hasCollided)
-                return;
-
-            _hasCollided = true;
-            Collided?.Invoke(collision);
-            SelfDestroy();
+            if (_alignToVelocity && velocitySqrMagnitude > float.Epsilon)
+                _rigidbody.MoveRotation(Quaternion.LookRotation(direction));
         }
 
         public void ApplyForce(float force, float drag)
@@ -51,7 +85,6 @@ namespace SnakesWithGuns.Gameplay.Weapons
             _hasCollided = false;
             _isDead = false;
             
-            _collider.enabled = true;
             _particleSystem.Play();
             _rigidbody.velocity = transform.forward * force;
             _rigidbody.angularVelocity = Vector3.zero;
@@ -66,8 +99,6 @@ namespace SnakesWithGuns.Gameplay.Weapons
 
         private void SelfDestroy()
         {
-            _collider.enabled = false;
-            
             if (_waitForParticleAnimation)
             {
                 _particleSystem.Stop(true);

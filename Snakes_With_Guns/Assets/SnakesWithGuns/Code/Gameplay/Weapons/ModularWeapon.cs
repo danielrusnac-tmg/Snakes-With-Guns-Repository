@@ -10,6 +10,8 @@ namespace SnakesWithGuns.Gameplay.Weapons
         private IWeapon[] _weapons;
         private bool _isFiring;
 
+        public int DamageLayer { get; set; }
+
         public bool IsFiring
         {
             get => _isFiring;
@@ -26,9 +28,12 @@ namespace SnakesWithGuns.Gameplay.Weapons
         public void Initialize(WeaponDefinition weaponDefinition)
         {
             _weapons = _weaponObjects.Select(o => o.GetComponent<IWeapon>()).ToArray();
-            
+
             foreach (IWeapon weapon in _weapons)
+            {
+                weapon.DamageLayer = DamageLayer;
                 weapon.Initialize(weaponDefinition);
+            }
         }
 
         private void ToggleIsFiring(bool value)

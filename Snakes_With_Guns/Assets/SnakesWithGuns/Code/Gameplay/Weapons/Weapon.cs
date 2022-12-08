@@ -20,6 +20,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
         private ParticleSystem _muzzle;
         private IChannel<ScreenShakeMessage> _screenShakeChannel;
 
+        public int DamageLayer { get; set; }
         public bool IsFiring { get; set; }
 
         public void Initialize(WeaponDefinition weaponDefinition)
@@ -72,31 +73,32 @@ namespace SnakesWithGuns.Gameplay.Weapons
         private void SpawnProjectile(Vector3 position, Quaternion rotation)
         {
             Projectile projectile = s_projectilePools[_weaponDefinition.Projectile].Get();
+            projectile.gameObject.layer = DamageLayer;
             projectile.transform.position = position;
             projectile.transform.rotation = rotation;
             projectile.ApplyForce(_weaponDefinition.GetForce(), _weaponDefinition.GetDrag());
         }
 
-        private void OnProjectileCollided(Collision collision)
+        private void OnProjectileCollided(HitData hitData)
         {
-            DealProjectileDamage(collision);
-            SpawnProjectileCollisionEffect(collision);
+            DealProjectileDamage(hitData);
+            SpawnProjectileCollisionEffect(hitData);
         }
 
-        private void DealProjectileDamage(Collision collision)
+        private void DealProjectileDamage(HitData hitData)
         {
             switch (_weaponDefinition.DamageDealMode)
             {
                 case DamageDealMode.OnContact:
                 {
-                    if (collision.gameObject.TryGetComponent(out IDamageable damageable))
+                    if (hitData.Collider.TryGetComponent(out IDamageable damageable))
                         damageable.DealDamage(_weaponDefinition.Damage);
                 }
                     break;
                 case DamageDealMode.InRadius:
                 {
                     int targets = Physics.OverlapSphereNonAlloc(
-                        collision.GetContact(0).point, 
+                        hitData.Point, 
                         _weaponDefinition.DamageRadius,
                         s_damageColliders);
                     
@@ -113,14 +115,13 @@ namespace SnakesWithGuns.Gameplay.Weapons
             }
         }
 
-        private void SpawnProjectileCollisionEffect(Collision collision)
+        private void SpawnProjectileCollisionEffect(HitData hitData)
         {
-            ContactPoint point = collision.GetContact(0);
             ParticleSystem effect = s_impactEffectPools[_weaponDefinition.ImpactEffectPrefab].Get();
-            effect.transform.position = point.point;
+            effect.transform.position = hitData.Point;
 
             if (_weaponDefinition.AlignImpactToSurface)
-                effect.transform.forward = point.normal;
+                effect.transform.forward = hitData.Normal;
 
             effect.Play();
             _screenShakeChannel.Publish(new ScreenShakeMessage(_weaponDefinition.ImpactShake));

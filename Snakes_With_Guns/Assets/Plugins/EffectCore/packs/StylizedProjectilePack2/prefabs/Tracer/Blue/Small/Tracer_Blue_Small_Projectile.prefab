@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 198451581803922730}
   - component: {fileID: 5290191564811312939}
   - component: {fileID: 5970117730437543047}
-  - component: {fileID: 845787611509832436}
   m_Layer: 6
   m_Name: Tracer_Blue_Small_Projectile
   m_TagString: FX
@@ -4860,24 +4859,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waitForParticleAnimation: 0
   _rigidbody: {fileID: 5290191564811312939}
-  _collider: {fileID: 845787611509832436}
   _particleSystem: {fileID: 198451581803922730}
+  _hitMask:
+    serializedVersion: 2
+    m_Bits: 512
   _destroyOnSlowDown: 1
   _minVelocity: 1
   _alignToVelocity: 0
---- !u!135 &845787611509832436
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1126776949354822}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.22
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1401749078459792
 GameObject:
   m_ObjectHideFlags: 0

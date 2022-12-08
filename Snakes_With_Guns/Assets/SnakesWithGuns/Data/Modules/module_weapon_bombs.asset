@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: module_weapon_bombs
   m_EditorClassIdentifier: 
   _moduleName: Bombs
-  _modulePrefab: {fileID: 5632188054079955187, guid: 404bb378f8bbdf245ba93d27e426826b,
+  _modulePrefab: {fileID: 5898271948896328344, guid: 404bb378f8bbdf245ba93d27e426826b,
     type: 3}

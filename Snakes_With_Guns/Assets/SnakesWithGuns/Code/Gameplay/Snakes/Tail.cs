@@ -6,6 +6,7 @@ namespace SnakesWithGuns.Gameplay.Snakes
 {
     public class Tail : MonoBehaviour
     {
+        [SerializeField] private Actor _snake;
         [Min(0), SerializeField] private int _pointPerSegment = 3;
         [Min(0f), SerializeField] private float _segmentsDistance = 1.1f;
         [SerializeField] private float _moveSpeed = 15f;
@@ -40,6 +41,7 @@ namespace SnakesWithGuns.Gameplay.Snakes
             Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
 
             Segment instance = Instantiate(_segmentPrefab, position, rotation);
+            instance.ParentActor = _snake;
 
             _segments.Add(instance);
 

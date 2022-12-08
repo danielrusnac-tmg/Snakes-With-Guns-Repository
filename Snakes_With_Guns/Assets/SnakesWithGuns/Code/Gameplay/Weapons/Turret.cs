@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using SnakesWithGuns.Gameplay.Snakes;
+using UnityEngine;
 
 namespace SnakesWithGuns.Gameplay.Weapons
 {
-    public class Turret : MonoBehaviour
+    public class Turret : SegmentModuleComponent
     {
         public WeaponDefinition WeaponDefinition;
 
@@ -21,18 +22,6 @@ namespace SnakesWithGuns.Gameplay.Weapons
         {
             _transform = transform;
             _weapon = GetComponent<IWeapon>();
-            Initialize(WeaponDefinition);
-        }
-
-        private void OnEnable()
-        {
-            _weapon.IsFiring = true;
-            _currentDirection = _rotationPivot.forward;
-        }
-
-        private void OnDisable()
-        {
-            _weapon.IsFiring = false;
         }
 
         private void Update()
@@ -49,6 +38,14 @@ namespace SnakesWithGuns.Gameplay.Weapons
             }
 
             RotateTowardsTargetDirection();
+        }
+
+        public override void OnInstall()
+        {
+            base.OnInstall();
+
+            Initialize(WeaponDefinition);
+            _weapon.IsFiring = true;
         }
 
         public void Initialize(WeaponDefinition weaponDefinition)

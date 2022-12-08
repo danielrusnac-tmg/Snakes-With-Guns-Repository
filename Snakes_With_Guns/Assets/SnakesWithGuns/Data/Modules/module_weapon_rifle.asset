@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: module_weapon_rifle
   m_EditorClassIdentifier: 
   _moduleName: Rifle
-  _modulePrefab: {fileID: 7872580082594177395, guid: 0dd17e8a0449cfe498d1dd6f705a3f8e,
+  _modulePrefab: {fileID: 972424625716327028, guid: 0dd17e8a0449cfe498d1dd6f705a3f8e,
     type: 3}

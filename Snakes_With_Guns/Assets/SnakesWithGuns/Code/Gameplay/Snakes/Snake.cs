@@ -3,7 +3,7 @@ using UnityEngine.Assertions;
 
 namespace SnakesWithGuns.Gameplay.Snakes
 {
-    public class Snake : MonoBehaviour
+    public class Snake : Actor
     {
         [SerializeField] private SnakeStats _stats = new();
         [SerializeField] private SnakeMover _mover;

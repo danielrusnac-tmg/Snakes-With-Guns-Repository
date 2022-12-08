@@ -9696,7 +9696,6 @@ GameObject:
   - component: {fileID: 199755693091019154}
   - component: {fileID: 198709153041281152}
   - component: {fileID: 5806941244839805179}
-  - component: {fileID: 9156619397782564906}
   m_Layer: 6
   m_Name: Cube_GoldFire_Small_Projectile
   m_TagString: FX
@@ -14544,24 +14543,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waitForParticleAnimation: 1
   _rigidbody: {fileID: 54514016292773024}
-  _collider: {fileID: 9156619397782564906}
   _particleSystem: {fileID: 198709153041281152}
+  _hitMask:
+    serializedVersion: 2
+    m_Bits: 512
   _destroyOnSlowDown: 0
   _minVelocity: 1
   _alignToVelocity: 1
---- !u!135 &9156619397782564906
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1234753078459988}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.22
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1277840756753770
 GameObject:
   m_ObjectHideFlags: 0

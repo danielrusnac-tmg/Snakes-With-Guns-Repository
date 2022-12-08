@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: module_weapon_shotgun
   m_EditorClassIdentifier: 
   _moduleName: Shotgun
-  _modulePrefab: {fileID: 2030844957735900598, guid: a121eb6b9d357d445b662b3a109fc26c,
+  _modulePrefab: {fileID: 8939848046972454577, guid: a121eb6b9d357d445b662b3a109fc26c,
     type: 3}

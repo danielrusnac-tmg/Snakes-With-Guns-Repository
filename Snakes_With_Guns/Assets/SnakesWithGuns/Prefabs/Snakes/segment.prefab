@@ -107,7 +107,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 2476195558216098685}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 452224f09657449489d06ea042784c66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isImmortal: 0
   _maxHealth: 100
 --- !u!1 &2476195558492249922
 GameObject:
