@@ -5,9 +5,14 @@ namespace SnakesWithGuns.Gameplay.Snakes
 {
     public class Snake : MonoBehaviour
     {
+        [SerializeField] private SnakeStats _stats = new();
         [SerializeField] private SnakeMover _mover;
+        [SerializeField] private Tail _tail;
 
         private ISnakeInputProvider _inputProvider;
+
+        public SnakeStats Stats => _stats;
+        public Tail Tail => _tail;
 
         private void Awake()
         {

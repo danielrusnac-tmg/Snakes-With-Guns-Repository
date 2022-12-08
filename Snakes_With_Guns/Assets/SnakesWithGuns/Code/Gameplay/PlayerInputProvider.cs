@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SnakesWithGuns.Gameplay
 {
-    public class SnakeInputProvider : MonoBehaviour, ISnakeInputProvider
+    public class PlayerInputProvider : MonoBehaviour, ISnakeInputProvider
     {
         [SerializeField] private float _rotationOffset = 45f;
 

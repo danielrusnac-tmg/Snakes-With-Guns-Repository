@@ -1,4 +1,3 @@
-using System.Linq;
 using SnakesWithGuns.Gameplay.Messages;
 using SnakesWithGuns.Gameplay.Snakes;
 using SnakesWithGuns.Infrastructure.PubSub;
@@ -21,7 +20,7 @@ namespace SnakesWithGuns.Gameplay.UI
             _levelUpChannel = Channels.GetChannel<LevelUpMessage>();
             _pauseMessage = Channels.GetChannel<PauseMessage>();
             _levelUpChannel.Register(OnLevelUpMessage);
-            
+
             foreach (UIModule module in _modules)
                 module.GetPressed += OnModuleGet;
         }
@@ -29,7 +28,7 @@ namespace SnakesWithGuns.Gameplay.UI
         private void OnDestroy()
         {
             _levelUpChannel.Unregister(OnLevelUpMessage);
-            
+
             foreach (UIModule module in _modules)
                 module.GetPressed -= OnModuleGet;
         }
@@ -40,7 +39,7 @@ namespace SnakesWithGuns.Gameplay.UI
             _canvas.enabled = true;
 
             Reroll();
-            
+
             _pauseMessage.Publish(new PauseMessage(true));
         }
 
@@ -68,8 +67,7 @@ namespace SnakesWithGuns.Gameplay.UI
 
         private void OnModuleGet(SegmentModule module)
         {
-            _tail.AddSegment();
-            _tail.Segments.Last().InstallModule(module);
+            _tail.AddModule(module);
             Hide();
         }
     }
