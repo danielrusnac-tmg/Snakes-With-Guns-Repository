@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 8735052509464045884}
   - component: {fileID: 9209503892612829635}
   - component: {fileID: 1130994333052417426}
+  - component: {fileID: 9174194589589416880}
   m_Layer: 9
   m_Name: segment
   m_TagString: Untagged
@@ -127,6 +128,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isImmortal: 1
   _maxHealth: 100
+--- !u!114 &9174194589589416880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2476195558216098685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cecb0aec2cec4e7d89a7fee213b5a23b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _color: {r: 1, g: 0.11764706, b: 0.11764706, a: 1}
+  _health: {fileID: 1130994333052417426}
 --- !u!1 &2476195558492249922
 GameObject:
   m_ObjectHideFlags: 0
