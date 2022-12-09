@@ -110,7 +110,10 @@ namespace SnakesWithGuns.Gameplay.Weapons
                         return;
 
                     for (int i = 0; i < targets; i++)
-                        hitData.Damageable.DealDamage(_weaponDefinition.Damage);
+                    {
+                        if (s_damageColliders[i].TryGetComponent(out IDamageable damageable) && damageable.SourceID != SourceID)
+                            damageable.DealDamage(_weaponDefinition.Damage);
+                    }
                 }
                     break;
             }
