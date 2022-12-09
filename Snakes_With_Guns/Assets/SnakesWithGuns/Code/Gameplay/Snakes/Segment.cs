@@ -1,14 +1,10 @@
-using System;
 using SnakesWithGuns.Gameplay.Objects;
-using SnakesWithGuns.Gameplay.Weapons;
 using UnityEngine;
 
 namespace SnakesWithGuns.Gameplay.Snakes
 {
-    public class Segment : MonoBehaviour, ITarget
+    public class Segment : MonoBehaviour
     {
-        public event Action<ITarget> Died;
-        
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private Transform _modulePoint;
         [SerializeField] private Health _health;
@@ -42,11 +38,6 @@ namespace SnakesWithGuns.Gameplay.Snakes
             _moduleInstance = Instantiate(module.ModulePrefab, _modulePoint);
             _moduleInstance.ParentActor = ParentActor;
             _moduleInstance.OnInstall();
-        }
-
-        public void SetVelocity(Vector3 velocity)
-        {
-            _rigidbody.velocity = velocity;
         }
 
         public void UninstallModule()
