@@ -1,4 +1,3 @@
-using SnakesWithGuns.Gameplay.Objects;
 using UnityEngine;
 
 namespace SnakesWithGuns.Gameplay.Snakes
@@ -7,7 +6,6 @@ namespace SnakesWithGuns.Gameplay.Snakes
     {
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private Transform _modulePoint;
-        [SerializeField] private Health _health;
 
         private SegmentModuleComponent _moduleInstance;
 
@@ -33,7 +31,6 @@ namespace SnakesWithGuns.Gameplay.Snakes
             if (ActiveModule != null)
                 UninstallModule();
 
-            _health.SourceID = ParentActor.SourceID;
             ActiveModule = module;
             _moduleInstance = Instantiate(module.ModulePrefab, _modulePoint);
             _moduleInstance.ParentActor = ParentActor;
