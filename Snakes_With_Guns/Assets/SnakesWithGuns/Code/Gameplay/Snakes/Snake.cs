@@ -24,5 +24,11 @@ namespace SnakesWithGuns.Gameplay.Snakes
         {
             _mover.Direction = _inputProvider.Direction;
         }
+
+        [ContextMenu(nameof(LevelUp))]
+        private void LevelUp()
+        {
+            _stats.Level.Value++;
+        }
     }
 }
