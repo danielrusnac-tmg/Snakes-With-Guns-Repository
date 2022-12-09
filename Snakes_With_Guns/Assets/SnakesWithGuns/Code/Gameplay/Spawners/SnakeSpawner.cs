@@ -16,7 +16,6 @@ namespace SnakesWithGuns.Gameplay.Spawners
 
         [Header("Player")]
         [SerializeField] private int _goal = 20;
-
         [SerializeField] private int _goalStep = 5;
         [SerializeField] private Snake _playerPrefab;
         [SerializeField] private CinemachineVirtualCamera _virtualCamera;
@@ -24,7 +23,6 @@ namespace SnakesWithGuns.Gameplay.Spawners
 
         [Header("Bots")]
         [SerializeField] private Snake _botPrefab;
-
         [SerializeField] private Transform _botPointsParent;
 
         private IChannel<LevelUpMessage> _levelUpChannel;

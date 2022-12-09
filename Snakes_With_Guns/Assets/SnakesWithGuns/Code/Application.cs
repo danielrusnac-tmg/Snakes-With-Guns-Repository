@@ -19,6 +19,7 @@ namespace SnakesWithGuns
 
         public void Restart()
         {
+            _pauseService.IsPaused = false;
             DOTween.KillAll();
             SceneManager.LoadScene(0);
         }

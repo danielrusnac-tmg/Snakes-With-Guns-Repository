@@ -1,4 +1,5 @@
-﻿using SnakesWithGuns.Infrastructure.PubSub;
+﻿using SnakesWithGuns.Gameplay.Messages;
+using SnakesWithGuns.Infrastructure.PubSub;
 using SnakesWithGuns.Utilities.CameraShake;
 using UnityEngine;
 
@@ -12,17 +13,19 @@ namespace SnakesWithGuns.Gameplay.Snakes
 
         private float _lastHeadKillTime;
         private IChannel<ScreenShakeMessage> _screenShakeChannel;
+        private IChannel<GameOverMessage> _gameOverChannel;
 
         private bool CanLoseHead => Time.time - _lastHeadKillTime > _damageCooldown;
 
         private void Awake()
         {
             _screenShakeChannel = Channels.GetChannel<ScreenShakeMessage>();
+            _gameOverChannel = Channels.GetChannel<GameOverMessage>();
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter(Collider other)
         {
-            if (collision.gameObject.CompareTag("Enemy") && CanLoseHead)
+            if (other.CompareTag("Enemy") && CanLoseHead)
                 KillHeadSegment();
         }
 
@@ -32,9 +35,17 @@ namespace SnakesWithGuns.Gameplay.Snakes
             {
                 _damageEffect.Play();
                 _screenShakeChannel.Publish(new ScreenShakeMessage(CameraShakeType.Strong));
+
+                if (_tail.Segments.Count == 0)
+                    Invoke(nameof(OnDie), 1.5f);
             }
 
             _lastHeadKillTime = Time.time;
+        }
+
+        private void OnDie()
+        {
+            _gameOverChannel.Publish(new GameOverMessage());
         }
     }
 }

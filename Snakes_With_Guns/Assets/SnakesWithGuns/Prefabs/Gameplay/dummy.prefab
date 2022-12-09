@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isImmortal: 0
-  _maxHealth: 6
+  _maxHealth: 10
 --- !u!114 &1903413531372503987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _energy: 1
-  _speed: 3
+  _speed: 2
   _health: {fileID: 1903413531372503986}
   _rigidbody: {fileID: 1903413531372503985}
   _flashEffect: {fileID: 847278967778994903}

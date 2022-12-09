@@ -504,7 +504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _globalSettings: {fileID: 11400000, guid: 1220de0c5348bf147b5c36c0ae87d4a9, type: 2}
-  _modeButtonPrefab: {fileID: 3616215743231515478, guid: 682b99a42d4a68148a52ac9ffa562aaf,
+  _modeButtonPrefab: {fileID: -529268134490890808, guid: ade8c59e5146c244f8b2c93797879f57,
     type: 3}
   _content: {fileID: 396511887}
 --- !u!1001 &2098289956

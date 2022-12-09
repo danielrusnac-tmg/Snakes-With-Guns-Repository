@@ -55,10 +55,10 @@ namespace SnakesWithGuns.Gameplay.Snakes
         
         public bool RemoveSegmentAt(int index)
         {
-            index = Mathf.Clamp(index, 0, _segments.Count - 1);
-            
-            if (_segments.Count <= 1)
+            if (_segments.Count == 0)
                 return false;
+            
+            index = Mathf.Clamp(index, 0, _segments.Count - 1);
 
             Segment segment = _segments[index];
             _segments.RemoveAt(index);
