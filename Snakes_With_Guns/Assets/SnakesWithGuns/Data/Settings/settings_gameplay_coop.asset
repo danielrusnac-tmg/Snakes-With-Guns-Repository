@@ -18,5 +18,29 @@ MonoBehaviour:
     - {fileID: 1903413531372503987, guid: 3e9d86a07c8879449ae2fd1ea339cae6, type: 3}
     - {fileID: 6612380532434290843, guid: 501d6a4b3cbeeb2478b037b684d83a58, type: 3}
     - {fileID: 6612380532434290843, guid: 501d6a4b3cbeeb2478b037b684d83a58, type: 3}
-    _spawnRate: 4
+    _levelDuration: 900
+    _dummyChanceCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 2.0437016
+        inSlope: 0.74431825
+        outSlope: 0.74431825
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0.38455784
+      - serializedVersion: 3
+        time: 1
+        value: 25.511246
+        inSlope: 0.828196
+        outSlope: 0.828196
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.6840608
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   _opponentCount: 2
