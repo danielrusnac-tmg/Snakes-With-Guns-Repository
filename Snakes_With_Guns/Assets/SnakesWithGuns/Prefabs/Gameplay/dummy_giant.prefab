@@ -102,5 +102,20 @@ PrefabInstance:
       propertyPath: _energy
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6456966694349449588, guid: 3e9d86a07c8879449ae2fd1ea339cae6,
+        type: 3}
+      propertyPath: m_Height
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6456966694349449588, guid: 3e9d86a07c8879449ae2fd1ea339cae6,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6456966694349449588, guid: 3e9d86a07c8879449ae2fd1ea339cae6,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e9d86a07c8879449ae2fd1ea339cae6, type: 3}

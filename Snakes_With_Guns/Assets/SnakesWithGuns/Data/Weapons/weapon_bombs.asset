@@ -30,6 +30,6 @@ MonoBehaviour:
   _impactEffectPrefab: {fileID: 198752863565291818, guid: edacf0fc41abd474da349ea9cd8aae6e,
     type: 3}
   _turretRadius: 10
-  _damage: 20
-  _damageRadius: 3
+  _damage: 30
+  _damageRadius: 4
   _damageDealMode: 1

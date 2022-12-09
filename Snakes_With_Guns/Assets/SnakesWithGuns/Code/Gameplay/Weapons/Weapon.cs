@@ -101,19 +101,11 @@ namespace SnakesWithGuns.Gameplay.Weapons
                     break;
                 case DamageDealMode.InRadius:
                 {
-                    int targets = Physics.OverlapSphereNonAlloc(
-                        hitData.Point,
-                        _weaponDefinition.DamageRadius,
-                        s_damageColliders);
-
-                    if (targets == 0)
-                        return;
-
-                    for (int i = 0; i < targets; i++)
-                    {
-                        if (s_damageColliders[i].TryGetComponent(out IDamageable damageable) && damageable.SourceID != SourceID)
-                            damageable.DealDamage(_weaponDefinition.Damage);
-                    }
+                    DamageUtility.DealDamageInRadius(
+                        hitData.Point, 
+                        _weaponDefinition.DamageRadius, 
+                        _weaponDefinition.Damage,
+                        SourceID);
                 }
                     break;
             }

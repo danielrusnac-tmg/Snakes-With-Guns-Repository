@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf108639e0e141a5a2fde0bb82a4e70d, type: 3}
   m_Name: weapon_shotgun
   m_EditorClassIdentifier: 
-  _fireRate: 0.5
-  _reloadDuration: 2
+  _fireRate: 0.4
+  _reloadDuration: 1
   _magazineSize: 4
   _projectilePerShot: 8
   _force: 60
   _drag: 6
   _rotationOffset: 20
-  _randomness: 0.131
+  _randomness: 0.178
   _alignImpactToSurface: 1
   _impactShake: 0
   _impactVibration: 1
@@ -30,6 +30,6 @@ MonoBehaviour:
   _impactEffectPrefab: {fileID: 198494534728232738, guid: 7a4540b877c7b1f44a7c01d60777765b,
     type: 3}
   _turretRadius: 8
-  _damage: 3
+  _damage: 8
   _damageRadius: 0
   _damageDealMode: 0

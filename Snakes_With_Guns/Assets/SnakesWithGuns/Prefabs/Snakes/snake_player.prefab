@@ -53411,6 +53411,11 @@ PrefabInstance:
       propertyPath: _sendMessages
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5442638299637446284, guid: b19776e579fbc0249bc3a49ed2b2f039,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7409312564375074347, guid: b19776e579fbc0249bc3a49ed2b2f039,
         type: 3}
       propertyPath: m_Name
@@ -53473,6 +53478,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b19776e579fbc0249bc3a49ed2b2f039, type: 3}
+--- !u!114 &2492170797315894015 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1315753167, guid: b19776e579fbc0249bc3a49ed2b2f039,
+    type: 3}
+  m_PrefabInstance: {fileID: 2492170796348302896}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4919851261921808411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 088d027a3ca141d99409e37d85baa84a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4919851261921808411 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7409312564375074347, guid: b19776e579fbc0249bc3a49ed2b2f039,
@@ -53492,18 +53509,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationOffset: 45
---- !u!114 &8971963993895413008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4919851261921808411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f24ba6d8e36463da924a2cd12d9bbc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3341869066676340546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53516,10 +53521,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bdff14f6cdd459294760bc604b628b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sendMessages: 0
   _damageCooldown: 0.3
   _tail: {fileID: 7976046124663072185}
+  _actor: {fileID: 2492170797315894015}
+  _explosionRadius: 6
+  _explosionDamage: 999
   _damageEffect: {fileID: 4046462788816288957}
+--- !u!114 &8971963993895413008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4919851261921808411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f24ba6d8e36463da924a2cd12d9bbc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4919851261921808412 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7409312564375074348, guid: b19776e579fbc0249bc3a49ed2b2f039,

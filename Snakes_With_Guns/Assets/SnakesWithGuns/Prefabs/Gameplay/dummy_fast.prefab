@@ -92,5 +92,20 @@ PrefabInstance:
       propertyPath: _speed
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6456966694349449588, guid: 3e9d86a07c8879449ae2fd1ea339cae6,
+        type: 3}
+      propertyPath: m_Height
+      value: 4.0530276
+      objectReference: {fileID: 0}
+    - target: {fileID: 6456966694349449588, guid: 3e9d86a07c8879449ae2fd1ea339cae6,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.91996586
+      objectReference: {fileID: 0}
+    - target: {fileID: 6456966694349449588, guid: 3e9d86a07c8879449ae2fd1ea339cae6,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 2.0265138
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e9d86a07c8879449ae2fd1ea339cae6, type: 3}

@@ -1,7 +1,11 @@
 ﻿using SnakesWithGuns.Gameplay.Messages;
+using SnakesWithGuns.Gameplay.Weapons;
 using SnakesWithGuns.Infrastructure.PubSub;
 using SnakesWithGuns.Utilities.CameraShake;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace SnakesWithGuns.Gameplay.Snakes
 {
@@ -9,6 +13,11 @@ namespace SnakesWithGuns.Gameplay.Snakes
     {
         [SerializeField] private float _damageCooldown = 0.3f;
         [SerializeField] private Tail _tail;
+        [SerializeField] private Actor _actor;
+
+        [Header("Explosion")]
+        [SerializeField] private float _explosionRadius = 7;
+        [SerializeField] private int _explosionDamage = 50;
         [SerializeField] private ParticleSystem _damageEffect;
 
         private float _lastHeadKillTime;
@@ -34,6 +43,8 @@ namespace SnakesWithGuns.Gameplay.Snakes
             if (_tail.RemoveSegment())
             {
                 _damageEffect.Play();
+                DamageUtility.DealDamageInRadius(transform.position, _explosionRadius, _explosionDamage,
+                    _actor.SourceID);
                 _screenShakeChannel.Publish(new ScreenShakeMessage(CameraShakeType.Strong));
 
                 if (_tail.Segments.Count == 0)
@@ -46,6 +57,13 @@ namespace SnakesWithGuns.Gameplay.Snakes
         private void OnDie()
         {
             _gameOverChannel.Publish(new GameOverMessage());
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+#if UNITY_EDITOR
+            Handles.DrawWireDisc(transform.position, Vector3.up, _explosionRadius);
+#endif
         }
     }
 }
