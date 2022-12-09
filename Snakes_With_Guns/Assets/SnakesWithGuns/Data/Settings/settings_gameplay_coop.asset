@@ -16,8 +16,13 @@ MonoBehaviour:
   _dummySpawn:
     _prefabs:
     - {fileID: 1903413531372503987, guid: 3e9d86a07c8879449ae2fd1ea339cae6, type: 3}
+    - {fileID: 6612380532434290843, guid: cccf3fbf804045c40bd4a47377dc6cd7, type: 3}
     - {fileID: 6612380532434290843, guid: 501d6a4b3cbeeb2478b037b684d83a58, type: 3}
-    - {fileID: 6612380532434290843, guid: 501d6a4b3cbeeb2478b037b684d83a58, type: 3}
+    - {fileID: 1903413531372503987, guid: 3e9d86a07c8879449ae2fd1ea339cae6, type: 3}
+    - {fileID: 1903413531372503987, guid: 3e9d86a07c8879449ae2fd1ea339cae6, type: 3}
+    - {fileID: 1903413531372503987, guid: 3e9d86a07c8879449ae2fd1ea339cae6, type: 3}
+    - {fileID: 1903413531372503987, guid: 3e9d86a07c8879449ae2fd1ea339cae6, type: 3}
+    - {fileID: 6612380532434290843, guid: cccf3fbf804045c40bd4a47377dc6cd7, type: 3}
     _levelDuration: 900
     _dummyChanceCurve:
       serializedVersion: 2

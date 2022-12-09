@@ -15,17 +15,17 @@ PrefabInstance:
     - target: {fileID: 1903413531372503981, guid: 3e9d86a07c8879449ae2fd1ea339cae6,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1903413531372503981, guid: 3e9d86a07c8879449ae2fd1ea339cae6,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1903413531372503981, guid: 3e9d86a07c8879449ae2fd1ea339cae6,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1903413531372503981, guid: 3e9d86a07c8879449ae2fd1ea339cae6,
         type: 3}
@@ -90,7 +90,7 @@ PrefabInstance:
     - target: {fileID: 1903413531372503986, guid: 3e9d86a07c8879449ae2fd1ea339cae6,
         type: 3}
       propertyPath: _maxHealth
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1903413531372503987, guid: 3e9d86a07c8879449ae2fd1ea339cae6,
         type: 3}
@@ -101,21 +101,6 @@ PrefabInstance:
         type: 3}
       propertyPath: _energy
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6456966694349449588, guid: 3e9d86a07c8879449ae2fd1ea339cae6,
-        type: 3}
-      propertyPath: m_Height
-      value: 2.137873
-      objectReference: {fileID: 0}
-    - target: {fileID: 6456966694349449588, guid: 3e9d86a07c8879449ae2fd1ea339cae6,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.7889265
-      objectReference: {fileID: 0}
-    - target: {fileID: 6456966694349449588, guid: 3e9d86a07c8879449ae2fd1ea339cae6,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 1.0689365
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e9d86a07c8879449ae2fd1ea339cae6, type: 3}
