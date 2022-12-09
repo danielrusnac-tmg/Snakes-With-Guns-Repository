@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Cinemachine;
 using SnakesWithGuns.Gameplay.Messages;
 using SnakesWithGuns.Gameplay.Settings;

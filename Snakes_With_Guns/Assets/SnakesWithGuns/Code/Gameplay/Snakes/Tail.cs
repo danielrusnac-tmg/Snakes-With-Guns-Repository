@@ -48,17 +48,24 @@ namespace SnakesWithGuns.Gameplay.Snakes
             AddSegmentPoints(new TailPoint(instance.Position, instance.Rotation));
         }
 
-        public void RemoveSegment()
+        public bool RemoveSegment()
         {
-            if (_segments.Count <= 1)
-                return;
-
-            int segmentIndex = _segments.Count - 1;
-            Segment segment = _segments[segmentIndex];
-            _segments.RemoveAt(segmentIndex);
-            Destroy(segment.gameObject);
+            return RemoveSegmentAt(0);
+        }
+        
+        public bool RemoveSegmentAt(int index)
+        {
+            index = Mathf.Clamp(index, 0, _segments.Count - 1);
             
+            if (_segments.Count <= 1)
+                return false;
+
+            Segment segment = _segments[index];
+            _segments.RemoveAt(index);
+            segment.gameObject.SetActive(false);
             RemoveSegmentPoints();
+
+            return true;
         }
 
         private void MoveSegments()
