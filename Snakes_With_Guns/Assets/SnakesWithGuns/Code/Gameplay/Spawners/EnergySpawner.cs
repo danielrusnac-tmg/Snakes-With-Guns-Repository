@@ -1,12 +1,13 @@
 ﻿using SnakesWithGuns.Gameplay.Messages;
 using SnakesWithGuns.Gameplay.Objects;
+using SnakesWithGuns.Infrastructure;
 using SnakesWithGuns.Infrastructure.PubSub;
 using UnityEngine;
 using UnityEngine.Pool;
 
 namespace SnakesWithGuns.Gameplay.Spawners
 {
-    public class EnergySpawner : MonoBehaviour
+    public class EnergySpawner : MonoBehaviour, ISceneService
     {
         private IChannel<SpawnEnergyMessage> _spawnEnergyChannel;
 
@@ -15,7 +16,7 @@ namespace SnakesWithGuns.Gameplay.Spawners
 
         private ObjectPool<Collectable> _energyPool;
 
-        private void Awake()
+        public void Initialize()
         {
             _energyPool =
                 new ObjectPool<Collectable>(CreateEnergy, OnGetEnergy, OnReleaseEnergy, OnDestroyEnergy, false);
@@ -23,7 +24,12 @@ namespace SnakesWithGuns.Gameplay.Spawners
             _spawnEnergyChannel.Register(OnSpawnEnergyMessage);
         }
 
-        private void OnDestroy()
+        public void Activate() { }
+        public void Tick(float deltaTime) { }
+
+        public void Deactivate() { }
+
+        public void Cleanup()
         {
             _spawnEnergyChannel.Unregister(OnSpawnEnergyMessage);
         }
@@ -33,7 +39,7 @@ namespace SnakesWithGuns.Gameplay.Spawners
             for (int i = 0; i < message.Amount; i++)
             {
                 Collectable energy = _energyPool.Get();
-                energy.transform.position =  GetPositionWithOffset(message);
+                energy.transform.position = GetPositionWithOffset(message);
                 energy.OnSpawn();
             }
         }

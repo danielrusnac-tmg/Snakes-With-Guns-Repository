@@ -4872,11 +4872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9700d019f3f45e0aea342d55f80710d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dummyPrefabs:
-  - {fileID: 1903413531372503987, guid: 3e9d86a07c8879449ae2fd1ea339cae6, type: 3}
-  - {fileID: 6612380532434290843, guid: 501d6a4b3cbeeb2478b037b684d83a58, type: 3}
   _session: {fileID: 2026193266}
-  _spawnRate: 1
   _spawnRadius: 20
 --- !u!114 &1899588588
 MonoBehaviour:

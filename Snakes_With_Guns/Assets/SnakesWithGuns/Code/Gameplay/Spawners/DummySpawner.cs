@@ -1,15 +1,15 @@
 ﻿using SnakesWithGuns.Gameplay.Objects;
+using SnakesWithGuns.Gameplay.Settings;
 using SnakesWithGuns.Gameplay.Weapons;
+using SnakesWithGuns.Infrastructure;
 using UnityEngine;
 using UnityEngine.Pool;
 
 namespace SnakesWithGuns.Gameplay.Spawners
 {
-    public class DummySpawner : MonoBehaviour
+    public class DummySpawner : MonoBehaviour, ISceneService
     {
-        [SerializeField] private Dummy[] _dummyPrefabs;
         [SerializeField] private Session _session;
-        [SerializeField] private float _spawnRate = 2;
         [SerializeField] private float _spawnRadius = 15;
 
         private ObjectPool<Dummy> _dummyyPool;
@@ -17,15 +17,17 @@ namespace SnakesWithGuns.Gameplay.Spawners
 
         private Transform PlayerTransform => _session.Player == null ? transform : _session.Player.transform;
 
-        private void Awake()
+        public void Initialize()
         {
             _dummyyPool =
                 new ObjectPool<Dummy>(CreateDummy, OnGetDummy, OnReleaseDummy, OnDestroyDummy, false);
         }
 
-        private void Update()
+        public void Activate() { }
+
+        public void Tick(float deltaTime)
         {
-            _spawnTime += _spawnRate * Time.deltaTime;
+            _spawnTime += GlobalSettings.SelectedGameMode.DummySpawn.CalculateSpawnRate(_session.GameplayTime) * deltaTime;
 
             while (_spawnTime > 1)
             {
@@ -33,6 +35,10 @@ namespace SnakesWithGuns.Gameplay.Spawners
                 _spawnTime -= 1;
             }
         }
+
+        public void Deactivate() { }
+
+        public void Cleanup() { }
 
         private void Spawn()
         {
@@ -57,7 +63,7 @@ namespace SnakesWithGuns.Gameplay.Spawners
 
         private Dummy CreateDummy()
         {
-            Dummy dummy = Instantiate(_dummyPrefabs[Random.Range(0, _dummyPrefabs.Length)]);
+            Dummy dummy = Instantiate(GlobalSettings.SelectedGameMode.DummySpawn.GetPrefab(_session.GameplayTime));
             dummy.Died += OnDummyDied;
             return dummy;
         }

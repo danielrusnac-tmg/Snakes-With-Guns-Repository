@@ -6,7 +6,7 @@ namespace SnakesWithGuns.Utilities
     public class EmissionFlashEffect : MonoBehaviour
     {
         private static readonly int EMISSION_COLOR = Shader.PropertyToID("_EmissionColor");
-        
+
         [SerializeField] private Renderer _renderer;
         [SerializeField] private Color _color = Color.white;
         [SerializeField] private float _duration = 0.5f;
@@ -16,7 +16,7 @@ namespace SnakesWithGuns.Utilities
         private MaterialPropertyBlock _propertyBlock;
         private Coroutine _flashCoroutine;
 
-        protected virtual void Awake()
+        private void Awake()
         {
             _gameObject = gameObject;
             _propertyBlock = new MaterialPropertyBlock();
@@ -27,7 +27,7 @@ namespace SnakesWithGuns.Utilities
         {
             if (!_gameObject.activeInHierarchy)
                 return;
-            
+
             if (_flashCoroutine != null)
                 StopCoroutine(_flashCoroutine);
 
@@ -44,14 +44,14 @@ namespace SnakesWithGuns.Utilities
         private IEnumerator FlashRoutine()
         {
             float t = 0f;
-            
+
             while (t < 1f)
             {
                 t += Time.deltaTime / _duration;
                 SetColor(t);
                 yield return null;
             }
-            
+
             SetColor(1f);
         }
 

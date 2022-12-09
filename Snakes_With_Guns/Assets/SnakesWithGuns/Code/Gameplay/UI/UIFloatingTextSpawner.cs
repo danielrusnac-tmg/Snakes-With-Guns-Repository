@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using SnakesWithGuns.Gameplay.Messages;
+using SnakesWithGuns.Infrastructure;
 using SnakesWithGuns.Infrastructure.PubSub;
 using SnakesWithGuns.Utilities;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.Pool;
 
 namespace SnakesWithGuns.Gameplay.UI
 {
-    public class UIFloatingTextSpawner : MonoBehaviour
+    public class UIFloatingTextSpawner : MonoBehaviour, ISceneService
     {
         [SerializeField] private FloatingText _textPrefab;
 
@@ -16,7 +17,7 @@ namespace SnakesWithGuns.Gameplay.UI
         private Dictionary<int, FloatingText> _floatingTextById;
         private Queue<int> _floatingTextToRemove;
 
-        private void Awake()
+        public void Initialize()
         {
             _pool = new ComponentPool<FloatingText>(_textPrefab);
             _floatingTextById = new Dictionary<int, FloatingText>();
@@ -25,15 +26,19 @@ namespace SnakesWithGuns.Gameplay.UI
             _channel.Register(OnMessage);
         }
 
-        private void OnDestroy()
-        {
-            _channel.Unregister(OnMessage);
-        }
+        public void Activate() { }
 
-        private void Update()
+        public void Tick(float deltaTime)
         {
             CheckForTimeOuts();
             RemoveTimeOutText();
+        }
+
+        public void Deactivate() { }
+
+        public void Cleanup()
+        {
+            _channel.Unregister(OnMessage);
         }
 
         private void RemoveTimeOutText()

@@ -1,10 +1,12 @@
-﻿using SnakesWithGuns.Gameplay.Snakes;
+﻿using SnakesWithGuns.Gameplay.Settings;
+using SnakesWithGuns.Gameplay.Snakes;
 using UnityEngine;
 
 namespace SnakesWithGuns.Gameplay
 {
     public class Session : MonoBehaviour
     {
+        public GameplaySettings SelectedSettings { get; set; }
         public Snake Player { get; private set; }
         public float GameplayTime { get; private set; }
 

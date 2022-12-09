@@ -1,6 +1,7 @@
 using DG.Tweening;
 using SnakesWithGuns.Gameplay;
 using SnakesWithGuns.Gameplay.Messages;
+using SnakesWithGuns.Infrastructure;
 using SnakesWithGuns.Infrastructure.PubSub;
 using SnakesWithGuns.Utilities.CameraShake;
 using UnityEngine;
@@ -8,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 namespace SnakesWithGuns
 {
-    public class Application : MonoBehaviour
+    public class Application : SceneController
     {
         [SerializeField] private CinemachineScreenShaker _screenShaker;
 
@@ -16,22 +17,22 @@ namespace SnakesWithGuns
         private IChannel<ScreenShakeMessage> _screenShakeChannel;
         private IChannel<PauseMessage> _pauseChannel;
 
-        private void Awake()
+        public void Restart()
+        {
+            DOTween.KillAll();
+            SceneManager.LoadScene(0);
+        }
+
+        protected override void OnInitialize()
         {
             InitializeServices();
             CreateChannels();
             RegisterChannels();
         }
 
-        private void OnDestroy()
+        protected override void OnCleanup()
         {
             UnregisterChannels();
-        }
-
-        public void Restart()
-        {
-            DOTween.KillAll();
-            SceneManager.LoadScene(0);
         }
 
         private void InitializeServices()

@@ -1,19 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cinemachine;
 using SnakesWithGuns.Gameplay.Messages;
+using SnakesWithGuns.Gameplay.Settings;
 using SnakesWithGuns.Gameplay.Snakes;
+using SnakesWithGuns.Infrastructure;
 using SnakesWithGuns.Infrastructure.PubSub;
 using UnityEngine;
 
 namespace SnakesWithGuns.Gameplay.Spawners
 {
-    public class SnakeSpawner : MonoBehaviour
+    public class SnakeSpawner : MonoBehaviour, ISceneService
     {
         [SerializeField] private Session _session;
         [SerializeField] private StaticData _staticData;
 
         [Header("Player")]
         [SerializeField] private int _goal = 20;
+
         [SerializeField] private int _goalStep = 5;
         [SerializeField] private Snake _playerPrefab;
         [SerializeField] private CinemachineVirtualCamera _virtualCamera;
@@ -21,6 +25,7 @@ namespace SnakesWithGuns.Gameplay.Spawners
 
         [Header("Bots")]
         [SerializeField] private Snake _botPrefab;
+
         [SerializeField] private Transform _botPointsParent;
 
         private IChannel<LevelUpMessage> _levelUpChannel;
@@ -31,22 +36,30 @@ namespace SnakesWithGuns.Gameplay.Spawners
         private int Goal => (_session.Player.Stats.Level.Value - 1) * _goalStep + _goal;
         private float Progress => Mathf.Clamp01((float)_session.Player.Stats.Energy.Value / Goal);
 
-        private void Awake()
+        public void Initialize()
         {
             _levelUpChannel = Channels.GetChannel<LevelUpMessage>();
             _levelProgressChannel = Channels.GetChannel<LevelProgressMessage>();
             _floatingTextChannel = Channels.GetChannel<SpawnFloatingTextMessage>();
         }
 
-        private void Start()
+        public void Activate()
         {
             SpawnPlayer();
             SpawnBots();
-            
+
             _session.Player.Stats.Level.Value++;
         }
 
-        private void OnDestroy()
+        public void Tick(float deltaTime)
+        {
+        }
+
+        public void Deactivate()
+        {
+        }
+
+        public void Cleanup()
         {
             _session.Player.Stats.Level.Changed -= OnPlayerLevelChanged;
             _session.Player.Stats.Energy.Changed -= OnPlayerEnergyChanged;
@@ -54,8 +67,15 @@ namespace SnakesWithGuns.Gameplay.Spawners
 
         private void SpawnBots()
         {
-            foreach (Transform point in _botPointsParent)
+            if (GlobalSettings.SelectedGameMode.OpponentCount == 0)
+                return;
+
+            for (int i = 0; i < GlobalSettings.SelectedGameMode.OpponentCount; i++)
+            {
+                int childCount = _botPointsParent.childCount;
+                Transform point = _botPointsParent.GetChild((int)Mathf.Repeat(i, childCount));
                 _bots.Add(SpawnSnake(_botPrefab, point.position));
+            }
         }
 
         private void SpawnPlayer()
