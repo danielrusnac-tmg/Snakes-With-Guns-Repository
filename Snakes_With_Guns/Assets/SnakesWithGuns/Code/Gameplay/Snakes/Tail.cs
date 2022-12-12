@@ -9,8 +9,6 @@ namespace SnakesWithGuns.Gameplay.Snakes
         [SerializeField] private Actor _snake;
         [Min(0), SerializeField] private int _pointPerSegment = 3;
         [Min(0f), SerializeField] private float _segmentsDistance = 1.1f;
-        [SerializeField] private float _moveSpeed = 15f;
-        [SerializeField] private float _turnSpeed = 20f;
         [SerializeField] private Segment _segmentPrefab;
 
         private Transform _transform;
@@ -52,12 +50,12 @@ namespace SnakesWithGuns.Gameplay.Snakes
         {
             return RemoveSegmentAt(0);
         }
-        
+
         public bool RemoveSegmentAt(int index)
         {
             if (_segments.Count == 0)
                 return false;
-            
+
             index = Mathf.Clamp(index, 0, _segments.Count - 1);
 
             Segment segment = _segments[index];
@@ -106,10 +104,8 @@ namespace SnakesWithGuns.Gameplay.Snakes
 
         private void MoveSegment(Segment segment, Vector3 position, Quaternion rotation)
         {
-            segment.Position =
-                Vector3.Lerp(segment.Position, position, _moveSpeed * Time.fixedDeltaTime);
-            segment.Rotation =
-                Quaternion.Lerp(segment.Rotation, rotation, _turnSpeed * Time.fixedDeltaTime);
+            segment.Position = position;
+            segment.Rotation = rotation;
         }
 
         private void AddSegmentPoints(TailPoint point)
@@ -122,6 +118,19 @@ namespace SnakesWithGuns.Gameplay.Snakes
         {
             for (int i = 0; i < _pointPerSegment; i++)
                 _points.RemoveAt(_points.Count - 1);
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (_points == null || _points.Count == 0)
+                return;
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawSphere(transform.position, 0.1f);
+
+            Gizmos.color = Color.white;
+            foreach (TailPoint point in _points)
+                Gizmos.DrawSphere(point.Position, 0.1f);
         }
 
         private struct TailPoint
