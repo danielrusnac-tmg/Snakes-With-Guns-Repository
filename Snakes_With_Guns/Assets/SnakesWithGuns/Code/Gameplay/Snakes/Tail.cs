@@ -9,6 +9,7 @@ namespace SnakesWithGuns.Gameplay.Snakes
         [SerializeField] private Actor _snake;
         [Min(0), SerializeField] private int _pointPerSegment = 3;
         [Min(0f), SerializeField] private float _segmentsDistance = 1.1f;
+        [SerializeField] private float _turnSpeed = 20f;
         [SerializeField] private Segment _segmentPrefab;
 
         private Transform _transform;
@@ -104,8 +105,8 @@ namespace SnakesWithGuns.Gameplay.Snakes
 
         private void MoveSegment(Segment segment, Vector3 position, Quaternion rotation)
         {
+            segment.Rotation = Quaternion.Lerp(segment.Rotation, rotation, _turnSpeed * Time.fixedDeltaTime);
             segment.Position = position;
-            segment.Rotation = rotation;
         }
 
         private void AddSegmentPoints(TailPoint point)
