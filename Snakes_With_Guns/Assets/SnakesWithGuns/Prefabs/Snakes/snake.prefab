@@ -160,7 +160,7 @@ MonoBehaviour:
   _segmentsDistance: 1.1
   _moveSpeed: 15
   _turnSpeed: 20
-  _segmentPrefab: {fileID: 2476195558216098683, guid: a91cff2d16f7d14458f38a2556c6bb46,
+  _segmentPrefab: {fileID: 2476195558216098683, guid: ee0af7d3387529c4a8d1df3971052532,
     type: 3}
 --- !u!114 &2405187485020178676
 MonoBehaviour:
