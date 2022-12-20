@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Material
+  m_Name: toon
   m_Shader: {fileID: -6465566751694194690, guid: 2696e3dee46a40d4481285e5f22b8ca4,
     type: 3}
   m_Parent: {fileID: 0}
@@ -121,7 +121,7 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _Fresnel_Amount: -10
+    - _Fresnel_Amount: 0
     - _Fresnel_Power: 10
     - _GlossMapScale: 0
     - _Glossiness: 0
