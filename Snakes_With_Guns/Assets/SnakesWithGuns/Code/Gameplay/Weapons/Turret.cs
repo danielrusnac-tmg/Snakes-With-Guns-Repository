@@ -40,6 +40,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
             RotateTowardsTargetDirection();
         }
 
+        [ContextMenu(nameof(OnInstall))]
         public override void OnInstall()
         {
             base.OnInstall();
@@ -52,7 +53,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
         {
             _aimer.ParentActor = ParentActor;
             _aimer.Radius = weaponDefinition.TurretRadius;
-            _weapon.SourceID = ParentActor.SourceID;
+            _weapon.SourceID = ParentActor == null ? GetInstanceID() : ParentActor.SourceID;
             _weapon.Initialize(weaponDefinition);
         }
 

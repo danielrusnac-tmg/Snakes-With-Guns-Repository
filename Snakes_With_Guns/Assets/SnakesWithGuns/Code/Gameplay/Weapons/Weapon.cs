@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using SnakesWithGuns.Infrastructure.PubSub;
@@ -21,7 +22,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
         private IChannel<ScreenShakeMessage> _screenShakeChannel;
 
         public int SourceID { get; set; }
-        public bool IsFiring { get; set; }
+        [field: SerializeField] public bool IsFiring { get; set; }
 
         public void Initialize(WeaponDefinition weaponDefinition)
         {
