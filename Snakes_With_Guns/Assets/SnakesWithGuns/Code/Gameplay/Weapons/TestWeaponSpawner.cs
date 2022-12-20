@@ -21,7 +21,7 @@ namespace SnakesWithGuns.Gameplay.Weapons
             {
                 float t = (float) i / _weaponCount;
                 float localX = Mathf.Lerp(-halfDistance, halfDistance, t);
-                Weapon weapon = Instantiate(_weaponPrefab, transform.TransformPoint(new Vector3(localX, 0f, 0f)), Quaternion.identity, transform);
+                Weapon weapon = Instantiate(_weaponPrefab, transform.TransformPoint(new Vector3(localX, 0f, 0f)), transform.rotation, transform);
                 weapon.Initialize(_definitions[(int) Mathf.Repeat(i, _definitions.Length)]);
                 weapon.IsFiring = true;
 
